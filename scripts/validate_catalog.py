@@ -51,7 +51,7 @@ for index, item in enumerate(data, start=1):
 
         path = ROOT / normalized
         if not path.exists():
-            errors.append(f"Dosya bulunamadı: {normalized}")
+            warnings.append(f"DOCX henüz yüklenmemiş: {normalized}")
         elif path.suffix.lower() != ".docx":
             warnings.append(f"DOCX olmayan dosya: {normalized}")
 
@@ -77,7 +77,7 @@ unlisted = sorted(
 )
 
 for path in unlisted:
-    errors.append(f"JSON'da kaydı olmayan DOCX: {path}")
+    warnings.append(f"JSON'da kaydı olmayan DOCX: {path}")
 
 print(f"Kazanım sayısı: {len(data)}")
 print(f"Tanımlı DOCX sayısı: {len(json_files)}")

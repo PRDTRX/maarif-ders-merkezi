@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://prdtrx.github.io/maarif-ders-merkezi/sitemap.xml

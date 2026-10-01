@@ -6,24 +6,39 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA_FILE = ROOT / "data" / "outcomes.json"
 UPLOADS_DIR = ROOT / "uploads"
 
+
+def normalize(value):
+    return str(value or "").strip().casefold()
+
+
+def item_key(item):
+    return (
+        normalize(item.get("sinif")),
+        normalize(item.get("ders")),
+        normalize(item.get("tema")),
+        normalize(item.get("id"))
+    )
+
+
 errors = []
 warnings = []
 
 if not DATA_FILE.exists():
     errors.append("data/outcomes.json bulunamadı.")
+    data = []
 else:
     try:
         with DATA_FILE.open("r", encoding="utf-8") as f:
             data = json.load(f)
-    except json.JSONDecodeError as e:
-        errors.append(f"outcomes.json geçersiz JSON: {e}")
+    except json.JSONDecodeError as error:
+        errors.append(f"outcomes.json geçersiz JSON: {error}")
         data = []
 
 if not isinstance(data, list):
     errors.append("outcomes.json bir JSON dizisi olmalıdır.")
     data = []
 
-ids = set()
+keys = set()
 paths = set()
 
 for index, item in enumerate(data, start=1):
@@ -31,37 +46,49 @@ for index, item in enumerate(data, start=1):
         errors.append(f"{index}. kayıt bir nesne değil.")
         continue
 
-    for field in ("id", "sinif", "ders", "kategori", "baslik", "dosyaYolu"):
+    for field in ("id", "sinif", "ders", "tema", "kategori", "baslik", "dosyaYolu"):
         if not str(item.get(field, "")).strip():
             errors.append(f"{index}. kayıt: '{field}' alanı eksik.")
 
-    item_id = str(item.get("id", "")).strip()
+    key = item_key(item)
+
+    if key in keys:
+        errors.append(
+            f"Tekrarlanan kayıt: "
+            f"{item.get('sinif')} / {item.get('ders')} / "
+            f"{item.get('tema')} / {item.get('id')}"
+        )
+
+    keys.add(key)
+
     file_path = str(item.get("dosyaYolu", "")).strip()
 
-    if item_id:
-        if item_id in ids:
-            errors.append(f"Tekrarlanan kazanım kodu: {item_id}")
-        ids.add(item_id)
-
     if file_path:
-        normalized = file_path.replace("\\", "/")
-        if normalized in paths:
-            errors.append(f"Tekrarlanan dosya yolu: {normalized}")
-        paths.add(normalized)
+        normalized_path = file_path.replace("\\", "/")
 
-        path = ROOT / normalized
+        if normalized_path in paths:
+            errors.append(f"Tekrarlanan dosya yolu: {normalized_path}")
+
+        paths.add(normalized_path)
+
+        path = ROOT / normalized_path
+
         if not path.exists():
-            warnings.append(f"DOCX henüz yüklenmemiş: {normalized}")
+            warnings.append(f"DOCX henüz yüklenmemiş: {normalized_path}")
+
         elif path.suffix.lower() != ".docx":
-            warnings.append(f"DOCX olmayan dosya: {normalized}")
+            warnings.append(f"DOCX olmayan dosya: {normalized_path}")
 
     tags = item.get("etiketler", [])
-    if not isinstance(tags, list):
-        errors.append(f"{item_id or index}: 'etiketler' bir dizi olmalıdır.")
 
-json_files = {
-    str(p.relative_to(ROOT)).replace("\\", "/")
-    for p in UPLOADS_DIR.rglob("*.docx")
+    if not isinstance(tags, list):
+        errors.append(
+            f"{item.get('id') or index}: 'etiketler' bir dizi olmalıdır."
+        )
+
+docx_files = {
+    path.relative_to(ROOT).as_posix()
+    for path in UPLOADS_DIR.rglob("*.docx")
 } if UPLOADS_DIR.exists() else set()
 
 referenced_files = {
@@ -70,17 +97,13 @@ referenced_files = {
     if isinstance(item, dict) and item.get("dosyaYolu")
 }
 
-unlisted = sorted(
-    str(Path(path)).replace("\\", "/")
-    for path in json_files
-    if path not in referenced_files
-)
+unlisted = sorted(docx_files - referenced_files)
 
 for path in unlisted:
     warnings.append(f"JSON'da kaydı olmayan DOCX: {path}")
 
 print(f"Kazanım sayısı: {len(data)}")
-print(f"Tanımlı DOCX sayısı: {len(json_files)}")
+print(f"Yüklü DOCX sayısı: {len(docx_files)}")
 print(f"Hata: {len(errors)}")
 print(f"Uyarı: {len(warnings)}")
 
@@ -89,8 +112,10 @@ for warning in warnings:
 
 if errors:
     print("\nHATALAR:")
+
     for error in errors:
         print(f"- {error}")
+
     sys.exit(1)
 
 print("Katalog kontrolü başarılı.")

@@ -1,4 +1,4 @@
-name: Validate catalog
+name: Sync and validate catalog
 
 on:
   push:
@@ -12,7 +12,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   validate:
@@ -27,5 +27,22 @@ jobs:
         with:
           python-version: "3.x"
 
+      - name: Sync DOCX paths
+        run: python scripts/sync_catalog.py
+
       - name: Validate catalog
         run: python scripts/validate_catalog.py
+
+      - name: Commit catalog changes
+        run: |
+          if git diff --quiet -- data/outcomes.json; then
+            echo "Katalogda değişiklik yok."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add data/outcomes.json
+          git commit -m "Auto-sync catalog [skip ci]"
+          git push

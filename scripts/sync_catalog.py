@@ -1,5 +1,6 @@
 import json
 from pathlib import Path
+import re
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -7,8 +8,32 @@ DATA_FILE = ROOT / "data" / "outcomes.json"
 UPLOADS_DIR = ROOT / "uploads"
 
 
-def norm(value):
+def normalize(value):
     return str(value or "").strip().casefold()
+
+
+def slugify(value):
+    value = str(value or "").strip().casefold()
+    table = str.maketrans({
+        "ç": "c",
+        "ğ": "g",
+        "ı": "i",
+        "ö": "o",
+        "ş": "s",
+        "ü": "u"
+    })
+    value = value.translate(table)
+    value = re.sub(r"[^a-z0-9]+", "-", value)
+    return value.strip("-")
+
+
+def item_key(item):
+    return (
+        normalize(item.get("sinif")),
+        normalize(item.get("ders")),
+        normalize(item.get("tema")),
+        normalize(item.get("id"))
+    )
 
 
 if not DATA_FILE.exists():
@@ -27,81 +52,88 @@ if not isinstance(outcomes, list):
     sys.exit(1)
 
 if not UPLOADS_DIR.exists():
-    print("uploads klasörü bulunamadı; katalog değişmedi.")
+    print("uploads klasörü bulunamadı.")
     sys.exit(0)
 
-files = sorted(
-    p for p in UPLOADS_DIR.rglob("*")
-    if p.is_file() and p.suffix.lower() == ".docx"
-)
-
-files_by_code = {}
-
-for path in files:
-    code = norm(path.stem)
-    if code:
-        files_by_code.setdefault(code, []).append(path)
-
-changed = False
-matched = 0
+outcome_map = {}
 
 for item in outcomes:
     if not isinstance(item, dict):
         continue
 
-    item_id = norm(item.get("id"))
+    key = item_key(item)
 
-    if not item_id:
+    if key in outcome_map:
+        print(
+            "HATA: Aynı sınıf + ders + tema + kazanım kodu tekrar ediyor: "
+            f"{item.get('sinif')} / {item.get('ders')} / "
+            f"{item.get('tema')} / {item.get('id')}"
+        )
+        sys.exit(1)
+
+    outcome_map[key] = item
+
+changed = False
+matched = 0
+warnings = []
+
+docx_files = sorted(
+    path for path in UPLOADS_DIR.rglob("*")
+    if path.is_file() and path.suffix.lower() == ".docx"
+)
+
+for path in docx_files:
+    relative = path.relative_to(UPLOADS_DIR)
+
+    if len(relative.parts) != 4:
+        warnings.append(
+            f"Beklenen klasör yapısında olmayan DOCX: "
+            f"{path.relative_to(ROOT).as_posix()}"
+        )
         continue
 
-    matches = files_by_code.get(item_id, [])
+    ders_slug = relative.parts[0]
+    sinif_slug = relative.parts[1]
+    tema_slug = relative.parts[2]
+    code = path.stem
 
-    if not matches:
-        continue
+    matches = [
+        item for item in outcomes
+        if slugify(item.get("ders")) == ders_slug
+        and slugify(item.get("sinif")) == sinif_slug
+        and slugify(item.get("tema")) == tema_slug
+        and normalize(item.get("id")) == normalize(code)
+    ]
 
-    path = matches[0]
-    relative_path = path.relative_to(ROOT).as_posix()
+    if len(matches) == 1:
+        item = matches[0]
+        relative_path = path.relative_to(ROOT).as_posix()
 
-    if item.get("dosyaYolu") != relative_path:
-        item["dosyaYolu"] = relative_path
-        changed = True
+        if item.get("dosyaYolu") != relative_path:
+            item["dosyaYolu"] = relative_path
+            changed = True
 
-    matched += 1
+        matched += 1
 
-duplicates = {
-    code: paths
-    for code, paths in files_by_code.items()
-    if len(paths) > 1
-}
+    elif len(matches) == 0:
+        warnings.append(
+            f"Eşleşme bulunamadı: {path.relative_to(ROOT).as_posix()}"
+        )
 
-if duplicates:
-    print("UYARI: Aynı kazanım koduna ait birden fazla DOCX bulundu:")
+    else:
+        warnings.append(
+            f"Birden fazla kazanımla eşleşti: "
+            f"{path.relative_to(ROOT).as_posix()}"
+        )
 
-    for code, paths in duplicates.items():
-        print(f"- {code}")
-        for path in paths:
-            print(f"  {path.relative_to(ROOT).as_posix()}")
-
-unmatched = [
-    path for path in files
-    if norm(path.stem) not in {
-        norm(item.get("id"))
-        for item in outcomes
-        if isinstance(item, dict)
-    }
-]
-
-if unmatched:
-    print("UYARI: JSON'da karşılığı olmayan DOCX dosyaları:")
-
-    for path in unmatched:
-        print(f"- {path.relative_to(ROOT).as_posix()}")
+for warning in warnings:
+    print(f"UYARI: {warning}")
 
 if changed:
     with DATA_FILE.open("w", encoding="utf-8") as f:
         json.dump(outcomes, f, ensure_ascii=False, indent=2)
         f.write("\n")
 
-print(f"Toplam DOCX: {len(files)}")
+print(f"Toplam DOCX: {len(docx_files)}")
 print(f"Eşleşen kazanım: {matched}")
 print(f"Katalog değişti: {'evet' if changed else 'hayır'}")

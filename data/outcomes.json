@@ -4,167 +4,167 @@
     "kategori": "Dinleme/İzleme",
     "baslik": "Dinleyeceğinin/izleyeceğinin içeriğine yönelik tahminde bulunabilme",
     "etiketler": ["dinleme", "izleme", "tahmin", "içerik", "oyun dünyası", "türkçe", "5.sınıf"],
-    "dosyaYolu": "uploads/T.D.5.3.pdf"
+    "dosyaYolu": "uploads/T.D.5.3.docx"
   },
   {
     "id": "T.D.5.4",
     "kategori": "Dinleme/İzleme",
     "baslik": "Dinlediğinde/izlediğinde geçen anlamını bilmediği söz varlığı unsurlarının anlamını tahmin edebilme",
     "etiketler": ["dinleme", "izleme", "kelime bilgisi", "söz varlığı", "bilinmeyen kelimeler", "tahmin"],
-    "dosyaYolu": "uploads/T.D.5.4.pdf"
+    "dosyaYolu": "uploads/T.D.5.4.docx"
   },
   {
     "id": "T.D.5.5",
     "kategori": "Dinleme/İzleme",
     "baslik": "Dinlediğinin/izlediğinin yüzey anlamını belirleyebilme",
     "etiketler": ["dinleme", "izleme", "yüzey anlam", "metin anlama"],
-    "dosyaYolu": "uploads/T.D.5.5.pdf"
+    "dosyaYolu": "uploads/T.D.5.5.docx"
   },
   {
     "id": "T.D.5.13",
     "kategori": "Dinleme/İzleme",
     "baslik": "Dinlediğinin/izlediğinin anahtar kelimelerini belirlemeye yönelik çözümleme yapabilme",
     "etiketler": ["dinleme", "izleme", "anahtar kelime", "çözümleme", "kavram haritası"],
-    "dosyaYolu": "uploads/T.D.5.13.pdf"
+    "dosyaYolu": "uploads/T.D.5.13.docx"
   },
   {
     "id": "T.D.5.17",
     "kategori": "Dinleme/İzleme",
     "baslik": "Dinlediğinden/izlediğinden hareketle söz varlığını geliştirmeye yönelik çözümleme yapabilme",
     "etiketler": ["dinleme", "izleme", "söz varlığı", "kelime dağarcığı"],
-    "dosyaYolu": "uploads/T.D.5.17.pdf"
+    "dosyaYolu": "uploads/T.D.5.17.docx"
   },
   {
     "id": "T.O.5.2",
     "kategori": "Okuma",
     "baslik": "Akıcı okuyabilme",
     "etiketler": ["okuma", "akıcı okuma", "sesli okuma", "sessiz okuma", "okuma hızı"],
-    "dosyaYolu": "uploads/T.O.5.2.pdf"
+    "dosyaYolu": "uploads/T.O.5.2.docx"
   },
   {
     "id": "T.O.5.3",
     "kategori": "Okuma",
     "baslik": "Okumada strateji, yöntem ve teknik seçimlerini yönetebilme",
     "etiketler": ["okuma", "okuma stratejileri", "yöntem ve teknikler"],
-    "dosyaYolu": "uploads/T.O.5.3.pdf"
+    "dosyaYolu": "uploads/T.O.5.3.docx"
   },
   {
     "id": "T.O.5.4",
     "kategori": "Okuma",
     "baslik": "Okuyacağı metnin içeriğine yönelik tahminde bulunabilme",
     "etiketler": ["okuma", "metin tahmini", "içerik tahmini", "hazırlık"],
-    "dosyaYolu": "uploads/T.O.5.4.pdf"
+    "dosyaYolu": "uploads/T.O.5.4.docx"
   },
   {
     "id": "T.O.5.5",
     "kategori": "Okuma",
     "baslik": "Metinde geçen anlamını bilmediği söz varlığı unsurlarının anlamını tahmin edebilme",
     "etiketler": ["okuma", "bilinmeyen kelimeler", "söz varlığı", "kelime tahmini"],
-    "dosyaYolu": "uploads/T.O.5.5.pdf"
+    "dosyaYolu": "uploads/T.O.5.5.docx"
   },
   {
     "id": "T.O.5.6",
     "kategori": "Okuma",
     "baslik": "Metnin yüzey anlamını belirleyebilme",
     "etiketler": ["okuma", "yüzey anlam", "metin anlama", "ana fikir"],
-    "dosyaYolu": "uploads/T.O.5.6.pdf"
+    "dosyaYolu": "uploads/T.O.5.6.docx"
   },
   {
     "id": "T.O.5.7",
     "kategori": "Okuma",
     "baslik": "Görselle iletilen anlamı belirleyebilme",
     "etiketler": ["okuma", "görsel okuma", "görsel okuryazarlık", "resim yorumlama"],
-    "dosyaYolu": "uploads/T.O.5.7.pdf"
+    "dosyaYolu": "uploads/T.O.5.7.docx"
   },
   {
     "id": "T.O.5.15",
     "kategori": "Okuma",
     "baslik": "Metnin anahtar kelimelerini belirlemeye yönelik çözümleme yapabilme",
     "etiketler": ["okuma", "anahtar kelimeler", "çözümleme", "kavramlar"],
-    "dosyaYolu": "uploads/T.O.5.15.pdf"
+    "dosyaYolu": "uploads/T.O.5.15.docx"
   },
   {
     "id": "T.O.5.20",
     "kategori": "Okuma",
     "baslik": "Metinden hareketle söz varlığını geliştirmeye yönelik çözümleme yapabilme (Eş, yakın, zıt anlam ve eş sesli kelimeler)",
     "etiketler": ["okuma", "söz varlığı", "eş anlam", "zıt anlam", "eş sesli", "yakın anlam", "kelimeler"],
-    "dosyaYolu": "uploads/T.O.5.20.pdf"
+    "dosyaYolu": "uploads/T.O.5.20.docx"
   },
   {
     "id": "T.K.5.1",
     "kategori": "Konuşma",
     "baslik": "Konuşma sürecini yönetebilme",
     "etiketler": ["konuşma", "konuşma süreci", "sunum"],
-    "dosyaYolu": "uploads/T.K.5.1.pdf"
+    "dosyaYolu": "uploads/T.K.5.1.docx"
   },
   {
     "id": "T.K.5.7",
     "kategori": "Konuşma",
     "baslik": "Hazırlıksız konuşma yapabilme",
     "etiketler": ["konuşma", "hazırlıksız konuşma", "spontan konuşma", "canlandırma"],
-    "dosyaYolu": "uploads/T.K.5.7.pdf"
+    "dosyaYolu": "uploads/T.K.5.7.docx"
   },
   {
     "id": "T.K.5.8",
     "kategori": "Konuşma",
     "baslik": "Konuşmasında sesini uygun şekilde kullanabilme",
     "etiketler": ["konuşma", "ses kullanımı", "vurgu", "tonlama", "diksiyon"],
-    "dosyaYolu": "uploads/T.K.5.8.pdf"
+    "dosyaYolu": "uploads/T.K.5.8.docx"
   },
   {
     "id": "T.K.5.17",
     "kategori": "Konuşma",
     "baslik": "Konuşmasını zenginleştirecek biçimde söz varlığını kullanabilme",
     "etiketler": ["konuşma", "söz varlığı", "hitabet", "kelime kullanımı"],
-    "dosyaYolu": "uploads/T.K.5.17.pdf"
+    "dosyaYolu": "uploads/T.K.5.17.docx"
   },
   {
     "id": "T.K.5.20",
     "kategori": "Konuşma",
     "baslik": "Konuşmasında beden dilini kullanabilme",
     "etiketler": ["konuşma", "beden dili", "jest", "mimik", "iletişim"],
-    "dosyaYolu": "uploads/T.K.5.20.pdf"
+    "dosyaYolu": "uploads/T.K.5.20.docx"
   },
   {
     "id": "T.Y.5.1",
     "kategori": "Yazma",
     "baslik": "Yazma sürecini yönetebilme",
     "etiketler": ["yazma", "yazma süreci", "kompozisyon"],
-    "dosyaYolu": "uploads/T.Y.5.1.pdf"
+    "dosyaYolu": "uploads/T.Y.5.1.docx"
   },
   {
     "id": "T.Y.5.2",
     "kategori": "Yazma",
     "baslik": "Yazmada strateji, yöntem ve teknik seçimlerini yönetebilme",
     "etiketler": ["yazma", "yazma teknikleri", "yöntemler"],
-    "dosyaYolu": "uploads/T.Y.5.2.pdf"
+    "dosyaYolu": "uploads/T.Y.5.2.docx"
   },
   {
     "id": "T.Y.5.3",
     "kategori": "Yazma",
     "baslik": "Yazısında içerik ve yapıya yönelik seçimlerini yönetebilme",
     "etiketler": ["yazma", "içerik", "yapı", "metin düzeni"],
-    "dosyaYolu": "uploads/T.Y.5.3.pdf"
+    "dosyaYolu": "uploads/T.Y.5.3.docx"
   },
   {
     "id": "T.Y.5.6",
     "kategori": "Yazma",
     "baslik": "Yazılı üretim ve yazılı etkileşiminde tahminlerinden yararlanabilme",
     "etiketler": ["yazma", "yazılı üretim", "tahmin"],
-    "dosyaYolu": "uploads/T.Y.5.6.pdf"
+    "dosyaYolu": "uploads/T.Y.5.6.docx"
   },
   {
     "id": "T.Y.5.13",
     "kategori": "Yazma",
     "baslik": "Yazısını zenginleştirecek biçimde söz varlığını kullanabilme",
     "etiketler": ["yazma", "söz varlığı", "kelime seçimi"],
-    "dosyaYolu": "uploads/T.Y.5.13.pdf"
+    "dosyaYolu": "uploads/T.Y.5.13.docx"
   },
   {
     "id": "T.Y.5.16",
     "kategori": "Yazma / Dil Bilgisi",
     "baslik": "Yazım ve noktalama işaretleriyle ilgili kuralları uygulayabilme",
     "etiketler": ["yazım kuralları", "noktalama işaretleri", "nokta", "kısa çizgi", "heceleme", "tarihlerin yazılışı", "saat yazımı"],
-    "dosyaYolu": "uploads/T.Y.5.16.pdf"
+    "dosyaYolu": "uploads/T.Y.5.16.docx"
   }
 ]

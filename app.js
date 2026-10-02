@@ -1,9 +1,11 @@
 let outcomes=[];
 let uploadedOutcomes=[];
 let searchIndex=[];
-let latestExpanded=false;
-let archiveExpanded=false;
 let fileStatus=new Map();
+
+let latestLimit=5;
+let archiveLimit=5;
+let resultsLimit=20;
 
 const $=selector=>document.querySelector(selector);
 
@@ -26,23 +28,11 @@ const resultsSection=$("#resultsSection");
 const resultsBody=$("#resultsBody");
 const resultsCount=$("#resultsCount");
 const resultsTableWrap=$("#resultsTableWrap");
+const resultsMore=$("#resultsMore");
 
 const emptyState=$("#emptyState");
-
-const escapeHtml=value=>String(value??"").replace(/[&<>"]/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[char]));
-
-const normalize=value=>String(value??"").trim().toLocaleLowerCase("tr-TR");
-
-const data=item=>({
-  code:item.id||"",
-  grade:item.sinif||"",
-  subject:item.ders||"",
-  theme:item.tema||"",
-  category:item.kategori||"",
-  title:item.baslik||"",
-  tags:Array.isArray(item.etiketler)?item.etiketler:[],
-  file:item.dosyaYolu||""
-});
+const loadingState=$("#loadingState");
+const clearFilters=$("#clearFilters");
 
 const filterMap={
   grade:gradeFilter,
@@ -56,35 +46,67 @@ const filterLabels={
   theme:"Tüm temalar"
 };
 
-function compareNatural(a,b){
-  return String(a).localeCompare(String(b),"tr",{numeric:true,sensitivity:"base"});
-}
+const escapeHtml=value=>
+  String(value??"").replace(/[&<>"]/g,char=>({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;"
+  }[char]));
 
-function sortArchive(list){
-  return [...list].sort((a,b)=>{
-    const x=data(a);
-    const y=data(b);
-    return compareNatural(x.grade,y.grade)||
-      compareNatural(x.subject,y.subject)||
-      compareNatural(x.theme,y.theme)||
-      compareNatural(x.code,y.code);
-  });
+const normalizeText=value=>
+  String(value??"")
+    .trim()
+    .toLocaleLowerCase("tr-TR")
+    .replace(/\s+/g," ");
+
+const normalizeCode=value=>
+  String(value??"")
+    .trim()
+    .toLocaleLowerCase("tr-TR")
+    .replace(/[^a-z0-9]/g,"");
+
+const getData=item=>({
+  code:item.id||"",
+  grade:item.sinif||"",
+  subject:item.ders||"",
+  theme:item.tema||"",
+  category:item.kategori||"",
+  title:item.baslik||"",
+  tags:Array.isArray(item.etiketler)?item.etiketler:[],
+  file:item.dosyaYolu||""
+});
+
+function compareNatural(a,b){
+  return String(a).localeCompare(
+    String(b),
+    "tr",
+    {
+      numeric:true,
+      sensitivity:"base"
+    }
+  );
 }
 
 function uniqueValues(key,filters={}){
-  return [...new Set(
-    uploadedOutcomes
-      .filter(item=>{
-        const d=data(item);
-        return Object.entries(filters).every(([name,value])=>!value||d[name]===value);
-      })
-      .map(item=>data(item)[key])
-      .filter(Boolean)
-  )].sort(compareNatural);
+  return[
+    ...new Set(
+      uploadedOutcomes
+        .filter(item=>{
+          const d=getData(item);
+
+          return Object.entries(filters).every(
+            ([name,value])=>!value||d[name]===value
+          );
+        })
+        .map(item=>getData(item)[key])
+        .filter(Boolean)
+    )
+  ].sort(compareNatural);
 }
 
 function buildOptions(values,placeholder,selected=""){
-  return [
+  return[
     `<option value="">${placeholder}</option>`,
     ...values.map(value=>
       `<option value="${escapeHtml(value)}"${value===selected?" selected":""}>${escapeHtml(value)}</option>`
@@ -92,16 +114,32 @@ function buildOptions(values,placeholder,selected=""){
   ].join("");
 }
 
+function closeMenus(){
+  document.querySelectorAll(".filter-menu").forEach(menu=>{
+    menu.hidden=true;
+
+    menu
+      .closest(".filter-select")
+      ?.querySelector(".filter-trigger")
+      ?.setAttribute("aria-expanded","false");
+  });
+}
+
 function renderCustomFilters(){
   Object.entries(filterMap).forEach(([key,select])=>{
-    const root=document.querySelector(`.filter-select[data-filter="${key}"]`);
+    const root=document.querySelector(
+      `.filter-select[data-filter="${key}"]`
+    );
+
     if(!root)return;
 
     const menu=root.querySelector(".filter-menu");
     const label=root.querySelector(".filter-value");
     const selected=select.value;
 
-    label.textContent=select.options[select.selectedIndex]?.textContent||filterLabels[key];
+    label.textContent=
+      select.options[select.selectedIndex]?.textContent||
+      filterLabels[key];
 
     menu.innerHTML=[...select.options].map(option=>`
       <button
@@ -116,45 +154,63 @@ function renderCustomFilters(){
   });
 }
 
-function closeMenus(){
-  document.querySelectorAll(".filter-menu").forEach(menu=>{
-    menu.hidden=true;
-    menu.closest(".filter-select")
-      ?.querySelector(".filter-trigger")
-      ?.setAttribute("aria-expanded","false");
-  });
-}
-
 function refreshFilters(){
   let grade=gradeFilter.value;
   let subject=subjectFilter.value;
   let theme=themeFilter.value;
 
   for(let i=0;i<3;i++){
-    const grades=uniqueValues("grade",{subject,theme});
-    if(grade&&!grades.includes(grade))grade="";
+    const grades=uniqueValues(
+      "grade",
+      {subject,theme}
+    );
 
-    const subjects=uniqueValues("subject",{grade,theme});
-    if(subject&&!subjects.includes(subject))subject="";
+    if(grade&&!grades.includes(grade)){
+      grade="";
+    }
 
-    const themes=uniqueValues("theme",{grade,subject});
-    if(theme&&!themes.includes(theme))theme="";
+    const subjects=uniqueValues(
+      "subject",
+      {grade,theme}
+    );
+
+    if(subject&&!subjects.includes(subject)){
+      subject="";
+    }
+
+    const themes=uniqueValues(
+      "theme",
+      {grade,subject}
+    );
+
+    if(theme&&!themes.includes(theme)){
+      theme="";
+    }
   }
 
   gradeFilter.innerHTML=buildOptions(
-    uniqueValues("grade",{subject,theme}),
+    uniqueValues(
+      "grade",
+      {subject,theme}
+    ),
     "Tüm sınıflar",
     grade
   );
 
   subjectFilter.innerHTML=buildOptions(
-    uniqueValues("subject",{grade,theme}),
+    uniqueValues(
+      "subject",
+      {grade,theme}
+    ),
     "Tüm dersler",
     subject
   );
 
   themeFilter.innerHTML=buildOptions(
-    uniqueValues("theme",{grade,subject}),
+    uniqueValues(
+      "theme",
+      {grade,subject}
+    ),
     "Tüm temalar",
     theme
   );
@@ -168,18 +224,19 @@ function refreshFilters(){
 
 function buildSearchIndex(){
   searchIndex=uploadedOutcomes.map(item=>{
-    const d=data(item);
+    const d=getData(item);
 
     return{
       item,
-      code:normalize(d.code),
+      code:normalizeText(d.code),
+      compactCode:normalizeCode(d.code),
       grade:d.grade,
       subject:d.subject,
       theme:d.theme,
       category:d.category,
-      title:normalize(d.title),
-      tags:d.tags.map(normalize),
-      searchText:normalize([
+      title:normalizeText(d.title),
+      tags:d.tags.map(normalizeText),
+      searchText:normalizeText([
         d.code,
         d.grade,
         d.subject,
@@ -192,70 +249,154 @@ function buildSearchIndex(){
   });
 }
 
-function scoreResult(entry,q){
-  if(!q)return 0;
+function scoreResult(entry,query,compactQuery){
+  if(!query)return 0;
 
   let score=0;
 
-  if(entry.code===q)score+=1000;
-  else if(entry.code.startsWith(q))score+=900;
-  else if(entry.code.includes(q))score+=800;
+  if(
+    compactQuery&&
+    entry.compactCode===compactQuery
+  ){
+    score+=1200;
+  }else if(
+    compactQuery&&
+    entry.compactCode.startsWith(compactQuery)
+  ){
+    score+=1100;
+  }else if(
+    compactQuery&&
+    entry.compactCode.includes(compactQuery)
+  ){
+    score+=1000;
+  }
 
-  if(entry.title===q)score+=750;
-  else if(entry.title.startsWith(q))score+=700;
-  else if(entry.title.includes(q))score+=600;
+  if(entry.code===query){
+    score+=950;
+  }else if(entry.code.startsWith(query)){
+    score+=900;
+  }else if(entry.code.includes(query)){
+    score+=850;
+  }
 
-  if(entry.tags.some(tag=>tag===q))score+=550;
-  else if(entry.tags.some(tag=>tag.startsWith(q)))score+=500;
-  else if(entry.tags.some(tag=>tag.includes(q)))score+=450;
+  if(entry.title===query){
+    score+=800;
+  }else if(entry.title.startsWith(query)){
+    score+=700;
+  }else if(entry.title.includes(query)){
+    score+=600;
+  }
 
-  const theme=normalize(entry.theme);
-  const category=normalize(entry.category);
-  const subject=normalize(entry.subject);
-  const grade=normalize(entry.grade);
+  if(entry.tags.some(tag=>tag===query)){
+    score+=550;
+  }else if(entry.tags.some(tag=>tag.startsWith(query))){
+    score+=500;
+  }else if(entry.tags.some(tag=>tag.includes(query))){
+    score+=450;
+  }
 
-  if(theme===q)score+=300;
-  else if(theme.includes(q))score+=250;
+  const theme=normalizeText(entry.theme);
+  const category=normalizeText(entry.category);
+  const subject=normalizeText(entry.subject);
+  const grade=normalizeText(entry.grade);
 
-  if(category===q)score+=225;
-  else if(category.includes(q))score+=200;
+  if(theme===query){
+    score+=300;
+  }else if(theme.includes(query)){
+    score+=250;
+  }
 
-  if(subject===q)score+=150;
-  else if(subject.includes(q))score+=125;
+  if(category===query){
+    score+=225;
+  }else if(category.includes(query)){
+    score+=200;
+  }
 
-  if(grade===q)score+=100;
-  else if(grade.includes(q))score+=75;
+  if(subject===query){
+    score+=150;
+  }else if(subject.includes(query)){
+    score+=125;
+  }
+
+  if(grade===query){
+    score+=100;
+  }else if(grade.includes(query)){
+    score+=75;
+  }
 
   return score;
 }
 
 function filtered(){
-  const q=normalize(searchInput.value);
+  const query=normalizeText(searchInput.value);
+  const compactQuery=normalizeCode(searchInput.value);
+
+  const isCodeSearch=
+    compactQuery.length>=3 &&
+    /\d/.test(compactQuery);
+
   const grade=gradeFilter.value;
   const subject=subjectFilter.value;
   const theme=themeFilter.value;
 
   return searchIndex
     .filter(entry=>{
-      if(q&&!entry.searchText.includes(q))return false;
+      const textMatch=
+        !query||
+        entry.searchText.includes(query)||
+        (
+          isCodeSearch&&
+          entry.compactCode.includes(compactQuery)
+        );
+
+      if(!textMatch)return false;
       if(grade&&entry.grade!==grade)return false;
       if(subject&&entry.subject!==subject)return false;
       if(theme&&entry.theme!==theme)return false;
+
       return true;
     })
     .map(entry=>({
       item:entry.item,
-      score:scoreResult(entry,q)
+      score:scoreResult(
+        entry,
+        query,
+        isCodeSearch?compactQuery:""
+      )
     }))
     .sort((a,b)=>
       b.score-a.score||
-      compareNatural(data(a.item).code,data(b.item).code)
+      compareNatural(
+        getData(a.item).code,
+        getData(b.item).code
+      )
     )
     .map(entry=>entry.item);
 }
 
+function highlightText(text,query){
+  const safe=escapeHtml(text);
+  const q=String(query??"").trim();
+
+  if(q.length<2)return safe;
+
+  const pattern=q.replace(
+    /[.*+?^${}()|[\]\\]/g,
+    "\\$&"
+  );
+
+  try{
+    return safe.replace(
+      new RegExp(pattern,"gi"),
+      match=>`<mark>${match}</mark>`
+    );
+  }catch{
+    return safe;
+  }
+}
+
 function card(item){
-  const d=data(item);
+  const d=getData(item);
 
   return`
     <article class="card">
@@ -268,9 +409,11 @@ function card(item){
       <h3>${escapeHtml(d.title)}</h3>
 
       <div class="card-foot">
-        <a class="download" href="${escapeHtml(d.file)}" download>
-          Dosyayı İndir
-        </a>
+        ${
+          d.file
+            ? `<a class="download" href="${escapeHtml(d.file)}" download>Dosyayı İndir</a>`
+            : `<span class="download is-error">Dosya yok</span>`
+        }
       </div>
     </article>
   `;
@@ -281,20 +424,34 @@ function renderGrid(target,list){
 }
 
 function resultRow(item){
-  const d=data(item);
+  const d=getData(item);
+  const query=searchInput.value.trim();
+  const compactQuery=normalizeCode(query);
+
+  const codeMatch=
+    compactQuery.length>=3&&
+    /\d/.test(compactQuery)&&
+    normalizeCode(d.code).includes(compactQuery);
 
   return`
     <tr>
       <td>${escapeHtml(d.grade)}</td>
+
       <td>${escapeHtml(d.subject)}</td>
+
       <td>${escapeHtml(d.theme)}</td>
 
       <td>
-        <span class="result-code">${escapeHtml(d.code)}</span>
+        <span class="result-code${codeMatch?" code-match":""}">
+          ${escapeHtml(d.code)}
+        </span>
       </td>
 
       <td>
-        <div class="result-title">${escapeHtml(d.title)}</div>
+        <div class="result-title">
+          ${highlightText(d.title,query)}
+        </div>
+
         ${
           d.tags.length
             ? `<div class="result-tags">
@@ -318,40 +475,59 @@ function resultRow(item){
 }
 
 function renderResults(list){
-  resultsBody.innerHTML=list.map(resultRow).join("");
+  resultsBody.innerHTML=
+    list
+      .slice(0,resultsLimit)
+      .map(resultRow)
+      .join("");
 }
 
 async function checkFile(path){
   if(!path)return false;
 
-  if(fileStatus.has(path))return fileStatus.get(path);
+  if(fileStatus.has(path)){
+    return fileStatus.get(path);
+  }
 
   let exists=false;
 
   try{
-    const head=await fetch(path,{
-      method:"HEAD",
-      cache:"no-cache"
-    });
+    const head=await fetch(
+      path,
+      {
+        method:"HEAD",
+        cache:"no-cache"
+      }
+    );
 
     exists=head.ok;
 
     if(!exists){
-      const get=await fetch(path,{
-        method:"GET",
-        headers:{Range:"bytes=0-0"},
-        cache:"no-cache"
-      });
+      const get=await fetch(
+        path,
+        {
+          method:"GET",
+          headers:{
+            Range:"bytes=0-0"
+          },
+          cache:"no-cache"
+        }
+      );
 
       exists=get.ok;
     }
   }catch{
     try{
-      const get=await fetch(path,{
-        method:"GET",
-        headers:{Range:"bytes=0-0"},
-        cache:"no-cache"
-      });
+      const get=await fetch(
+        path,
+        {
+          method:"GET",
+          headers:{
+            Range:"bytes=0-0"
+          },
+          cache:"no-cache"
+        }
+      );
 
       exists=get.ok;
     }catch{
@@ -360,6 +536,7 @@ async function checkFile(path){
   }
 
   fileStatus.set(path,exists);
+
   return exists;
 }
 
@@ -372,7 +549,7 @@ async function verifyUploadedFiles(list){
     while(cursor<list.length){
       const index=cursor++;
       const item=list[index];
-      const d=data(item);
+      const d=getData(item);
 
       if(await checkFile(d.file)){
         valid.push(item);
@@ -382,12 +559,30 @@ async function verifyUploadedFiles(list){
 
   await Promise.all(
     Array.from(
-      {length:Math.min(concurrency,list.length)},
+      {
+        length:Math.min(
+          concurrency,
+          list.length
+        )
+      },
       ()=>worker()
     )
   );
 
   return valid;
+}
+
+function setLoading(value){
+  loadingState.hidden=!value;
+
+  document
+    .querySelector(".content-columns")
+    .hidden=value;
+
+  if(value){
+    resultsSection.hidden=true;
+    emptyState.hidden=true;
+  }
 }
 
 function render(){
@@ -398,31 +593,59 @@ function render(){
     themeFilter.value
   );
 
-  const latestSource=[...uploadedOutcomes].reverse();
+  const latestSource=[
+    ...uploadedOutcomes
+  ].reverse();
 
-  const latest=latestExpanded
-    ? latestSource
-    : latestSource.slice(0,5);
+  const archiveSource=[
+    ...uploadedOutcomes
+  ].sort((a,b)=>{
+    const x=getData(a);
+    const y=getData(b);
 
-  const archiveSource=sortArchive(uploadedOutcomes);
+    return(
+      compareNatural(x.grade,y.grade)||
+      compareNatural(x.subject,y.subject)||
+      compareNatural(x.theme,y.theme)||
+      compareNatural(x.code,y.code)
+    );
+  });
 
-  const archive=archiveExpanded
-    ? archiveSource
-    : archiveSource.slice(0,5);
-
+  const latest=latestSource.slice(0,latestLimit);
+  const archive=archiveSource.slice(0,archiveLimit);
   const results=filtered();
 
-  renderGrid(latestGrid,latest);
-  renderGrid(allGrid,archive);
+  renderGrid(
+    latestGrid,
+    latest
+  );
 
-  latestCount.textContent=`${uploadedOutcomes.length} paket`;
-  allCount.textContent=`${uploadedOutcomes.length} paket`;
+  renderGrid(
+    allGrid,
+    archive
+  );
 
-  latestMore.hidden=uploadedOutcomes.length<=5;
-  allMore.hidden=uploadedOutcomes.length<=5;
+  latestCount.textContent=
+    `${uploadedOutcomes.length} paket`;
 
-  latestMore.textContent=latestExpanded?"Daha Az":"Daha Fazla";
-  allMore.textContent=archiveExpanded?"Daha Az":"Daha Fazla";
+  allCount.textContent=
+    `${uploadedOutcomes.length} paket`;
+
+  latestMore.hidden=
+    latestLimit>=latestSource.length;
+
+  allMore.hidden=
+    archiveLimit>=archiveSource.length;
+
+  latestMore.textContent=
+    latestLimit>=latestSource.length
+      ? "Daha Fazla"
+      : `Daha Fazla`;
+
+  allMore.textContent=
+    archiveLimit>=archiveSource.length
+      ? "Daha Fazla"
+      : `Daha Fazla`;
 
   if(active){
     latestSection.hidden=true;
@@ -430,58 +653,93 @@ function render(){
 
     resultsSection.hidden=false;
 
-    resultsCount.textContent=`${results.length} sonuç`;
+    resultsCount.textContent=
+      `${results.length} sonuç`;
 
     renderResults(results);
 
-    resultsTableWrap.hidden=results.length===0;
-    emptyState.hidden=results.length>0;
+    resultsTableWrap.hidden=
+      results.length===0;
+
+    resultsMore.hidden=
+      results.length<=resultsLimit;
+
+    emptyState.hidden=
+      results.length>0;
 
     if(results.length===0){
-      emptyState.querySelector("h2").textContent="Sonuç bulunamadı.";
-      emptyState.querySelector("p").textContent="Arama metnini veya filtreleri değiştirerek tekrar deneyin.";
+      emptyState.querySelector("h2").textContent=
+        "Sonuç bulunamadı.";
+
+      emptyState.querySelector("p").textContent=
+        "Arama metnini veya filtreleri değiştirerek tekrar deneyin.";
     }
   }else{
     latestSection.hidden=false;
     allSection.hidden=false;
     resultsSection.hidden=true;
+    resultsMore.hidden=true;
     emptyState.hidden=true;
   }
+
+  clearFilters.hidden=
+    !(
+      gradeFilter.value||
+      subjectFilter.value||
+      themeFilter.value
+    );
 }
 
 async function init(){
   try{
-    const response=await fetch("data/outcomes.json",{
-      cache:"no-cache"
-    });
+    setLoading(true);
+
+    const response=await fetch(
+      "data/outcomes.json",
+      {
+        cache:"no-cache"
+      }
+    );
 
     if(!response.ok){
-      throw new Error(`HTTP ${response.status}`);
+      throw new Error(
+        `HTTP ${response.status}`
+      );
     }
 
-    outcomes=await response.json();
+    const json=await response.json();
 
-    if(!Array.isArray(outcomes)){
-      outcomes=[];
-    }
+    outcomes=
+      Array.isArray(json)
+        ? json.filter(
+            item=>item&&typeof item==="object"
+          )
+        : [];
 
-    const withPath=outcomes.filter(item=>data(item).file);
+    const withFiles=outcomes.filter(
+      item=>getData(item).file
+    );
 
-    uploadedOutcomes=await verifyUploadedFiles(withPath);
+    uploadedOutcomes=
+      await verifyUploadedFiles(withFiles);
 
     buildSearchIndex();
     refreshFilters();
+
+    setLoading(false);
     render();
   }catch(error){
     outcomes=[];
     uploadedOutcomes=[];
     searchIndex=[];
 
+    setLoading(false);
     refreshFilters();
     render();
 
     latestGrid.innerHTML="";
     allGrid.innerHTML="";
+    resultsSection.hidden=true;
 
     emptyState.hidden=false;
 
@@ -489,124 +747,195 @@ async function init(){
       "Kazanım listesi yüklenemedi.";
 
     emptyState.querySelector("p").textContent=
-      "data/outcomes.json dosyasını kontrol edin.";
+      "Veri dosyası veya site bağlantısını kontrol edin.";
 
     console.error(error);
   }
 }
 
-searchInput.addEventListener("input",render);
+searchInput.addEventListener(
+  "input",
+  ()=>{
+    resultsLimit=20;
+    render();
+  }
+);
 
-[gradeFilter,subjectFilter,themeFilter].forEach(select=>{
-  select.addEventListener("change",()=>{
+[gradeFilter,subjectFilter,themeFilter].forEach(
+  select=>{
+    select.addEventListener(
+      "change",
+      ()=>{
+        resultsLimit=20;
+        refreshFilters();
+        render();
+      }
+    );
+  }
+);
+
+clearFilters.addEventListener(
+  "click",
+  ()=>{
+    gradeFilter.value="";
+    subjectFilter.value="";
+    themeFilter.value="";
+    resultsLimit=20;
     refreshFilters();
     render();
-  });
-});
-
-document.addEventListener("click",event=>{
-  const option=event.target.closest(".filter-option");
-  const trigger=event.target.closest(".filter-trigger");
-
-  if(option){
-    const root=option.closest(".filter-select");
-    const key=root?.dataset.filter;
-    const select=filterMap[key];
-
-    if(select){
-      select.value=option.dataset.value;
-      closeMenus();
-      refreshFilters();
-      render();
-    }
-
-    return;
   }
+);
 
-  if(trigger){
-    const root=trigger.closest(".filter-select");
-    const menu=root.querySelector(".filter-menu");
-    const wasOpen=!menu.hidden;
+latestMore.addEventListener(
+  "click",
+  ()=>{
+    latestLimit+=5;
+    render();
+  }
+);
 
-    closeMenus();
+allMore.addEventListener(
+  "click",
+  ()=>{
+    archiveLimit+=5;
+    render();
+  }
+);
 
-    if(!wasOpen){
-      menu.hidden=false;
-      trigger.setAttribute("aria-expanded","true");
+resultsMore.addEventListener(
+  "click",
+  ()=>{
+    resultsLimit+=20;
+    render();
+  }
+);
 
-      const selected=menu.querySelector('[aria-selected="true"]');
+document.addEventListener(
+  "click",
+  event=>{
+    const option=
+      event.target.closest(".filter-option");
 
-      if(selected){
-        selected.focus();
+    const trigger=
+      event.target.closest(".filter-trigger");
+
+    if(option){
+      const root=
+        option.closest(".filter-select");
+
+      const key=root?.dataset.filter;
+      const select=filterMap[key];
+
+      if(select){
+        select.value=option.dataset.value;
+        closeMenus();
+        resultsLimit=20;
+        refreshFilters();
+        render();
       }
-    }
 
-    return;
-  }
-
-  if(!event.target.closest(".filter-select")){
-    closeMenus();
-  }
-});
-
-document.addEventListener("keydown",event=>{
-  if(event.key==="Escape"){
-    closeMenus();
-  }
-});
-
-latestMore.addEventListener("click",()=>{
-  latestExpanded=!latestExpanded;
-  render();
-});
-
-allMore.addEventListener("click",()=>{
-  archiveExpanded=!archiveExpanded;
-  render();
-});
-
-document.addEventListener("click",async event=>{
-  const link=event.target.closest("a[download]");
-
-  if(
-    !link||
-    link.dataset.ready==="1"||
-    link.classList.contains("is-error")
-  ){
-    return;
-  }
-
-  event.preventDefault();
-
-  if(link.dataset.checking==="1")return;
-
-  link.dataset.checking="1";
-
-  const original=link.textContent;
-
-  link.textContent="Kontrol ediliyor...";
-
-  try{
-    const exists=await checkFile(link.getAttribute("href"));
-
-    if(!exists){
-      link.textContent="Dosya bulunamadı";
-      link.classList.add("is-error");
       return;
     }
 
-    link.dataset.ready="1";
-    link.click();
-  }catch{
-    link.textContent="Dosya kontrol edilemedi";
-    link.classList.add("is-error");
-  }finally{
-    delete link.dataset.checking;
+    if(trigger){
+      const root=
+        trigger.closest(".filter-select");
 
-    if(link.dataset.ready==="1"){
-      link.textContent=original;
+      const menu=
+        root.querySelector(".filter-menu");
+
+      const wasOpen=!menu.hidden;
+
+      closeMenus();
+
+      if(!wasOpen){
+        menu.hidden=false;
+
+        trigger.setAttribute(
+          "aria-expanded",
+          "true"
+        );
+
+        menu
+          .querySelector('[aria-selected="true"]')
+          ?.focus();
+      }
+
+      return;
+    }
+
+    if(!event.target.closest(".filter-select")){
+      closeMenus();
     }
   }
-});
+);
+
+document.addEventListener(
+  "keydown",
+  event=>{
+    if(event.key==="Escape"){
+      closeMenus();
+    }
+  }
+);
+
+document.addEventListener(
+  "click",
+  async event=>{
+    const link=
+      event.target.closest("a[download]");
+
+    if(
+      !link||
+      link.dataset.ready==="1"||
+      link.classList.contains("is-error")
+    ){
+      return;
+    }
+
+    event.preventDefault();
+
+    if(link.dataset.checking==="1"){
+      return;
+    }
+
+    link.dataset.checking="1";
+
+    const original=link.textContent;
+
+    link.textContent=
+      "Kontrol ediliyor...";
+
+    try{
+      const exists=
+        await checkFile(
+          link.getAttribute("href")
+        );
+
+      if(!exists){
+        link.textContent=
+          "Dosya bulunamadı";
+
+        link.classList.add("is-error");
+
+        return;
+      }
+
+      link.dataset.ready="1";
+      link.click();
+    }catch{
+      link.textContent=
+        "Dosya kontrol edilemedi";
+
+      link.classList.add("is-error");
+    }finally{
+      delete link.dataset.checking;
+
+      if(link.dataset.ready==="1"){
+        link.textContent=original;
+      }
+    }
+  }
+);
 
 init();

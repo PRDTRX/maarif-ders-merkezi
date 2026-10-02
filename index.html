@@ -3,12 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="google-site-verification" content="ixD6a_taHVXhWrO0aG_VJueA47k46V0KlGC5o9VfuAM" />
 <meta name="description" content="Maarif Modeli ile uyumlu ders paketleri, kazanımlar ve eğitim materyalleri.">
+<meta name="robots" content="index,follow">
 <meta name="theme-color" content="#172033">
 <meta property="og:title" content="Maarif Ders Merkezi">
 <meta property="og:description" content="Maarif Modeli uyumlu ders paketleri ve kazanım arşivi.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://prdtrx.github.io/maarif-ders-merkezi/">
 <link rel="canonical" href="https://prdtrx.github.io/maarif-ders-merkezi/">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,7 +27,7 @@
       <span class="brand-name">Maarif Ders Merkezi</span>
     </a>
 
-    <div class="site-heading">
+    <div class="site-heading" aria-label="Maarif Modeli Ders Paketleri">
       <span>MAARİF MODELİ</span>
       <strong>Ders Paketleri</strong>
     </div>
@@ -44,7 +45,6 @@
 
       <div class="field">
         <span>Sınıf</span>
-
         <div class="filter-select" data-filter="grade">
           <button class="filter-trigger" type="button" aria-haspopup="listbox" aria-expanded="false">
             <span class="filter-value">Tüm sınıflar</span>
@@ -52,9 +52,7 @@
               <path d="M1 1.5 6 6.5 11 1.5"></path>
             </svg>
           </button>
-
           <div class="filter-menu" role="listbox" hidden></div>
-
           <select id="gradeFilter" class="native-filter" tabindex="-1" aria-hidden="true">
             <option value="">Tüm sınıflar</option>
           </select>
@@ -63,7 +61,6 @@
 
       <div class="field">
         <span>Ders</span>
-
         <div class="filter-select" data-filter="subject">
           <button class="filter-trigger" type="button" aria-haspopup="listbox" aria-expanded="false">
             <span class="filter-value">Tüm dersler</span>
@@ -71,9 +68,7 @@
               <path d="M1 1.5 6 6.5 11 1.5"></path>
             </svg>
           </button>
-
           <div class="filter-menu" role="listbox" hidden></div>
-
           <select id="subjectFilter" class="native-filter" tabindex="-1" aria-hidden="true">
             <option value="">Tüm dersler</option>
           </select>
@@ -82,7 +77,6 @@
 
       <div class="field">
         <span>Tema</span>
-
         <div class="filter-select" data-filter="theme">
           <button class="filter-trigger" type="button" aria-haspopup="listbox" aria-expanded="false">
             <span class="filter-value">Tüm temalar</span>
@@ -90,9 +84,7 @@
               <path d="M1 1.5 6 6.5 11 1.5"></path>
             </svg>
           </button>
-
           <div class="filter-menu" role="listbox" hidden></div>
-
           <select id="themeFilter" class="native-filter" tabindex="-1" aria-hidden="true">
             <option value="">Tüm temalar</option>
           </select>
@@ -108,7 +100,6 @@
           <path d="M16 16 21 21"></path>
         </svg>
       </span>
-
       <input
         id="searchInput"
         type="search"
@@ -118,11 +109,22 @@
         aria-label="Kazanım, konu veya paket ara">
     </label>
 
+    <div class="filter-actions">
+      <button id="clearFilters" class="clear-filters" type="button" hidden>
+        Filtreleri Temizle
+      </button>
+    </div>
+
   </div>
 </section>
 
 <section class="content">
   <div class="container">
+
+    <div id="loadingState" class="loading-state" role="status" aria-live="polite">
+      <span class="loading-spinner" aria-hidden="true"></span>
+      <span>Kazanımlar yükleniyor...</span>
+    </div>
 
     <div class="content-columns">
 
@@ -132,7 +134,6 @@
             <p class="section-kicker">GÜNCEL</p>
             <h2>Son Yüklenenler</h2>
           </div>
-
           <span id="latestCount" class="section-count" aria-live="polite"></span>
         </div>
 
@@ -151,7 +152,6 @@
             <p class="section-kicker">ARŞİV</p>
             <h2>Tüm Paketler</h2>
           </div>
-
           <span id="allCount" class="section-count" aria-live="polite"></span>
         </div>
 
@@ -167,13 +167,11 @@
     </div>
 
     <section id="resultsSection" class="section results-section" hidden>
-
       <div class="section-head">
         <div>
           <p class="section-kicker">ARAMA SONUÇLARI</p>
           <h2>Bulunan Kazanımlar</h2>
         </div>
-
         <span id="resultsCount" class="section-count" aria-live="polite"></span>
       </div>
 
@@ -189,15 +187,19 @@
               <th scope="col">Dosya</th>
             </tr>
           </thead>
-
           <tbody id="resultsBody"></tbody>
         </table>
       </div>
 
+      <div class="more-wrap">
+        <button id="resultsMore" class="more-button" type="button" hidden>
+          Daha Fazla
+        </button>
+      </div>
     </section>
 
     <div id="emptyState" class="empty" hidden>
-      <h2>Paket bulunamadı.</h2>
+      <h2>Sonuç bulunamadı.</h2>
       <p>Arama metnini veya filtreleri değiştirerek tekrar deneyin.</p>
     </div>
 

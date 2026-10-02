@@ -4,39 +4,21 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
-<meta
-  name="google-site-verification"
-  content="ixD6a_taHVXhWrO0aG_VJueA47k46V0KlGC5o9VfuAM"
-/>
+<meta name="google-site-verification" content="ixD6a_taHVXhWrO0aG_VJueA47k46V0KlGC5o9VfuAM">
 
-<meta
-  name="description"
-  content="Maarif Modeli ile uyumlu ders paketleri, kazanımlar ve eğitim materyalleri."
->
-
+<meta name="description" content="Maarif Modeli ile uyumlu ders paketleri, kazanımlar ve eğitim materyalleri.">
 <meta name="theme-color" content="#172033">
 
 <meta property="og:title" content="Maarif Ders Merkezi">
-<meta
-  property="og:description"
-  content="Maarif Modeli uyumlu ders paketleri ve kazanım arşivi."
->
+<meta property="og:description" content="Maarif Modeli uyumlu ders paketleri ve kazanım arşivi.">
 <meta property="og:type" content="website">
 
-<link
-  rel="canonical"
-  href="https://prdtrx.github.io/maarif-ders-merkezi/"
->
-
+<link rel="canonical" href="https://prdtrx.github.io/maarif-ders-merkezi/">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link
-  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&display=swap"
-  rel="stylesheet"
->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="styles.css">
 
@@ -48,11 +30,7 @@
 <header class="site-header">
   <div class="container header-in">
 
-    <a
-      class="brand"
-      href="./"
-      aria-label="Maarif Ders Merkezi ana sayfa"
-    >
+    <a class="brand" href="./" aria-label="Maarif Ders Merkezi ana sayfa">
       <span class="brand-mark">MD</span>
       <span class="brand-name">Maarif Ders Merkezi</span>
     </a>
@@ -71,44 +49,33 @@
 <section class="hero">
   <div class="container hero-in">
 
-    <p class="hero-text">
-      Kazanım kodu, konu veya paket adına göre arayın.
-    </p>
+    <div class="hero-copy">
+      <h1>Ders Paketlerini Bulun</h1>
+      <p>Kazanım kodu, konu, tema veya paket adına göre arayın.</p>
+    </div>
+
 
     <div class="filters" aria-label="Paket filtreleri">
 
-      <!-- Sınıf -->
       <div class="field">
         <span>Sınıf</span>
 
-        <div
-          class="filter-select"
-          data-filter="grade"
-        >
+        <div class="filter-select" data-filter="grade">
+
           <button
             class="filter-trigger"
             type="button"
             aria-haspopup="listbox"
             aria-expanded="false"
           >
-            <span class="filter-value">
-              Tüm sınıflar
-            </span>
+            <span class="filter-value">Tüm sınıflar</span>
 
-            <svg
-              viewBox="0 0 12 8"
-              fill="none"
-              aria-hidden="true"
-            >
+            <svg viewBox="0 0 12 8" fill="none" aria-hidden="true">
               <path d="M1 1.5 6 6.5 11 1.5"></path>
             </svg>
           </button>
 
-          <div
-            class="filter-menu"
-            role="listbox"
-            hidden
-          ></div>
+          <div class="filter-menu" role="listbox" hidden></div>
 
           <select
             id="gradeFilter"
@@ -118,42 +85,30 @@
           >
             <option value="">Tüm sınıflar</option>
           </select>
+
         </div>
       </div>
 
 
-      <!-- Ders -->
       <div class="field">
         <span>Ders</span>
 
-        <div
-          class="filter-select"
-          data-filter="subject"
-        >
+        <div class="filter-select" data-filter="subject">
+
           <button
             class="filter-trigger"
             type="button"
             aria-haspopup="listbox"
             aria-expanded="false"
           >
-            <span class="filter-value">
-              Tüm dersler
-            </span>
+            <span class="filter-value">Tüm dersler</span>
 
-            <svg
-              viewBox="0 0 12 8"
-              fill="none"
-              aria-hidden="true"
-            >
+            <svg viewBox="0 0 12 8" fill="none" aria-hidden="true">
               <path d="M1 1.5 6 6.5 11 1.5"></path>
             </svg>
           </button>
 
-          <div
-            class="filter-menu"
-            role="listbox"
-            hidden
-          ></div>
+          <div class="filter-menu" role="listbox" hidden></div>
 
           <select
             id="subjectFilter"
@@ -163,42 +118,30 @@
           >
             <option value="">Tüm dersler</option>
           </select>
+
         </div>
       </div>
 
 
-      <!-- Tema -->
       <div class="field">
         <span>Tema</span>
 
-        <div
-          class="filter-select"
-          data-filter="theme"
-        >
+        <div class="filter-select" data-filter="theme">
+
           <button
             class="filter-trigger"
             type="button"
             aria-haspopup="listbox"
             aria-expanded="false"
           >
-            <span class="filter-value">
-              Tüm temalar
-            </span>
+            <span class="filter-value">Tüm temalar</span>
 
-            <svg
-              viewBox="0 0 12 8"
-              fill="none"
-              aria-hidden="true"
-            >
+            <svg viewBox="0 0 12 8" fill="none" aria-hidden="true">
               <path d="M1 1.5 6 6.5 11 1.5"></path>
             </svg>
           </button>
 
-          <div
-            class="filter-menu"
-            role="listbox"
-            hidden
-          ></div>
+          <div class="filter-menu" role="listbox" hidden></div>
 
           <select
             id="themeFilter"
@@ -208,6 +151,7 @@
           >
             <option value="">Tüm temalar</option>
           </select>
+
         </div>
       </div>
 
@@ -216,24 +160,11 @@
 
     <div class="search-row">
 
-      <label
-        class="search-box"
-        for="searchInput"
-      >
-        <span
-          class="search-icon"
-          aria-hidden="true"
-        >
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-          >
-            <circle
-              cx="11"
-              cy="11"
-              r="6.5"
-            ></circle>
+      <label class="search-box" for="searchInput">
 
+        <span class="search-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <circle cx="11" cy="11" r="6.5"></circle>
             <path d="M16 16 21 21"></path>
           </svg>
         </span>
@@ -246,6 +177,7 @@
           spellcheck="false"
           aria-label="Kazanım, konu veya paket ara"
         >
+
       </label>
 
 
@@ -260,6 +192,11 @@
 
     </div>
 
+
+    <p class="search-help">
+      Örnek: <strong>T.O.5.20</strong> · <strong>to520</strong> · söz varlığı · okuma
+    </p>
+
   </div>
 </section>
 
@@ -267,38 +204,17 @@
 <section class="content">
   <div class="container">
 
-    <!-- Yükleniyor -->
-    <div
-      id="loadingState"
-      class="loading-state"
-      aria-live="polite"
-    >
-      <span class="loading-spinner" aria-hidden="true"></span>
-      <span>Kazanımlar yükleniyor...</span>
-    </div>
 
+    <div class="content-columns">
 
-    <div
-      class="content-columns"
-      hidden
-    >
-
-      <!-- Son yüklenenler -->
-      <section
-        id="latestSection"
-        class="section"
-      >
+      <section id="latestSection" class="section">
 
         <div class="section-head">
 
           <div>
-            <p class="section-kicker">
-              GÜNCEL
-            </p>
-
-            <h2>
-              Son Yüklenenler
-            </h2>
+            <p class="section-kicker">GÜNCEL</p>
+            <h2>Son Yüklenenler</h2>
+            <p class="section-sub">Son eklenen ders paketleri</p>
           </div>
 
           <span
@@ -309,12 +225,12 @@
 
         </div>
 
-        <div
-          id="latestGrid"
-          class="grid"
-        ></div>
+
+        <div id="latestGrid" class="grid"></div>
+
 
         <div class="more-wrap">
+
           <button
             id="latestMore"
             class="more-button"
@@ -323,27 +239,20 @@
           >
             Daha Fazla
           </button>
+
         </div>
 
       </section>
 
 
-      <!-- Arşiv -->
-      <section
-        id="allSection"
-        class="section"
-      >
+      <section id="allSection" class="section">
 
         <div class="section-head">
 
           <div>
-            <p class="section-kicker">
-              ARŞİV
-            </p>
-
-            <h2>
-              Tüm Paketler
-            </h2>
+            <p class="section-kicker">ARŞİV</p>
+            <h2>Tüm Paketler</h2>
+            <p class="section-sub">Tüm ders paketlerinin arşivi</p>
           </div>
 
           <span
@@ -354,12 +263,12 @@
 
         </div>
 
-        <div
-          id="allGrid"
-          class="grid"
-        ></div>
+
+        <div id="allGrid" class="grid"></div>
+
 
         <div class="more-wrap">
+
           <button
             id="allMore"
             class="more-button"
@@ -368,6 +277,7 @@
           >
             Daha Fazla
           </button>
+
         </div>
 
       </section>
@@ -375,7 +285,6 @@
     </div>
 
 
-    <!-- Arama sonuçları -->
     <section
       id="resultsSection"
       class="section results-section"
@@ -385,13 +294,8 @@
       <div class="section-head">
 
         <div>
-          <p class="section-kicker">
-            ARAMA SONUÇLARI
-          </p>
-
-          <h2>
-            Bulunan Kazanımlar
-          </h2>
+          <p class="section-kicker">ARAMA SONUÇLARI</p>
+          <h2>Bulunan Kazanımlar</h2>
         </div>
 
         <span
@@ -429,6 +333,7 @@
 
 
       <div class="more-wrap">
+
         <button
           id="resultsMore"
           class="more-button"
@@ -437,22 +342,20 @@
         >
           Daha Fazla
         </button>
+
       </div>
 
     </section>
 
 
-    <!-- Sonuç yok -->
-    <div
-      id="emptyState"
-      class="empty"
-      hidden
-    >
+    <div id="emptyState" class="empty" hidden>
+
       <h2>Sonuç bulunamadı.</h2>
 
       <p>
         Arama metnini veya filtreleri değiştirerek tekrar deneyin.
       </p>
+
     </div>
 
   </div>
@@ -462,24 +365,19 @@
 
 
 <footer class="site-footer">
+
   <div class="container footer-in">
 
-    <span>
-      © 2026 Maarif Ders Merkezi
-    </span>
+    <span>© 2026 Maarif Ders Merkezi</span>
 
-    <span>
-      Maarif Modeli uyumlu ders paketleri
-    </span>
+    <span>Maarif Modeli uyumlu ders paketleri</span>
 
   </div>
+
 </footer>
 
 
-<script
-  src="app.js"
-  defer
-></script>
+<script src="app.js" defer></script>
 
 </body>
 </html>

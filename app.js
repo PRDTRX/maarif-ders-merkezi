@@ -8,16 +8,12 @@ let resultsLimit = 20;
 
 const fileStatus = new Map();
 
-const $ = selector =>
-  document.querySelector(selector);
+const $ = selector => document.querySelector(selector);
 
-
-// DOM
 const gradeFilter = $("#gradeFilter");
 const subjectFilter = $("#subjectFilter");
 const themeFilter = $("#themeFilter");
 const searchInput = $("#searchInput");
-
 const clearFilters = $("#clearFilters");
 
 const latestSection = $("#latestSection");
@@ -38,11 +34,6 @@ const resultsMore = $("#resultsMore");
 
 const emptyState = $("#emptyState");
 
-const loadingState = $("#loadingState");
-const contentColumns = document.querySelector(".content-columns");
-
-
-// Filtre haritası
 const filterMap = {
   grade: gradeFilter,
   subject: subjectFilter,
@@ -55,8 +46,6 @@ const filterLabels = {
   theme: "Tüm temalar"
 };
 
-
-// HTML güvenliği
 function escapeHtml(value) {
   return String(value ?? "").replace(
     /[&<>"]/g,
@@ -69,8 +58,6 @@ function escapeHtml(value) {
   );
 }
 
-
-// Metin normalizasyonu
 function normalizeText(value) {
   return String(value ?? "")
     .trim()
@@ -78,8 +65,6 @@ function normalizeText(value) {
     .replace(/\s+/g, " ");
 }
 
-
-// Kod normalizasyonu
 function normalizeCode(value) {
   return String(value ?? "")
     .trim()
@@ -87,8 +72,6 @@ function normalizeCode(value) {
     .replace(/[^a-z0-9]/g, "");
 }
 
-
-// Veri alanlarını tek yerde topluyoruz
 function getData(item) {
   return {
     code: item?.id || "",
@@ -104,8 +87,6 @@ function getData(item) {
   };
 }
 
-
-// Doğal sıralama
 function compareNatural(a, b) {
   return String(a).localeCompare(
     String(b),
@@ -117,8 +98,6 @@ function compareNatural(a, b) {
   );
 }
 
-
-// Veri sıralama
 function sortArchive(list) {
   return [...list].sort((a, b) => {
     const x = getData(a);
@@ -133,8 +112,6 @@ function sortArchive(list) {
   });
 }
 
-
-// Filtre seçenekleri
 function uniqueValues(key, filters = {}) {
   return [
     ...new Set(
@@ -153,8 +130,6 @@ function uniqueValues(key, filters = {}) {
   ].sort(compareNatural);
 }
 
-
-// Native select option üretimi
 function buildOptions(
   values,
   placeholder,
@@ -162,7 +137,6 @@ function buildOptions(
 ) {
   return [
     `<option value="">${escapeHtml(placeholder)}</option>`,
-
     ...values.map(value =>
       `<option value="${escapeHtml(value)}"${
         value === selected ? " selected" : ""
@@ -171,8 +145,6 @@ function buildOptions(
   ].join("");
 }
 
-
-// Menüler kapat
 function closeMenus() {
   document
     .querySelectorAll(".filter-menu")
@@ -189,8 +161,6 @@ function closeMenus() {
     });
 }
 
-
-// Özel dropdownları oluştur
 function renderCustomFilters() {
   Object.entries(filterMap).forEach(
     ([key, select]) => {
@@ -206,7 +176,7 @@ function renderCustomFilters() {
       const label =
         root.querySelector(".filter-value");
 
-      if (!menu || !label || !select) return;
+      if (!menu || !label) return;
 
       const selected = select.value;
 
@@ -245,15 +215,12 @@ function renderCustomFilters() {
   );
 }
 
-
-// Bağımlı filtreleri yenile
 function refreshFilters() {
   let grade = gradeFilter.value;
   let subject = subjectFilter.value;
   let theme = themeFilter.value;
 
   for (let i = 0; i < 3; i++) {
-
     const grades = uniqueValues(
       "grade",
       {
@@ -269,7 +236,6 @@ function refreshFilters() {
       grade = "";
     }
 
-
     const subjects = uniqueValues(
       "subject",
       {
@@ -284,7 +250,6 @@ function refreshFilters() {
     ) {
       subject = "";
     }
-
 
     const themes = uniqueValues(
       "theme",
@@ -302,7 +267,6 @@ function refreshFilters() {
     }
   }
 
-
   gradeFilter.innerHTML = buildOptions(
     uniqueValues(
       "grade",
@@ -314,7 +278,6 @@ function refreshFilters() {
     "Tüm sınıflar",
     grade
   );
-
 
   subjectFilter.innerHTML = buildOptions(
     uniqueValues(
@@ -328,7 +291,6 @@ function refreshFilters() {
     subject
   );
 
-
   themeFilter.innerHTML = buildOptions(
     uniqueValues(
       "theme",
@@ -341,7 +303,6 @@ function refreshFilters() {
     theme
   );
 
-
   gradeFilter.value = grade;
   subjectFilter.value = subject;
   themeFilter.value = theme;
@@ -349,27 +310,30 @@ function refreshFilters() {
   renderCustomFilters();
 }
 
-
-// Arama indeksini hazırla
 function buildSearchIndex() {
   searchIndex = outcomes.map(item => {
-
     const d = getData(item);
 
-    const codeText =
-      normalizeText(d.code);
+    return {
+      item,
 
-    const compactCode =
-      normalizeCode(d.code);
+      code: normalizeText(d.code),
 
-    const title =
-      normalizeText(d.title);
+      compactCode:
+        normalizeCode(d.code),
 
-    const tags =
-      d.tags.map(normalizeText);
+      grade: d.grade,
+      subject: d.subject,
+      theme: d.theme,
+      category: d.category,
 
-    const searchText =
-      normalizeText(
+      title: normalizeText(d.title),
+
+      tags: d.tags.map(
+        normalizeText
+      ),
+
+      searchText: normalizeText(
         [
           d.code,
           d.grade,
@@ -379,31 +343,11 @@ function buildSearchIndex() {
           d.title,
           ...d.tags
         ].join(" ")
-      );
-
-    return {
-      item,
-
-      code: codeText,
-
-      compactCode,
-
-      grade: d.grade,
-      subject: d.subject,
-      theme: d.theme,
-      category: d.category,
-
-      title,
-
-      tags,
-
-      searchText
+      )
     };
   });
 }
 
-
-// Arama skoru
 function scoreResult(
   entry,
   query,
@@ -415,8 +359,6 @@ function scoreResult(
 
   let score = 0;
 
-
-  // Kod
   if (
     isCodeSearch &&
     entry.compactCode === compactQuery
@@ -440,8 +382,6 @@ function scoreResult(
     score += 1100;
   }
 
-
-  // Normal kod
   if (entry.code === query) {
     score += 1000;
   }
@@ -452,8 +392,6 @@ function scoreResult(
     score += 800;
   }
 
-
-  // Kazanım
   if (entry.title === query) {
     score += 750;
   }
@@ -464,8 +402,6 @@ function scoreResult(
     score += 600;
   }
 
-
-  // Etiketler
   if (
     entry.tags.some(
       tag => tag === query
@@ -488,8 +424,6 @@ function scoreResult(
     score += 450;
   }
 
-
-  // Tema
   const theme =
     normalizeText(entry.theme);
 
@@ -500,8 +434,6 @@ function scoreResult(
     score += 250;
   }
 
-
-  // Kategori
   const category =
     normalizeText(entry.category);
 
@@ -512,8 +444,6 @@ function scoreResult(
     score += 200;
   }
 
-
-  // Ders
   const subject =
     normalizeText(entry.subject);
 
@@ -524,8 +454,6 @@ function scoreResult(
     score += 125;
   }
 
-
-  // Sınıf
   const grade =
     normalizeText(entry.grade);
 
@@ -536,8 +464,6 @@ function scoreResult(
     score += 75;
   }
 
-
-  // Çok kelimeli aramalar
   const matchedTerms =
     terms.filter(term =>
       entry.searchText.includes(term)
@@ -545,19 +471,19 @@ function scoreResult(
 
   score += matchedTerms * 60;
 
-
   return score;
 }
 
-
-// Arama
 function filtered() {
-
   const query =
-    normalizeText(searchInput.value);
+    normalizeText(
+      searchInput.value
+    );
 
   const compactQuery =
-    normalizeCode(searchInput.value);
+    normalizeCode(
+      searchInput.value
+    );
 
   const terms =
     query
@@ -568,7 +494,6 @@ function filtered() {
     compactQuery.length >= 3 &&
     /\d/.test(compactQuery);
 
-
   const grade =
     gradeFilter.value;
 
@@ -578,11 +503,8 @@ function filtered() {
   const theme =
     themeFilter.value;
 
-
   return searchIndex
-
     .filter(entry => {
-
       if (query) {
 
         const phraseMatch =
@@ -591,7 +513,7 @@ function filtered() {
           );
 
         const termMatch =
-          terms.length > 0 &&
+          terms.length > 1 &&
           terms.every(term =>
             entry.searchText.includes(
               term
@@ -612,7 +534,6 @@ function filtered() {
           return false;
         }
       }
-
 
       if (
         grade &&
@@ -635,10 +556,8 @@ function filtered() {
         return false;
       }
 
-
       return true;
     })
-
     .map(entry => ({
       item: entry.item,
 
@@ -650,7 +569,6 @@ function filtered() {
         isCodeSearch
       )
     }))
-
     .sort((a, b) =>
       b.score - a.score ||
       compareNatural(
@@ -658,12 +576,9 @@ function filtered() {
         getData(b.item).code
       )
     )
-
     .map(entry => entry.item);
 }
 
-
-// Arama kelimelerini vurgula
 function highlightText(
   text,
   query
@@ -675,34 +590,29 @@ function highlightText(
     String(query ?? "")
       .trim()
       .split(/\s+/)
-      .filter(term => term.length >= 2);
+      .filter(
+        term => term.length >= 2
+      );
 
   if (!terms.length) {
     return safe;
   }
 
-
-  let result = safe;
-
-
-  const patterns = [
-    ...terms
-  ]
-    .sort(
-      (a, b) =>
-        b.length - a.length
-    )
-    .map(term =>
-      term.replace(
-        /[.*+?^${}()|[\]\\]/g,
-        "\\$&"
+  const patterns =
+    terms
+      .sort(
+        (a, b) =>
+          b.length - a.length
       )
-    );
-
+      .map(term =>
+        term.replace(
+          /[.*+?^${}()|[\]\\]/g,
+          "\\$&"
+        )
+      );
 
   try {
-
-    result = result.replace(
+    return safe.replace(
       new RegExp(
         `(${patterns.join("|")})`,
         "gi"
@@ -710,20 +620,13 @@ function highlightText(
       match =>
         `<mark>${match}</mark>`
     );
-
   }
   catch {
     return safe;
   }
-
-
-  return result;
 }
 
-
-// Kart
 function card(item) {
-
   const d =
     getData(item);
 
@@ -752,11 +655,19 @@ function card(item) {
 
       </div>
 
+      ${
+        d.code
+          ? `
+            <div class="card-code">
+              ${escapeHtml(d.code)}
+            </div>
+          `
+          : ""
+      }
 
       <h3>
         ${escapeHtml(d.title)}
       </h3>
-
 
       <div class="card-foot">
 
@@ -772,9 +683,7 @@ function card(item) {
               </a>
             `
             : `
-              <span
-                class="download is-error"
-              >
+              <span class="download is-error">
                 Dosya yok
               </span>
             `
@@ -786,8 +695,6 @@ function card(item) {
   `;
 }
 
-
-// Grid oluştur
 function renderGrid(
   target,
   list
@@ -796,10 +703,7 @@ function renderGrid(
     list.map(card).join("");
 }
 
-
-// Sonuç satırı
 function resultRow(item) {
-
   const d =
     getData(item);
 
@@ -809,14 +713,12 @@ function resultRow(item) {
   const compactQuery =
     normalizeCode(query);
 
-
   const codeMatch =
     compactQuery.length >= 3 &&
     /\d/.test(compactQuery) &&
     normalizeCode(d.code).includes(
       compactQuery
     );
-
 
   return `
     <tr>
@@ -834,7 +736,6 @@ function resultRow(item) {
       </td>
 
       <td>
-
         <span
           class="result-code${
             codeMatch
@@ -844,7 +745,6 @@ function resultRow(item) {
         >
           ${escapeHtml(d.code)}
         </span>
-
       </td>
 
       <td>
@@ -893,9 +793,7 @@ function resultRow(item) {
               </a>
             `
             : `
-              <span
-                class="result-download is-error"
-              >
+              <span class="result-download is-error">
                 Dosya yok
               </span>
             `
@@ -907,41 +805,26 @@ function resultRow(item) {
   `;
 }
 
-
-// Sonuçları oluştur
 function renderResults(list) {
-
-  const visible =
-    list.slice(
-      0,
-      resultsLimit
-    );
-
   resultsBody.innerHTML =
-    visible.map(resultRow).join("");
+    list
+      .slice(0, resultsLimit)
+      .map(resultRow)
+      .join("");
 }
 
-
-// Dosya kontrolü
 async function checkFile(path) {
-
   if (!path) {
     return false;
   }
 
-
-  if (
-    fileStatus.has(path)
-  ) {
+  if (fileStatus.has(path)) {
     return fileStatus.get(path);
   }
 
-
   let exists = false;
 
-
   try {
-
     const head =
       await fetch(
         path,
@@ -953,9 +836,7 @@ async function checkFile(path) {
 
     exists = head.ok;
 
-
     if (!exists) {
-
       const get =
         await fetch(
           path,
@@ -970,12 +851,9 @@ async function checkFile(path) {
 
       exists = get.ok;
     }
-
   }
   catch {
-
     try {
-
       const get =
         await fetch(
           path,
@@ -989,42 +867,21 @@ async function checkFile(path) {
         );
 
       exists = get.ok;
-
     }
     catch {
       exists = false;
     }
   }
 
-
   fileStatus.set(
     path,
     exists
   );
 
-
   return exists;
 }
 
-
-// Arayüzü yükleme durumuna sok
-function setLoading(isLoading) {
-
-  if (loadingState) {
-    loadingState.hidden =
-      !isLoading;
-  }
-
-  if (contentColumns) {
-    contentColumns.hidden =
-      isLoading;
-  }
-}
-
-
-// Ana render
 function render() {
-
   const query =
     searchInput.value.trim();
 
@@ -1037,7 +894,6 @@ function render() {
   const theme =
     themeFilter.value;
 
-
   const active =
     Boolean(
       query ||
@@ -1046,35 +902,24 @@ function render() {
       theme
     );
 
-
   const latestSource =
     [...outcomes].reverse();
 
   const archiveSource =
     sortArchive(outcomes);
 
-
   const latest =
     latestExpanded
       ? latestSource
-      : latestSource.slice(
-          0,
-          5
-        );
-
+      : latestSource.slice(0, 5);
 
   const archive =
     archiveExpanded
       ? archiveSource
-      : archiveSource.slice(
-          0,
-          5
-        );
-
+      : archiveSource.slice(0, 5);
 
   const results =
     filtered();
-
 
   renderGrid(
     latestGrid,
@@ -1086,20 +931,17 @@ function render() {
     archive
   );
 
-
   latestCount.textContent =
     `${outcomes.length} paket`;
 
   allCount.textContent =
     `${outcomes.length} paket`;
 
-
   latestMore.hidden =
     outcomes.length <= 5;
 
   allMore.hidden =
     outcomes.length <= 5;
-
 
   latestMore.textContent =
     latestExpanded
@@ -1110,7 +952,6 @@ function render() {
     archiveExpanded
       ? "Daha Az"
       : "Daha Fazla";
-
 
   if (active) {
 
@@ -1123,29 +964,21 @@ function render() {
     resultsSection.hidden =
       false;
 
-
     resultsCount.textContent =
       `${results.length} sonuç`;
 
-
     renderResults(results);
-
 
     resultsTableWrap.hidden =
       results.length === 0;
 
-
     resultsMore.hidden =
       results.length <= resultsLimit;
-
 
     emptyState.hidden =
       results.length > 0;
 
-
-    if (
-      results.length === 0
-    ) {
+    if (results.length === 0) {
 
       emptyState.querySelector(
         "h2"
@@ -1177,20 +1010,11 @@ function render() {
       true;
   }
 
-
-  if (clearFilters) {
-
-    clearFilters.hidden =
-      !active;
-  }
+  clearFilters.hidden =
+    !active;
 }
 
-
-// Başlat
 async function init() {
-
-  setLoading(true);
-
 
   try {
 
@@ -1202,17 +1026,14 @@ async function init() {
         }
       );
 
-
     if (!response.ok) {
       throw new Error(
         `HTTP ${response.status}`
       );
     }
 
-
     const json =
       await response.json();
-
 
     outcomes =
       Array.isArray(json)
@@ -1223,13 +1044,8 @@ async function init() {
           )
         : [];
 
-
     buildSearchIndex();
-
     refreshFilters();
-
-    setLoading(false);
-
     render();
 
   }
@@ -1240,15 +1056,11 @@ async function init() {
       error
     );
 
-
     outcomes = [];
     searchIndex = [];
 
-
-    refreshFilters();
-
-    setLoading(false);
-
+    latestGrid.innerHTML = "";
+    allGrid.innerHTML = "";
 
     latestSection.hidden =
       true;
@@ -1259,10 +1071,8 @@ async function init() {
     resultsSection.hidden =
       true;
 
-
     emptyState.hidden =
       false;
-
 
     emptyState.querySelector(
       "h2"
@@ -1276,8 +1086,6 @@ async function init() {
   }
 }
 
-
-// Arama
 searchInput.addEventListener(
   "input",
   () => {
@@ -1286,8 +1094,6 @@ searchInput.addEventListener(
   }
 );
 
-
-// Native filtre değişimleri
 [
   gradeFilter,
   subjectFilter,
@@ -1301,42 +1107,33 @@ searchInput.addEventListener(
       resultsLimit = 20;
 
       refreshFilters();
-
       render();
     }
   );
 });
 
+clearFilters.addEventListener(
+  "click",
+  () => {
 
-// Filtreleri temizle
-if (clearFilters) {
+    gradeFilter.value = "";
+    subjectFilter.value = "";
+    themeFilter.value = "";
 
-  clearFilters.addEventListener(
-    "click",
-    () => {
+    searchInput.value = "";
 
-      gradeFilter.value = "";
-      subjectFilter.value = "";
-      themeFilter.value = "";
+    resultsLimit = 20;
 
-      searchInput.value = "";
+    latestExpanded = false;
+    archiveExpanded = false;
 
-      resultsLimit = 20;
+    refreshFilters();
+    render();
 
-      latestExpanded = false;
-      archiveExpanded = false;
+    searchInput.focus();
+  }
+);
 
-      refreshFilters();
-
-      render();
-
-      searchInput.focus();
-    }
-  );
-}
-
-
-// Daha fazla - son yüklenenler
 latestMore.addEventListener(
   "click",
   () => {
@@ -1348,8 +1145,6 @@ latestMore.addEventListener(
   }
 );
 
-
-// Daha fazla - arşiv
 allMore.addEventListener(
   "click",
   () => {
@@ -1361,8 +1156,6 @@ allMore.addEventListener(
   }
 );
 
-
-// Daha fazla - arama sonuçları
 resultsMore.addEventListener(
   "click",
   () => {
@@ -1373,8 +1166,6 @@ resultsMore.addEventListener(
   }
 );
 
-
-// Dropdown işlemleri
 document.addEventListener(
   "click",
   event => {
@@ -1389,8 +1180,6 @@ document.addEventListener(
         ".filter-trigger"
       );
 
-
-    // Seçenek
     if (option) {
 
       const root =
@@ -1404,7 +1193,6 @@ document.addEventListener(
       const select =
         filterMap[key];
 
-
       if (select) {
 
         select.value =
@@ -1415,15 +1203,12 @@ document.addEventListener(
         resultsLimit = 20;
 
         refreshFilters();
-
         render();
       }
 
       return;
     }
 
-
-    // Dropdown aç/kapat
     if (trigger) {
 
       const root =
@@ -1432,17 +1217,16 @@ document.addEventListener(
         );
 
       const menu =
-        root.querySelector(
+        root?.querySelector(
           ".filter-menu"
         );
 
+      if (!menu) return;
 
       const wasOpen =
         !menu.hidden;
 
-
       closeMenus();
-
 
       if (!wasOpen) {
 
@@ -1454,7 +1238,6 @@ document.addEventListener(
           "true"
         );
 
-
         menu
           .querySelector(
             '[aria-selected="true"]'
@@ -1462,12 +1245,9 @@ document.addEventListener(
           ?.focus();
       }
 
-
       return;
     }
 
-
-    // Dışarı tıklayınca kapat
     if (
       !event.target.closest(
         ".filter-select"
@@ -1478,8 +1258,6 @@ document.addEventListener(
   }
 );
 
-
-// ESC
 document.addEventListener(
   "keydown",
   event => {
@@ -1492,8 +1270,6 @@ document.addEventListener(
   }
 );
 
-
-// İndirme kontrolü
 document.addEventListener(
   "click",
   async event => {
@@ -1502,7 +1278,6 @@ document.addEventListener(
       event.target.closest(
         "a[download]"
       );
-
 
     if (
       !link ||
@@ -1514,9 +1289,7 @@ document.addEventListener(
       return;
     }
 
-
     event.preventDefault();
-
 
     if (
       link.dataset.checking === "1"
@@ -1524,17 +1297,14 @@ document.addEventListener(
       return;
     }
 
-
-    link.dataset.checking = "1";
-
+    link.dataset.checking =
+      "1";
 
     const original =
       link.textContent;
 
-
     link.textContent =
       "Kontrol ediliyor...";
-
 
     try {
 
@@ -1544,7 +1314,6 @@ document.addEventListener(
             "href"
           )
         );
-
 
       if (!exists) {
 
@@ -1557,7 +1326,6 @@ document.addEventListener(
 
         return;
       }
-
 
       link.dataset.ready =
         "1";
@@ -1579,7 +1347,6 @@ document.addEventListener(
 
       delete link.dataset.checking;
 
-
       if (
         link.dataset.ready === "1"
       ) {
@@ -1590,6 +1357,4 @@ document.addEventListener(
   }
 );
 
-
-// Başlat
 init();

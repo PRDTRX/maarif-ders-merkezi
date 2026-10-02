@@ -1,758 +1,612 @@
-:root{
---ink:#172033;
---text:#3f4755;
---muted:#737b88;
---line:#e5e7eb;
---bg:#fafaf9;
---white:#fff;
---soft:#f4f5f7;
---accent:#315c9b;
---container:1040px
-}
-
-*{
-box-sizing:border-box
-}
-
-html{
-scroll-behavior:smooth
-}
-
-body{
-margin:0;
-background:var(--bg);
-color:var(--text);
-font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
--webkit-font-smoothing:antialiased
-}
-
-button,input{
-font:inherit
-}
-
-button{
-cursor:pointer
-}
-
-.container{
-width:min(var(--container),calc(100% - 40px));
-margin:0 auto
-}
-
-.site-header{
-background:var(--white);
-border-bottom:1px solid var(--line)
-}
-
-.header-in{
-min-height:60px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:24px
-}
-
-.brand{
-display:inline-flex;
-align-items:center;
-gap:10px;
-color:var(--ink);
-text-decoration:none;
-flex:0 0 auto
-}
-
-.brand-mark{
-width:34px;
-height:34px;
-display:grid;
-place-items:center;
-border:1px solid #d8dee8;
-border-radius:9px;
-background:#f5f7fa;
-color:var(--ink);
-font:800 11px/1 Manrope,sans-serif
-}
-
-.brand-name{
-font:700 16px/1 Manrope,sans-serif;
-letter-spacing:-.025em
-}
-
-.site-heading{
-display:flex;
-align-items:baseline;
-justify-content:flex-end;
-gap:10px;
-white-space:nowrap
-}
-
-.site-heading span{
-color:var(--accent);
-font-size:10px;
-font-weight:700;
-letter-spacing:.12em
-}
-
-.site-heading strong{
-color:var(--ink);
-font:800 clamp(23px,3vw,34px)/1 Manrope,sans-serif;
-letter-spacing:-.045em
-}
-
-.hero{
-background:var(--white);
-border-bottom:1px solid var(--line)
-}
-
-.hero-in{
-padding:24px 0 30px;
-text-align:center
-}
-
-.hero-text{
-max-width:600px;
-margin:0 auto;
-color:var(--muted);
-font-size:13px;
-line-height:1.5
-}
-
-.filters{
-width:min(800px,100%);
-margin:18px auto 10px;
-display:grid;
-grid-template-columns:repeat(3,minmax(0,1fr));
-gap:12px
-}
-
-.field{
-display:grid;
-gap:7px;
-text-align:center
-}
-
-.field>span{
-color:var(--text);
-font-size:12px;
-font-weight:600
-}
-
-.filter-select{
-position:relative;
-width:100%
-}
-
-.native-filter{
-position:absolute;
-width:1px;
-height:1px;
-opacity:0;
-pointer-events:none
-}
-
-.filter-trigger{
-width:100%;
-height:44px;
-padding:0 13px 0 12px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:10px;
-border:1px solid var(--line);
-border-radius:9px;
-background:var(--white);
-color:var(--ink);
-font:500 13px/1.2 Inter,sans-serif;
-text-align:left;
-transition:border-color .18s,box-shadow .18s,background .18s
-}
-
-.filter-trigger:hover{
-border-color:#cbd3de;
-background:#fcfcfd
-}
-
-.filter-trigger[aria-expanded="true"]{
-border-color:#aebbd0;
-box-shadow:0 0 0 3px rgba(49,92,155,.08)
-}
-
-.filter-trigger svg{
-width:12px;
-height:8px;
-flex:0 0 auto;
-stroke:#7b8491;
-stroke-width:1.5;
-stroke-linecap:round;
-stroke-linejoin:round;
-transition:transform .18s ease
-}
-
-.filter-trigger[aria-expanded="true"] svg{
-transform:rotate(180deg)
-}
-
-.filter-menu{
-position:absolute;
-z-index:100;
-top:calc(100% + 7px);
-left:0;
-width:100%;
-max-height:250px;
-overflow:auto;
-padding:6px;
-border:1px solid #dfe3e9;
-border-radius:11px;
-background:var(--white);
-box-shadow:0 14px 32px rgba(23,32,51,.12);
-text-align:left
-}
-
-.filter-option{
-width:100%;
-min-height:38px;
-padding:8px 10px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:10px;
-border:0;
-border-radius:7px;
-background:transparent;
-color:var(--text);
-font:500 12px/1.3 Inter,sans-serif;
-text-align:left
-}
-
-.filter-option:hover,
-.filter-option:focus-visible{
-background:#f5f7fa;
-color:var(--ink);
-outline:none
-}
-
-.filter-option[aria-selected="true"]{
-background:#eef3f9;
-color:var(--accent);
-font-weight:600
-}
-
-.filter-option[aria-selected="true"]::after{
-content:"✓";
-font-size:12px
-}
-
-.search-box{
-width:min(800px,100%);
-height:50px;
-margin:0 auto;
-display:flex;
-align-items:center;
-gap:12px;
-padding:0 17px;
-border:1px solid #d8dde5;
-border-radius:11px;
-background:var(--white);
-box-shadow:0 7px 20px rgba(23,32,51,.05);
-text-align:left;
-transition:border-color .18s,box-shadow .18s
-}
-
-.search-box:focus-within{
-border-color:#aebbd0;
-box-shadow:0 0 0 4px rgba(49,92,155,.08),0 10px 28px rgba(23,32,51,.06)
-}
-
-.search-icon{
-width:20px;
-height:20px;
-flex:0 0 20px;
-display:grid;
-place-items:center;
-color:#697383
-}
-
-.search-icon svg{
-width:19px;
-height:19px;
-display:block;
-stroke:currentColor;
-stroke-width:1.8;
-stroke-linecap:round
-}
-
-.search-box input{
-width:100%;
-min-width:0;
-padding:0;
-border:0;
-background:transparent;
-color:var(--ink);
-font:500 14px/1.2 Inter,sans-serif;
-outline:0
-}
-
-.search-box input::placeholder{
-color:#969eaa
-}
-
-.content{
-padding:46px 0 72px
-}
-
-.content-columns{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:36px;
-max-width:1000px;
-margin:0 auto
-}
-
-.section{
-width:100%;
-margin:0
-}
-
-.section-head{
-margin:0 0 15px;
-display:flex;
-align-items:flex-end;
-justify-content:space-between;
-gap:14px
-}
-
-.section-kicker{
-margin:0;
-color:var(--accent);
-font-size:10px;
-font-weight:700;
-letter-spacing:.12em
-}
-
-.section-head h2{
-margin:5px 0 0;
-color:var(--ink);
-font:700 22px/1.15 Manrope,sans-serif;
-letter-spacing:-.035em
-}
-
-.section-count{
-color:var(--muted);
-font-size:11px;
-white-space:nowrap
-}
-
-.grid{
-display:grid;
-grid-template-columns:1fr;
-gap:10px
-}
-
-.card{
-display:flex;
-flex-direction:column;
-min-height:156px;
-padding:16px;
-border:1px solid var(--line);
-border-radius:12px;
-background:var(--white);
-transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease
-}
-
-.card:hover{
-transform:translateY(-2px);
-border-color:#d2d8e1;
-box-shadow:0 10px 24px rgba(23,32,51,.055)
-}
-
-.meta{
-display:flex;
-flex-wrap:wrap;
-gap:5px;
-margin-bottom:10px
-}
-
-.tag{
-padding:5px 7px;
-border:1px solid var(--line);
-border-radius:6px;
-background:var(--soft);
-color:#596170;
-font-size:9px;
-font-weight:600
-}
-
-.card h3{
-margin:0;
-color:var(--ink);
-font:700 16px/1.35 Manrope,sans-serif;
-letter-spacing:-.025em
-}
-
-.card-foot{
-display:flex;
-align-items:center;
-justify-content:flex-end;
-margin-top:auto;
-padding-top:15px
-}
-
-.download,
-.result-download{
-display:inline-flex;
-align-items:center;
-justify-content:center;
-min-height:35px;
-padding:0 11px;
-border-radius:7px;
-background:var(--ink);
-color:#fff;
-text-decoration:none;
-font-size:10px;
-font-weight:600;
-white-space:nowrap;
-transition:background .16s ease,transform .16s ease
-}
-
-.download:hover,
-.result-download:hover{
-background:#0d1421;
-transform:translateY(-1px)
-}
-
-.download.is-error,
-.result-download.is-error{
-background:#8b3a3a!important;
-cursor:not-allowed
-}
-
-.more-wrap{
-display:flex;
-justify-content:center;
-margin-top:13px
-}
-
-.more-button{
-min-height:35px;
-padding:0 15px;
-border:1px solid #d9dee6;
-border-radius:8px;
-background:var(--white);
-color:var(--ink);
-font:600 10px/1 Inter,sans-serif;
-transition:border-color .18s,background .18s,transform .18s
-}
-
-.more-button:hover{
-border-color:#c6ceda;
-background:#f8f9fb;
-transform:translateY(-1px)
-}
-
-.results-section{
-max-width:1000px;
-margin:46px auto 0
-}
-
-.results-table-wrap{
-width:100%;
-overflow-x:auto;
-border:1px solid var(--line);
-border-radius:13px;
-background:var(--white);
-box-shadow:0 5px 18px rgba(23,32,51,.035)
-}
-
-.results-table{
-width:100%;
-min-width:850px;
-border-collapse:collapse;
-table-layout:fixed
-}
-
-.results-table th{
-padding:12px 13px;
-border-bottom:1px solid var(--line);
-background:#f8f9fa;
-color:#687180;
-font-size:9px;
-font-weight:700;
-letter-spacing:.07em;
-text-align:left;
-white-space:nowrap
-}
-
-.results-table td{
-padding:14px 13px;
-border-bottom:1px solid #edf0f3;
-color:var(--text);
-font-size:11px;
-line-height:1.5;
-vertical-align:top
-}
-
-.results-table tbody tr:last-child td{
-border-bottom:0
-}
-
-.results-table tbody tr:hover{
-background:#fafbfd
-}
-
-.results-table th:nth-child(1),
-.results-table td:nth-child(1){
-width:10%
-}
-
-.results-table th:nth-child(2),
-.results-table td:nth-child(2){
-width:13%
-}
-
-.results-table th:nth-child(3),
-.results-table td:nth-child(3){
-width:14%
-}
-
-.results-table th:nth-child(4),
-.results-table td:nth-child(4){
-width:14%
-}
-
-.results-table th:nth-child(5),
-.results-table td:nth-child(5){
-width:39%
-}
-
-.results-table th:nth-child(6),
-.results-table td:nth-child(6){
-width:10%;
-text-align:right
-}
-
-.result-code{
-display:inline-flex;
-padding:5px 7px;
-border:1px solid #dce3ed;
-border-radius:6px;
-background:#f4f7fb;
-color:#315c9b;
-font-size:9px;
-font-weight:700;
-white-space:nowrap
-}
-
-.result-title{
-color:var(--ink);
-font-weight:600
-}
-
-.result-tags{
-display:flex;
-flex-wrap:wrap;
-gap:5px;
-margin-top:6px
-}
-
-.result-tag{
-color:#7b8491;
-font-size:9px
-}
-
-.empty{
-max-width:1000px;
-margin:28px auto 0;
-padding:42px 20px;
-border:1px dashed #d5dae2;
-border-radius:13px;
-text-align:center;
-background:var(--soft)
-}
-
-.empty h2{
-margin:0;
-color:var(--ink);
-font:700 19px/1.2 Manrope,sans-serif
-}
-
-.empty p{
-margin:8px 0 0;
-color:var(--muted);
-font-size:13px
-}
-
-.site-footer{
-background:var(--white);
-border-top:1px solid var(--line)
-}
-
-.footer-in{
-min-height:70px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:20px;
-color:#9299a4;
-font-size:11px
-}
-
-:focus-visible{
-outline:3px solid rgba(49,92,155,.28);
-outline-offset:3px
-}
-
-@media(max-width:820px){
-.content-columns{
-grid-template-columns:1fr;
-gap:42px
-}
-}
-
-@media(max-width:680px){
-.container{
-width:min(var(--container),calc(100% - 28px))
-}
-
-.header-in{
-min-height:58px;
-gap:10px
-}
-
-.brand{
-gap:8px
-}
-
-.brand-mark{
-width:30px;
-height:30px;
-border-radius:8px;
-font-size:10px
-}
-
-.brand-name{
-font-size:13px
-}
-
-.site-heading{
-gap:6px
-}
-
-.site-heading span{
-font-size:7px;
-letter-spacing:.1em
-}
-
-.site-heading strong{
-font-size:18px
-}
-
-.hero-in{
-padding:22px 0 28px
-}
-
-.hero-text{
-font-size:12px
-}
-
-.filters{
-grid-template-columns:1fr;
-margin-top:18px;
-gap:8px
-}
-
-.field{
-gap:6px
-}
-
-.field>span{
-font-size:11px
-}
-
-.filter-menu{
-max-height:220px
-}
-
-.search-box{
-height:50px;
-padding:0 15px;
-border-radius:10px
-}
-
-.search-box input{
-font-size:13px
-}
-
-.content{
-padding:38px 0 56px
-}
-
-.content-columns{
-grid-template-columns:1fr;
-gap:42px
-}
-
-.section-head{
-align-items:flex-start;
-flex-direction:column;
-gap:4px;
-margin-bottom:14px
-}
-
-.section-head h2{
-font-size:21px
-}
-
-.grid{
-gap:10px
-}
-
-.card{
-min-height:0;
-padding:16px;
-border-radius:11px
-}
-
-.card h3{
-font-size:16px
-}
-
-.results-section{
-margin-top:40px
-}
-
-.results-table-wrap{
-border-radius:10px
-}
-
-.results-table{
-min-width:850px
-}
-
-.results-table th{
-padding:11px 12px;
-font-size:8px
-}
-
-.results-table td{
-padding:12px;
-font-size:10px
-}
-
-.result-title{
-font-size:10px;
-line-height:1.5
-}
-
-.result-code{
-font-size:8px
-}
-
-.footer-in{
-min-height:82px;
-align-items:flex-start;
-justify-content:center;
-flex-direction:column;
-gap:5px;
-padding:16px 0
-}
-}
+let outcomes=[];
+let uploadedOutcomes=[];
+let searchIndex=[];
+let latestExpanded=false;
+let archiveExpanded=false;
+let fileStatus=new Map();
+
+const $=selector=>document.querySelector(selector);
+
+const gradeFilter=$("#gradeFilter");
+const subjectFilter=$("#subjectFilter");
+const themeFilter=$("#themeFilter");
+const searchInput=$("#searchInput");
+
+const latestSection=$("#latestSection");
+const latestGrid=$("#latestGrid");
+const latestCount=$("#latestCount");
+const latestMore=$("#latestMore");
+
+const allSection=$("#allSection");
+const allGrid=$("#allGrid");
+const allCount=$("#allCount");
+const allMore=$("#allMore");
+
+const resultsSection=$("#resultsSection");
+const resultsBody=$("#resultsBody");
+const resultsCount=$("#resultsCount");
+const resultsTableWrap=$("#resultsTableWrap");
+
+const emptyState=$("#emptyState");
+
+const escapeHtml=value=>String(value??"").replace(/[&<>"]/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[char]));
+
+const normalize=value=>String(value??"").trim().toLocaleLowerCase("tr-TR");
+
+const data=item=>({
+  code:item.id||"",
+  grade:item.sinif||"",
+  subject:item.ders||"",
+  theme:item.tema||"",
+  category:item.kategori||"",
+  title:item.baslik||"",
+  tags:Array.isArray(item.etiketler)?item.etiketler:[],
+  file:item.dosyaYolu||""
+});
+
+const filterMap={
+  grade:gradeFilter,
+  subject:subjectFilter,
+  theme:themeFilter
+};
+
+const filterLabels={
+  grade:"Tüm sınıflar",
+  subject:"Tüm dersler",
+  theme:"Tüm temalar"
+};
+
+function compareNatural(a,b){
+  return String(a).localeCompare(String(b),"tr",{numeric:true,sensitivity:"base"});
+}
+
+function sortArchive(list){
+  return [...list].sort((a,b)=>{
+    const x=data(a);
+    const y=data(b);
+    return compareNatural(x.grade,y.grade)||
+      compareNatural(x.subject,y.subject)||
+      compareNatural(x.theme,y.theme)||
+      compareNatural(x.code,y.code);
+  });
+}
+
+function uniqueValues(key,filters={}){
+  return [...new Set(
+    uploadedOutcomes
+      .filter(item=>{
+        const d=data(item);
+        return Object.entries(filters).every(([name,value])=>!value||d[name]===value);
+      })
+      .map(item=>data(item)[key])
+      .filter(Boolean)
+  )].sort(compareNatural);
+}
+
+function buildOptions(values,placeholder,selected=""){
+  return [
+    `<option value="">${placeholder}</option>`,
+    ...values.map(value=>
+      `<option value="${escapeHtml(value)}"${value===selected?" selected":""}>${escapeHtml(value)}</option>`
+    )
+  ].join("");
+}
+
+function renderCustomFilters(){
+  Object.entries(filterMap).forEach(([key,select])=>{
+    const root=document.querySelector(`.filter-select[data-filter="${key}"]`);
+    if(!root)return;
+
+    const menu=root.querySelector(".filter-menu");
+    const label=root.querySelector(".filter-value");
+    const selected=select.value;
+
+    label.textContent=select.options[select.selectedIndex]?.textContent||filterLabels[key];
+
+    menu.innerHTML=[...select.options].map(option=>`
+      <button
+        type="button"
+        class="filter-option"
+        role="option"
+        aria-selected="${option.value===selected}"
+        data-value="${escapeHtml(option.value)}">
+        <span>${escapeHtml(option.textContent)}</span>
+      </button>
+    `).join("");
+  });
+}
+
+function closeMenus(){
+  document.querySelectorAll(".filter-menu").forEach(menu=>{
+    menu.hidden=true;
+    menu.closest(".filter-select")
+      ?.querySelector(".filter-trigger")
+      ?.setAttribute("aria-expanded","false");
+  });
+}
+
+function refreshFilters(){
+  let grade=gradeFilter.value;
+  let subject=subjectFilter.value;
+  let theme=themeFilter.value;
+
+  for(let i=0;i<3;i++){
+    const grades=uniqueValues("grade",{subject,theme});
+    if(grade&&!grades.includes(grade))grade="";
+
+    const subjects=uniqueValues("subject",{grade,theme});
+    if(subject&&!subjects.includes(subject))subject="";
+
+    const themes=uniqueValues("theme",{grade,subject});
+    if(theme&&!themes.includes(theme))theme="";
+  }
+
+  gradeFilter.innerHTML=buildOptions(
+    uniqueValues("grade",{subject,theme}),
+    "Tüm sınıflar",
+    grade
+  );
+
+  subjectFilter.innerHTML=buildOptions(
+    uniqueValues("subject",{grade,theme}),
+    "Tüm dersler",
+    subject
+  );
+
+  themeFilter.innerHTML=buildOptions(
+    uniqueValues("theme",{grade,subject}),
+    "Tüm temalar",
+    theme
+  );
+
+  gradeFilter.value=grade;
+  subjectFilter.value=subject;
+  themeFilter.value=theme;
+
+  renderCustomFilters();
+}
+
+function buildSearchIndex(){
+  searchIndex=uploadedOutcomes.map(item=>{
+    const d=data(item);
+
+    return{
+      item,
+      code:normalize(d.code),
+      grade:d.grade,
+      subject:d.subject,
+      theme:d.theme,
+      category:d.category,
+      title:normalize(d.title),
+      tags:d.tags.map(normalize),
+      searchText:normalize([
+        d.code,
+        d.grade,
+        d.subject,
+        d.theme,
+        d.category,
+        d.title,
+        ...d.tags
+      ].join(" "))
+    };
+  });
+}
+
+function scoreResult(entry,q){
+  if(!q)return 0;
+
+  let score=0;
+
+  if(entry.code===q)score+=1000;
+  else if(entry.code.startsWith(q))score+=900;
+  else if(entry.code.includes(q))score+=800;
+
+  if(entry.title===q)score+=750;
+  else if(entry.title.startsWith(q))score+=700;
+  else if(entry.title.includes(q))score+=600;
+
+  if(entry.tags.some(tag=>tag===q))score+=550;
+  else if(entry.tags.some(tag=>tag.startsWith(q)))score+=500;
+  else if(entry.tags.some(tag=>tag.includes(q)))score+=450;
+
+  const theme=normalize(entry.theme);
+  const category=normalize(entry.category);
+  const subject=normalize(entry.subject);
+  const grade=normalize(entry.grade);
+
+  if(theme===q)score+=300;
+  else if(theme.includes(q))score+=250;
+
+  if(category===q)score+=225;
+  else if(category.includes(q))score+=200;
+
+  if(subject===q)score+=150;
+  else if(subject.includes(q))score+=125;
+
+  if(grade===q)score+=100;
+  else if(grade.includes(q))score+=75;
+
+  return score;
+}
+
+function filtered(){
+  const q=normalize(searchInput.value);
+  const grade=gradeFilter.value;
+  const subject=subjectFilter.value;
+  const theme=themeFilter.value;
+
+  return searchIndex
+    .filter(entry=>{
+      if(q&&!entry.searchText.includes(q))return false;
+      if(grade&&entry.grade!==grade)return false;
+      if(subject&&entry.subject!==subject)return false;
+      if(theme&&entry.theme!==theme)return false;
+      return true;
+    })
+    .map(entry=>({
+      item:entry.item,
+      score:scoreResult(entry,q)
+    }))
+    .sort((a,b)=>
+      b.score-a.score||
+      compareNatural(data(a.item).code,data(b.item).code)
+    )
+    .map(entry=>entry.item);
+}
+
+function card(item){
+  const d=data(item);
+
+  return`
+    <article class="card">
+      <div class="meta">
+        <span class="tag">${escapeHtml(d.grade)}</span>
+        <span class="tag">${escapeHtml(d.subject)}</span>
+        ${d.theme?`<span class="tag">${escapeHtml(d.theme)}</span>`:""}
+      </div>
+
+      <h3>${escapeHtml(d.title)}</h3>
+
+      <div class="card-foot">
+        <a class="download" href="${escapeHtml(d.file)}" download>
+          Dosyayı İndir
+        </a>
+      </div>
+    </article>
+  `;
+}
+
+function renderGrid(target,list){
+  target.innerHTML=list.map(card).join("");
+}
+
+function resultRow(item){
+  const d=data(item);
+
+  return`
+    <tr>
+      <td>${escapeHtml(d.grade)}</td>
+      <td>${escapeHtml(d.subject)}</td>
+      <td>${escapeHtml(d.theme)}</td>
+
+      <td>
+        <span class="result-code">${escapeHtml(d.code)}</span>
+      </td>
+
+      <td>
+        <div class="result-title">${escapeHtml(d.title)}</div>
+        ${
+          d.tags.length
+            ? `<div class="result-tags">
+                ${d.tags.slice(0,5).map(tag=>
+                  `<span class="result-tag">#${escapeHtml(tag)}</span>`
+                ).join("")}
+              </div>`
+            : ""
+        }
+      </td>
+
+      <td>
+        ${
+          d.file
+            ? `<a class="result-download" href="${escapeHtml(d.file)}" download>Dosyayı İndir</a>`
+            : `<span class="result-download is-error">Dosya yok</span>`
+        }
+      </td>
+    </tr>
+  `;
+}
+
+function renderResults(list){
+  resultsBody.innerHTML=list.map(resultRow).join("");
+}
+
+async function checkFile(path){
+  if(!path)return false;
+
+  if(fileStatus.has(path))return fileStatus.get(path);
+
+  let exists=false;
+
+  try{
+    const head=await fetch(path,{
+      method:"HEAD",
+      cache:"no-cache"
+    });
+
+    exists=head.ok;
+
+    if(!exists){
+      const get=await fetch(path,{
+        method:"GET",
+        headers:{Range:"bytes=0-0"},
+        cache:"no-cache"
+      });
+
+      exists=get.ok;
+    }
+  }catch{
+    try{
+      const get=await fetch(path,{
+        method:"GET",
+        headers:{Range:"bytes=0-0"},
+        cache:"no-cache"
+      });
+
+      exists=get.ok;
+    }catch{
+      exists=false;
+    }
+  }
+
+  fileStatus.set(path,exists);
+  return exists;
+}
+
+async function verifyUploadedFiles(list){
+  const valid=[];
+  const concurrency=6;
+  let cursor=0;
+
+  async function worker(){
+    while(cursor<list.length){
+      const index=cursor++;
+      const item=list[index];
+      const d=data(item);
+
+      if(await checkFile(d.file)){
+        valid.push(item);
+      }
+    }
+  }
+
+  await Promise.all(
+    Array.from(
+      {length:Math.min(concurrency,list.length)},
+      ()=>worker()
+    )
+  );
+
+  return valid;
+}
+
+function render(){
+  const active=Boolean(
+    searchInput.value.trim()||
+    gradeFilter.value||
+    subjectFilter.value||
+    themeFilter.value
+  );
+
+  const latestSource=[...uploadedOutcomes].reverse();
+
+  const latest=latestExpanded
+    ? latestSource
+    : latestSource.slice(0,5);
+
+  const archiveSource=sortArchive(uploadedOutcomes);
+
+  const archive=archiveExpanded
+    ? archiveSource
+    : archiveSource.slice(0,5);
+
+  const results=filtered();
+
+  renderGrid(latestGrid,latest);
+  renderGrid(allGrid,archive);
+
+  latestCount.textContent=`${uploadedOutcomes.length} paket`;
+  allCount.textContent=`${uploadedOutcomes.length} paket`;
+
+  latestMore.hidden=uploadedOutcomes.length<=5;
+  allMore.hidden=uploadedOutcomes.length<=5;
+
+  latestMore.textContent=latestExpanded?"Daha Az":"Daha Fazla";
+  allMore.textContent=archiveExpanded?"Daha Az":"Daha Fazla";
+
+  if(active){
+    latestSection.hidden=true;
+    allSection.hidden=true;
+
+    resultsSection.hidden=false;
+
+    resultsCount.textContent=`${results.length} sonuç`;
+
+    renderResults(results);
+
+    resultsTableWrap.hidden=results.length===0;
+    emptyState.hidden=results.length>0;
+
+    if(results.length===0){
+      emptyState.querySelector("h2").textContent="Sonuç bulunamadı.";
+      emptyState.querySelector("p").textContent="Arama metnini veya filtreleri değiştirerek tekrar deneyin.";
+    }
+  }else{
+    latestSection.hidden=false;
+    allSection.hidden=false;
+    resultsSection.hidden=true;
+    emptyState.hidden=true;
+  }
+}
+
+async function init(){
+  try{
+    const response=await fetch("data/outcomes.json",{
+      cache:"no-cache"
+    });
+
+    if(!response.ok){
+      throw new Error(`HTTP ${response.status}`);
+    }
+
+    outcomes=await response.json();
+
+    if(!Array.isArray(outcomes)){
+      outcomes=[];
+    }
+
+    const withPath=outcomes.filter(item=>data(item).file);
+
+    uploadedOutcomes=await verifyUploadedFiles(withPath);
+
+    buildSearchIndex();
+    refreshFilters();
+    render();
+  }catch(error){
+    outcomes=[];
+    uploadedOutcomes=[];
+    searchIndex=[];
+
+    refreshFilters();
+    render();
+
+    latestGrid.innerHTML="";
+    allGrid.innerHTML="";
+
+    emptyState.hidden=false;
+
+    emptyState.querySelector("h2").textContent=
+      "Kazanım listesi yüklenemedi.";
+
+    emptyState.querySelector("p").textContent=
+      "data/outcomes.json dosyasını kontrol edin.";
+
+    console.error(error);
+  }
+}
+
+searchInput.addEventListener("input",render);
+
+[gradeFilter,subjectFilter,themeFilter].forEach(select=>{
+  select.addEventListener("change",()=>{
+    refreshFilters();
+    render();
+  });
+});
+
+document.addEventListener("click",event=>{
+  const option=event.target.closest(".filter-option");
+  const trigger=event.target.closest(".filter-trigger");
+
+  if(option){
+    const root=option.closest(".filter-select");
+    const key=root?.dataset.filter;
+    const select=filterMap[key];
+
+    if(select){
+      select.value=option.dataset.value;
+      closeMenus();
+      refreshFilters();
+      render();
+    }
+
+    return;
+  }
+
+  if(trigger){
+    const root=trigger.closest(".filter-select");
+    const menu=root.querySelector(".filter-menu");
+    const wasOpen=!menu.hidden;
+
+    closeMenus();
+
+    if(!wasOpen){
+      menu.hidden=false;
+      trigger.setAttribute("aria-expanded","true");
+
+      const selected=menu.querySelector('[aria-selected="true"]');
+
+      if(selected){
+        selected.focus();
+      }
+    }
+
+    return;
+  }
+
+  if(!event.target.closest(".filter-select")){
+    closeMenus();
+  }
+});
+
+document.addEventListener("keydown",event=>{
+  if(event.key==="Escape"){
+    closeMenus();
+  }
+});
+
+latestMore.addEventListener("click",()=>{
+  latestExpanded=!latestExpanded;
+  render();
+});
+
+allMore.addEventListener("click",()=>{
+  archiveExpanded=!archiveExpanded;
+  render();
+});
+
+document.addEventListener("click",async event=>{
+  const link=event.target.closest("a[download]");
+
+  if(
+    !link||
+    link.dataset.ready==="1"||
+    link.classList.contains("is-error")
+  ){
+    return;
+  }
+
+  event.preventDefault();
+
+  if(link.dataset.checking==="1")return;
+
+  link.dataset.checking="1";
+
+  const original=link.textContent;
+
+  link.textContent="Kontrol ediliyor...";
+
+  try{
+    const exists=await checkFile(link.getAttribute("href"));
+
+    if(!exists){
+      link.textContent="Dosya bulunamadı";
+      link.classList.add("is-error");
+      return;
+    }
+
+    link.dataset.ready="1";
+    link.click();
+  }catch{
+    link.textContent="Dosya kontrol edilemedi";
+    link.classList.add("is-error");
+  }finally{
+    delete link.dataset.checking;
+
+    if(link.dataset.ready==="1"){
+      link.textContent=original;
+    }
+  }
+});
+
+init();

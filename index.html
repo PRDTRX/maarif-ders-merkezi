@@ -4,7 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Maarif Modeli ile uyumlu ders paketleri, kazanımlar ve eğitim materyalleri.">
-<title>Maarif Ders Merkezi</title>
 <meta name="theme-color" content="#172033">
 <meta property="og:title" content="Maarif Ders Merkezi">
 <meta property="og:description" content="Maarif Modeli uyumlu ders paketleri ve kazanım arşivi.">
@@ -15,6 +14,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<title>Maarif Ders Merkezi</title>
 </head>
 <body>
 
@@ -25,7 +25,7 @@
       <span class="brand-name">Maarif Ders Merkezi</span>
     </a>
 
-    <div class="site-heading" aria-label="Maarif Modeli Ders Paketleri">
+    <div class="site-heading">
       <span>MAARİF MODELİ</span>
       <strong>Ders Paketleri</strong>
     </div>
@@ -33,146 +33,176 @@
 </header>
 
 <main>
-  <section class="hero">
-    <div class="container hero-in">
-      <p class="hero-text">Kazanım kodu, konu veya paket adına göre arayın.</p>
 
-      <div class="filters" aria-label="Paket filtreleri">
+<section class="hero">
+  <div class="container hero-in">
 
-        <div class="field">
-          <span>Sınıf</span>
-          <div class="filter-select" data-filter="grade">
-            <button class="filter-trigger" type="button" aria-haspopup="listbox" aria-expanded="false">
-              <span class="filter-value">Tüm sınıflar</span>
-              <svg viewBox="0 0 12 8" fill="none" aria-hidden="true">
-                <path d="M1 1.5 6 6.5 11 1.5"></path>
-              </svg>
-            </button>
-            <div class="filter-menu" role="listbox" hidden></div>
-            <select id="gradeFilter" class="native-filter" tabindex="-1" aria-hidden="true">
-              <option value="">Tüm sınıflar</option>
-            </select>
-          </div>
+    <p class="hero-text">Kazanım kodu, konu veya paket adına göre arayın.</p>
+
+    <div class="filters" aria-label="Paket filtreleri">
+
+      <div class="field">
+        <span>Sınıf</span>
+
+        <div class="filter-select" data-filter="grade">
+          <button class="filter-trigger" type="button" aria-haspopup="listbox" aria-expanded="false">
+            <span class="filter-value">Tüm sınıflar</span>
+            <svg viewBox="0 0 12 8" fill="none" aria-hidden="true">
+              <path d="M1 1.5 6 6.5 11 1.5"></path>
+            </svg>
+          </button>
+
+          <div class="filter-menu" role="listbox" hidden></div>
+
+          <select id="gradeFilter" class="native-filter" tabindex="-1" aria-hidden="true">
+            <option value="">Tüm sınıflar</option>
+          </select>
         </div>
-
-        <div class="field">
-          <span>Ders</span>
-          <div class="filter-select" data-filter="subject">
-            <button class="filter-trigger" type="button" aria-haspopup="listbox" aria-expanded="false">
-              <span class="filter-value">Tüm dersler</span>
-              <svg viewBox="0 0 12 8" fill="none" aria-hidden="true">
-                <path d="M1 1.5 6 6.5 11 1.5"></path>
-              </svg>
-            </button>
-            <div class="filter-menu" role="listbox" hidden></div>
-            <select id="subjectFilter" class="native-filter" tabindex="-1" aria-hidden="true">
-              <option value="">Tüm dersler</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="field">
-          <span>Tema</span>
-          <div class="filter-select" data-filter="theme">
-            <button class="filter-trigger" type="button" aria-haspopup="listbox" aria-expanded="false">
-              <span class="filter-value">Tüm temalar</span>
-              <svg viewBox="0 0 12 8" fill="none" aria-hidden="true">
-                <path d="M1 1.5 6 6.5 11 1.5"></path>
-              </svg>
-            </button>
-            <div class="filter-menu" role="listbox" hidden></div>
-            <select id="themeFilter" class="native-filter" tabindex="-1" aria-hidden="true">
-              <option value="">Tüm temalar</option>
-            </select>
-          </div>
-        </div>
-
       </div>
 
-      <label class="search-box" for="searchInput">
-        <span class="search-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none">
-            <circle cx="11" cy="11" r="6.5"></circle>
-            <path d="M16 16 21 21"></path>
-          </svg>
-        </span>
-        <input id="searchInput" type="search" placeholder="Kazanım kodu, konu veya paket ara..." autocomplete="off" spellcheck="false">
-      </label>
+      <div class="field">
+        <span>Ders</span>
+
+        <div class="filter-select" data-filter="subject">
+          <button class="filter-trigger" type="button" aria-haspopup="listbox" aria-expanded="false">
+            <span class="filter-value">Tüm dersler</span>
+            <svg viewBox="0 0 12 8" fill="none" aria-hidden="true">
+              <path d="M1 1.5 6 6.5 11 1.5"></path>
+            </svg>
+          </button>
+
+          <div class="filter-menu" role="listbox" hidden></div>
+
+          <select id="subjectFilter" class="native-filter" tabindex="-1" aria-hidden="true">
+            <option value="">Tüm dersler</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <span>Tema</span>
+
+        <div class="filter-select" data-filter="theme">
+          <button class="filter-trigger" type="button" aria-haspopup="listbox" aria-expanded="false">
+            <span class="filter-value">Tüm temalar</span>
+            <svg viewBox="0 0 12 8" fill="none" aria-hidden="true">
+              <path d="M1 1.5 6 6.5 11 1.5"></path>
+            </svg>
+          </button>
+
+          <div class="filter-menu" role="listbox" hidden></div>
+
+          <select id="themeFilter" class="native-filter" tabindex="-1" aria-hidden="true">
+            <option value="">Tüm temalar</option>
+          </select>
+        </div>
+      </div>
+
     </div>
-  </section>
 
-  <section class="content">
-    <div class="container">
+    <label class="search-box" for="searchInput">
+      <span class="search-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <circle cx="11" cy="11" r="6.5"></circle>
+          <path d="M16 16 21 21"></path>
+        </svg>
+      </span>
 
-      <div class="content-columns">
+      <input
+        id="searchInput"
+        type="search"
+        placeholder="Kazanım kodu, konu veya paket ara..."
+        autocomplete="off"
+        spellcheck="false"
+        aria-label="Kazanım, konu veya paket ara">
+    </label>
 
-        <section id="latestSection" class="section">
-          <div class="section-head">
-            <div>
-              <p class="section-kicker">GÜNCEL</p>
-              <h2>Son Yüklenenler</h2>
-            </div>
-            <span id="latestCount" class="section-count" aria-live="polite"></span>
-          </div>
+  </div>
+</section>
 
-          <div id="latestGrid" class="grid"></div>
+<section class="content">
+  <div class="container">
 
-          <div class="more-wrap">
-            <button id="latestMore" class="more-button" type="button" hidden>Daha Fazla</button>
-          </div>
-        </section>
+    <div class="content-columns">
 
-        <section id="allSection" class="section">
-          <div class="section-head">
-            <div>
-              <p class="section-kicker">ARŞİV</p>
-              <h2>Tüm Paketler</h2>
-            </div>
-            <span id="allCount" class="section-count" aria-live="polite"></span>
-          </div>
-
-          <div id="allGrid" class="grid"></div>
-
-          <div class="more-wrap">
-            <button id="allMore" class="more-button" type="button" hidden>Daha Fazla</button>
-          </div>
-        </section>
-
-      </div>
-
-      <section id="resultsSection" class="section results-section" hidden>
+      <section id="latestSection" class="section">
         <div class="section-head">
           <div>
-            <p class="section-kicker">ARAMA SONUÇLARI</p>
-            <h2>Bulunan Kazanımlar</h2>
+            <p class="section-kicker">GÜNCEL</p>
+            <h2>Son Yüklenenler</h2>
           </div>
-          <span id="resultsCount" class="section-count" aria-live="polite"></span>
+
+          <span id="latestCount" class="section-count" aria-live="polite"></span>
         </div>
 
-        <div class="results-table-wrap">
-          <table class="results-table">
-            <thead>
-              <tr>
-                <th scope="col">Sınıf</th>
-                <th scope="col">Ders</th>
-                <th scope="col">Tema</th>
-                <th scope="col">Kazanım Kodu</th>
-                <th scope="col">Kazanım</th>
-                <th scope="col">Dosya</th>
-              </tr>
-            </thead>
-            <tbody id="resultsBody"></tbody>
-          </table>
+        <div id="latestGrid" class="grid"></div>
+
+        <div class="more-wrap">
+          <button id="latestMore" class="more-button" type="button" hidden>
+            Daha Fazla
+          </button>
         </div>
       </section>
 
-      <div id="emptyState" class="empty" hidden>
-        <h2>Paket bulunamadı.</h2>
-        <p>Arama metnini veya filtreleri değiştirerek tekrar deneyin.</p>
-      </div>
+      <section id="allSection" class="section">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">ARŞİV</p>
+            <h2>Tüm Paketler</h2>
+          </div>
+
+          <span id="allCount" class="section-count" aria-live="polite"></span>
+        </div>
+
+        <div id="allGrid" class="grid"></div>
+
+        <div class="more-wrap">
+          <button id="allMore" class="more-button" type="button" hidden>
+            Daha Fazla
+          </button>
+        </div>
+      </section>
 
     </div>
-  </section>
+
+    <section id="resultsSection" class="section results-section" hidden>
+
+      <div class="section-head">
+        <div>
+          <p class="section-kicker">ARAMA SONUÇLARI</p>
+          <h2>Bulunan Kazanımlar</h2>
+        </div>
+
+        <span id="resultsCount" class="section-count" aria-live="polite"></span>
+      </div>
+
+      <div id="resultsTableWrap" class="results-table-wrap">
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th scope="col">Sınıf</th>
+              <th scope="col">Ders</th>
+              <th scope="col">Tema</th>
+              <th scope="col">Kazanım Kodu</th>
+              <th scope="col">Kazanım</th>
+              <th scope="col">Dosya</th>
+            </tr>
+          </thead>
+
+          <tbody id="resultsBody"></tbody>
+        </table>
+      </div>
+
+    </section>
+
+    <div id="emptyState" class="empty" hidden>
+      <h2>Paket bulunamadı.</h2>
+      <p>Arama metnini veya filtreleri değiştirerek tekrar deneyin.</p>
+    </div>
+
+  </div>
+</section>
+
 </main>
 
 <footer class="site-footer">

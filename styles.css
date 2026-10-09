@@ -214,6 +214,7 @@ svg{display:block;width:1.25em;height:1.25em}
  .footer-main{align-items:flex-start;flex-direction:column;gap:15px;padding-bottom:22px}
  .footer-links{flex-wrap:wrap;gap:12px 18px}.footer-bottom{align-items:flex-start;flex-direction:column;gap:12px}
 }
+@media(max-width:540px){.container{width:calc(100% - 32px)}.hero h1{letter-spacing:-2.5px}.hero-visual{min-height:365px}.filter-panel{grid-template-columns:repeat(2,minmax(0,1fr))}.materials-grid{grid-template-columns:1fr}}
 @media(max-width:390px){
  .container{width:calc(100% - 28px)}.brand{gap:8px}.brand-mark{width:34px;height:34px}
  .hero h1{font-size:44px}.hero-visual{transform:scale(.72);margin-inline:-45px;margin-bottom:-80px}

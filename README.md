@@ -4,10 +4,10 @@ Türkiye Yüzyılı Maarif Modeli ile ilişkili ders materyallerini aramak ve in
 
 ## Arayüz ve arama
 
-- Filtre sırası: sınıf → ders → ünite → öğrenme çıktısı / kazanım kodu
+- Filtre sırası: sınıf → ders → ünite → kazanım kodu → kazanımın konusu
 - Filtreler birbirine bağlıdır; üst filtre değiştiğinde alt filtreler sıfırlanır.
 - Arama yazdıkça güncellenir ve büyük/küçük harf farkını gözetmez.
-- Arama; Türkçe karakter normalleştirmesiyle başlık, açıklama, ders, sınıf, ünite, konu, kazanım, kazanım kodu ve anahtar kelimeleri tarar.
+- Arama; Türkçe karakter normalleştirmesiyle başlık, açıklama, ders, sınıf, ünite, konu, kazanım metni, kazanım kodu, kazanımın konusu ve anahtar kelimeleri tarar.
 - Eşleşen metinler güvenli DOM metin düğümleri ve `<mark>` öğeleriyle vurgulanır.
 - Materyal türü filtresi ve ayrı “Hakkında” bölümü kaldırılmıştır.
 - Mobil uyumlu düzen ve klavye erişilebilirliği; harici kütüphane veya derleme adımı yoktur.
@@ -34,7 +34,9 @@ Her kayıt için `title` ve `url` zorunludur. Diğer alanlar isteğe bağlıdır
     "unit": "Ünite adı",
     "topic": "Konu adı",
     "outcomeCode": "Öğretim programındaki resmî kod",
-    "outcome": "İlgili öğrenme çıktısı/kazanım metni",
+    "outcomeCode": "T.D.5.3.",
+    "outcomeTopic": "Dinleyeceğinin/izleyeceğinin içeriğine yönelik tahminde bulunabilme",
+    "outcome": "Dinleyeceğinin/izleyeceğinin içeriğine yönelik tahminde bulunabilme",
     "keywords": ["anahtar kelime", "başka ifade"],
     "url": "materials/dosya-adi.pdf",
     "fileSize": "PDF"
@@ -42,7 +44,7 @@ Her kayıt için `title` ve `url` zorunludur. Diğer alanlar isteğe bağlıdır
 ]
 ```
 
-Öğrenme çıktısı kodunu yalnızca ilgili resmî öğretim programında yer aldığı biçimiyle girin. Maarif Modeli dokümanlarında kullanılan resmî terim “öğrenme çıktısı”dır. Mevcut olmayan dosyalara bağlantı vermeyin.
+Kazanım kodunu ve kazanım konusunu ayrı alanlara, ilgili resmî öğretim programında yer aldığı biçimiyle girin. Örnekteki kod ve konu alanları ayrı filtrelenir. Mevcut olmayan dosyalara bağlantı vermeyin.
 
 ## GitHub Pages yayını
 

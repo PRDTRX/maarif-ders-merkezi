@@ -23,16 +23,20 @@
   <main id="main">
     <section class="hero" aria-labelledby="page-title">
       <div class="hero-inner">
-        <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span> Öğrenme materyalleri, tek merkezde</p>
-        <h1 id="page-title">Aradığın ders materyalini<br><span>kolayca bul.</span></h1>
-        <p class="hero-description">Sınıf, ders, ünite veya kazanım koduyla filtrele; aradığın ifadeyi yazarak materyali bul.</p>
+        <h1 id="page-title">Aradığın ders paketini<br><span>kolayca bul</span></h1>
+        <div class="filter-row hero-filter-row" role="group" aria-label="Ders paketi filtreleri">
+          <label class="filter-control"><span>Sınıf</span><select id="grade-filter"><option value="">Tüm sınıflar</option></select></label>
+          <label class="filter-control"><span>Ders</span><select id="subject-filter"><option value="">Tüm dersler</option></select></label>
+          <label class="filter-control"><span>Ünite</span><select id="unit-filter"><option value="">Tüm üniteler</option></select></label>
+          <button type="button" class="clear-filters" id="clear-filters">Filtreleri temizle</button>
+        </div>
         <form class="search-form" id="search-form" role="search">
-          <label class="sr-only" for="search-input">Ders materyali ara</label>
+          <label class="sr-only" for="search-input">Ders paketi ara</label>
           <svg aria-hidden="true" class="search-icon" viewBox="0 0 24 24" fill="none">
             <circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" stroke-width="1.8"/>
             <path d="m16 16 4.3 4.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
           </svg>
-          <input id="search-input" name="q" type="search" placeholder="Örn. 6. sınıf matematik kesirler…" autocomplete="off">
+          <input id="search-input" name="q" type="search" placeholder="Örn. sınıf, ders, ünite veya kazanım kodu…" autocomplete="off">
           <button type="submit">Ara <span aria-hidden="true">→</span></button>
         </form>
         <div class="quick-searches" aria-label="Örnek aramalar">
@@ -50,21 +54,8 @@
       </div>
     </section>
 
-    <section class="content-section" id="materyaller" aria-labelledby="materials-title">
-      <div class="section-heading">
-        <div>
-          <p class="section-kicker">KÜTÜPHANE</p>
-          <h2 id="materials-title" class="library-title">Materyalleri keşfet</h2>
-        </div>
-        <p class="result-count" id="result-count" role="status" aria-live="polite" aria-atomic="true">Materyaller yükleniyor…</p>
-      </div>
-
-      <div class="filter-row" role="group" aria-label="Materyal filtreleri">
-        <label class="filter-control"><span>Sınıf</span><select id="grade-filter"><option value="">Tüm sınıflar</option></select></label>
-        <label class="filter-control"><span>Ders</span><select id="subject-filter"><option value="">Tüm dersler</option></select></label>
-        <label class="filter-control"><span>Ünite</span><select id="unit-filter"><option value="">Tüm üniteler</option></select></label>
-        <button type="button" class="clear-filters" id="clear-filters">Filtreleri temizle</button>
-      </div>
+    <section class="content-section" id="materyaller" aria-label="Ders paketleri">
+      <p class="result-count" id="result-count" role="status" aria-live="polite" aria-atomic="true">Materyaller yükleniyor…</p>
 
       <p class="active-query" id="active-query" hidden></p>
       <div class="materials-grid" id="materials-grid" aria-busy="true"></div>
@@ -94,7 +85,6 @@
   </main>
 
   <footer class="site-footer">
-    <p>Bağımsız eğitim materyali kataloğu. Resmî MEB sitesi değildir.</p>
     <button type="button" class="back-top" id="back-top" aria-label="Sayfanın başına dön" title="Sayfanın başına dön">
       <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
         <path d="M12 19V5m0 0-6 6m6-6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

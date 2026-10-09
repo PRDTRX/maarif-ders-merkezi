@@ -82,7 +82,7 @@ h1, h2, h3, p { margin-top: 0; }
   background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
 }
 .hero-filter-row {
-  max-width: 900px; margin: 28px auto 18px; padding: 14px;
+  max-width: 900px; margin: 42px auto 24px; padding: 14px;
   text-align: left; box-shadow: var(--shadow-soft);
 }
 .hero-filter-row .filter-control { min-width: 130px; }
@@ -149,7 +149,7 @@ mark { background: #ffe58a; color: #263329; border-radius: 3px; padding: 0 .08em
   .hero-inner { padding: 56px 22px 48px; }
   .hero h1 { font-size: clamp(39px, 7.7vw, 58px); }
   .filter-row { align-items: stretch; }
-  .hero-filter-row { margin-top: 24px; padding: 12px; }
+  .hero-filter-row { margin-top: 34px; padding: 12px; }
   .filter-control { min-width: calc(50% - 8px); }
   .clear-filters { align-self: end; }
 }

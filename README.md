@@ -1,90 +1,114 @@
 # Maarif Ders Merkezi
 
-Türkiye Yüzyılı Maarif Modeli ile ilişkili ders materyallerini aramak ve incelemek için hazırlanmış, bağımlılıksız bir statik web sitesi. Arayüz HTML, CSS ve tarayıcı JavaScript'i kullanır; derleme adımı veya npm bağımlılığı yoktur.
+Türkiye Yüzyılı Maarif Modeli ile ilişkili ders materyallerini sınıf, ders, ünite ve öğrenme çıktısına göre keşfetmek için hazırlanmış, bağımlılıksız statik bir web kataloğu.
 
-> **Katalog durumu:** `data/materials.json` şu anda boş. Gerçekliği ve kaynağı doğrulanmamış örnek kayıtlar eklenmez; site, katalogda içerik bulunmadığını açıkça gösterir.
+- **Arayüz:** HTML, CSS ve tarayıcı JavaScript'i
+- **Veri:** data/materials.json
+- **Yayın:** GitHub Pages
+- **Derleme / npm bağımlılığı:** Yok
+- **Kişisel veri:** Site arama ve filtreleri tarayıcıda işler; uygulama hesabı veya sunucu tarafı kullanıcı profili içermez.
 
-## Özellikler
+> **Katalog durumu:** data/materials.json şu an bilerek boş bir dizidir ([]). Doğrulanmamış materyal, örnek içerik veya çalıştığı kanıtlanmamış bağlantı yayımlanmaz.
 
-- Sınıf, ders ve ünite filtreleri birbirine bağlı çalışır.
-- Yazarken arama ve Türkçe karakter normalleştirmesi desteklenir.
-- Başlık, açıklama, sınıf, ders, ünite, konu, kazanım, anahtar kelime ve kaynak adı aranabilir.
-- Arama eşleşmeleri güvenli DOM metin düğümleri ve `<mark>` öğeleriyle vurgulanır; katalog içeriği `innerHTML` ile eklenmez.
-- Site içi dosyalar indirme bağlantısı, HTTPS harici kaynaklar ise yeni sekmede açılan kaynak bağlantısı olarak sunulur.
-- Klavye odak göstergeleri, ana içeriğe atlama bağlantısı, mobil düzen, karanlık tema ve hareket azaltma tercihi desteği bulunur.
-- Harici JavaScript/CSS kütüphanesi veya derleme aracı kullanılmaz.
+## Ürün ilkeleri
 
-## Materyal kataloğuna kayıt ekleme
-
-Kayıtları `data/materials.json` dosyasına ekleyin. Yalnızca gerçek, erişilebilir ve kullanım amacı incelenmiş materyaller ekleyin. Dosya ya da kaynak URL'sinin varlığı bu doğrulama betiği tarafından internet üzerinden kontrol edilmez.
-
-Örnek kayıt şeması:
-
-```json
-[
-  {
-    "title": "Materyalin adı",
-    "description": "Kısa ve doğrulanabilir açıklama",
-    "subject": "Matematik",
-    "grade": "5. sınıf",
-    "unit": "Ünite adı",
-    "topic": "Konu adı",
-    "outcomeCode": "Resmî programdaki kazanım kodu",
-    "outcomeTopic": "Resmî programdaki kazanım ifadesi",
-    "outcome": "Kazanım açıklaması",
-    "keywords": ["anahtar kelime", "eş anlamlı ifade"],
-    "url": "materials/dosya-adi.pdf",
-    "format": "PDF",
-    "fileSize": "PDF",
-    "sourceName": "Kaynak kurum",
-    "sourceUrl": "https://example.gov.tr/kaynak",
-    "updatedAt": "2026-10-09"
-  }
-]
-```
-
-Bu örnekteki `example.gov.tr` bir yer tutucudur; gerçek bir kaynak URL'siyle değiştirilmeden yayına alınmamalıdır. `title` ve `url` zorunludur. Diğer alanlar isteğe bağlıdır. `keywords` bir metin dizisi olmalıdır. `updatedAt` için `YYYY-MM-DD` biçimi kullanılır. Mutlak URL'ler HTTPS kullanmalıdır; göreli URL'ler yayımlanan site yolu içinde kalmalıdır.
-
-Kazanım kodunu ve kazanım ifadesini ilgili resmî öğretim programında yer aldığı biçimiyle girin. Kaynak ve güncelleme bilgilerini yalnızca doğrulanabiliyorsa ekleyin. Site, resmî MEB yayını değildir; içerikler kullanılmadan önce öğretmen tarafından kontrol edilmelidir.
-
-Resmî kaynak: https://tymm.meb.gov.tr/ogretim-programlari/
-
-## Yerel kontrol
-
-Node.js 22 ile aşağıdaki komutları çalıştırın:
-
-```sh
-node --check app.js
-node scripts/validate-site.mjs
-```
-
-Doğrulama betiği temel HTML/SEO gerekliliklerini, erişilebilirlik işaretlerini, CSS özelliklerini, URL şemasını, yinelenen başlık/URL kayıtlarını, katalog alanlarını, sitemap ve CI izinlerini kontrol eder. Harici URL'lerin yanıt verdiğini, PDF'lerin açıldığını veya görsel erişilebilirlik/perfomans ölçümlerini **kanıtlamaz**.
-
-## GitHub Pages yayını
-
-1. Depoda **Settings → Pages** bölümünü açın.
-2. Build and deployment alanında **Deploy from a branch** seçin.
-3. Branch olarak `main`, klasör olarak `/(root)` seçin.
-4. Kaydedin ve yayımlanan adresi aynı ekrandan doğrulayın.
-
-Yayın ayarları bu değişiklik kapsamında değiştirilmez.
+1. **Kaynağı görünür tut:** Her materyalin kaynak adı ve asıl kaynak URL'si zorunludur.
+2. **Kullanım hakkını kontrol et:** Bir dosyanın internette bulunması, dosyanın yeniden yayımlanabileceği anlamına gelmez. Depoya yalnızca yeniden dağıtım hakkı doğrulanmış dosyalar eklenmelidir. Aksi durumda dosyayı kopyalamak yerine kaynak sayfasına bağlantı ver.
+3. **İnsan doğrulaması olmadan yayımlama:** Her kayıt için verificationStatus: "doğrulandı" ve kontrol tarihi gereklidir.
+4. **Müfredat bağlamını kaydet:** Sınıf, ders, ünite ve öğrenme çıktısı alanlarını doğrulanabilir resmî programla karşılaştır.
+5. **Güncelliği takip et:** verifiedAt kaydın insan tarafından en son kontrol edildiği tarihtir; updatedAt ise materyalin güncellenme tarihidir. Bu tarihler farklı anlamlar taşır.
+6. **Resmî kaynakla karıştırma:** Maarif Ders Merkezi resmî MEB sitesi değildir. Yapay zekâ desteği, kaynak kontrolü veya öğretmen değerlendirmesinin yerine geçmez.
 
 ## Dosya yapısı
 
-- `index.html` — anlamsal sayfa yapısı ve SEO meta verileri
-- `styles.css` — duyarlı tasarım, açık/koyu tema ve hareket tercihi
-- `app.js` — arama, filtreleme, güvenli kart üretimi ve URL denetimi
-- `data/materials.json` — materyal kataloğu
-- `scripts/validate-site.mjs` — bağımlılıksız kalite doğrulaması
-- `.github/workflows/site-quality.yml` — GitHub Actions kalite kontrolü
+- index.html — erişilebilir sayfa iskeleti ve SEO metadata
+- styles.css — tasarım sistemi, duyarlı düzen, açık/koyu tema ve hareket tercihleri
+- app.js — arama, filtreleme, sıralama, URL durumu, kart üretimi ve istemci tarafı doğrulama
+- data/materials.json — yayımlanacak materyal kayıtları
+- data/materials.schema.json — editör ve araçlar için JSON Schema
+- scripts/validate-site.mjs — bağımlılıksız yerel kalite ve katalog doğrulaması
+- .github/workflows/site-quality.yml — pull request ve main push olaylarında statik kontroller
 
-## Otomatik kalite kontrolleri
+## Materyal ekleme
 
-GitHub Actions, pull request'lerde ve `main` dalına push yapıldığında JavaScript sözdizimini ve statik site/katalog doğrulamasını çalıştırır. Workflow ayrıca elle başlatılabilir. Bu kontroller gerçek tarayıcıda ekran okuyucu, WCAG 2.2 AA, Lighthouse/Core Web Vitals, HTTP güvenlik başlıkları, bağlantı erişilebilirliği veya gerçek cihaz testlerinin yerine geçmez.
+Kayıtları data/materials.json dosyasına JSON nesneleri olarak ekle. Katalog bir JSON dizisidir. Zorunlu alanlar:
 
-## Bilinen sınırlamalar ve sonraki adımlar
+| Alan | Kural |
+| --- | --- |
+| title | Boş olamaz; en fazla 180 karakter |
+| url | HTTPS URL veya yayımlanan site yolu içindeki mevcut yerel dosya |
+| sourceName | Kaynak kurumun veya yayıncının adı |
+| sourceUrl | Asıl kaynağa giden HTTPS bağlantısı |
+| usageRights | Dosyanın yeniden yayımlanması ya da yalnızca bağlantılanması gibi kullanım koşullarının açık kaydı |
+| verifiedAt | İnsan doğrulamasının yapıldığı geçerli YYYY-MM-DD tarihi |
+| verificationStatus | Yayımlanabilir kayıtlar için yalnızca doğrulandı |
 
-- Katalog boş olduğu için kullanıcıya sunulacak gerçek materyaller henüz yoktur. Kaynak ve içerik seçimi insan incelemesi gerektirir; otomatik olarak içerik uydurulmaz.
-- GitHub Pages güvenlik başlıkları uygulama dosyalarından bütünüyle yönetilemez. Canlı yanıt başlıkları ve yönlendirmeler yayımlanan alan adı üzerinde ayrıca denetlenmelidir.
-- Lisans belirtilmemiştir. Proje sahibi uygun lisansı seçmeden bir lisans dosyası eklenmemiştir.
-- Tam WCAG 2.2 AA uygunluğu, W3C HTML doğrulaması, gerçek cihaz/tarayıcı testi ve performans ölçümü ayrı araçlarla tamamlanmalıdır.
+Örnek şema gösterimi (yer tutucular gerçek materyal değildir ve olduğu gibi yayımlanmamalıdır):
+
+    [
+      {
+        "title": "Gerçek materyalin başlığı",
+        "description": "Materyalin kapsamını doğru ve kısa biçimde açıklayan metin.",
+        "subject": "Matematik",
+        "grade": "5. sınıf",
+        "unit": "Gerçek ünite adı",
+        "topic": "Gerçek konu adı",
+        "outcomeCode": "Resmî programdaki kod",
+        "outcomeTopic": "Resmî programdaki öğrenme çıktısı",
+        "keywords": ["arama terimi", "eş anlamlı terim"],
+        "url": "materials/gercek-dosya.pdf",
+        "format": "PDF",
+        "fileName": "gercek-dosya.pdf",
+        "fileSize": "2.4 MB",
+        "sourceName": "Kaynak kurum",
+        "sourceUrl": "https://example.org/gercek-kaynak",
+        "academicYear": "2026-2027",
+        "curriculumVersion": "İlgili programın doğrulanmış sürümü",
+        "updatedAt": "2026-10-01",
+        "verifiedAt": "2026-10-09",
+        "verificationStatus": "doğrulandı",
+        "license": "Doğrulanmış lisans adı veya koşulu",
+        "usageRights": "Yeniden yayımlama izni doğrulandı; izin kaydı editoryal arşivde."
+      }
+    ]
+
+Örnekteki example.org adresi yer tutucudur. Gerçek kaynakla değiştirilmeden kullanılmamalıdır. Yerel url kullanıyorsan dosya depoda gerçekten bulunmalı ve site içinde yayımlanıyor olmalıdır. Haricî dosyalarda HTTPS bağlantısı kullanılır; kaynak bağlantısı ayrıca tutulur. Haricî URL'lerin erişilebilirliği veya dosya içeriğinin doğruluğu statik betik tarafından internet üzerinden garanti edilmez.
+
+### Alanların anlamı
+
+- **url:** Kullanıcının açacağı veya indireceği materyal.
+- **sourceUrl:** Materyalin alındığı asıl yayın veya kaynak sayfası. Kullanıcı arayüzünde ayrıca gösterilir.
+- **license:** Biliniyorsa lisansın adı.
+- **usageRights:** Uygulamadaki kullanım ve yeniden dağıtım durumuna ilişkin somut editoryal kayıt. Lisans adı tek başına hak sahipliğini veya izin kapsamını kanıtlamaz.
+- **updatedAt:** İçeriğin güncellenme tarihi.
+- **verifiedAt:** Kaynağın, URL'nin, kullanım koşullarının ve müfredat bağlamının kontrol edildiği tarih.
+- **academicYear / curriculumVersion:** Gerektiğinde materyalin ilgili olduğu eğitim-öğretim yılı ve program sürümü.
+
+verificationStatus alanını doğrulama tamamlanmadan doğrulandı olarak ayarlama. Yayımlama öncesinde kaynağı, URL'yi, dosyayı, kullanım koşullarını ve program eşleştirmesini gerçek bir kişi kontrol etmelidir. Eğitim içeriği veya kaynak URL'si uydurulmaz.
+
+Resmî program kaynağı: https://tymm.meb.gov.tr/ogretim-programlari/
+
+## Yerel kalite kontrolleri
+
+Node.js 22 ile depo kökünde çalıştır:
+
+    node --check app.js
+    node scripts/validate-site.mjs
+
+Doğrulama betiği HTML için temel yapısal gereklilikleri, benzersiz kimlikleri, yerel dosya bağlantılarını, erişilebilirlik işaretlerini, katalog alanlarını, kaynak URL'lerini, tarihleri, tekrar eden başlık/URL kayıtlarını ve CI izinlerini kontrol eder. Katalog boşsa başarısız olmak yerine açık bir uyarı verir.
+
+Bu kontroller **şunları kanıtlamaz**: haricî URL'lerin canlı olduğunu, PDF'lerin doğru içeriğe sahip olduğunu, kullanım haklarının hukuken geçerli olduğunu, WCAG 2.2 AA uygunluğunu, ekran okuyucu davranışını, Lighthouse/Core Web Vitals skorlarını veya gerçek cihazlarda görsel tutarlılığı. Bunlar ayrıca kontrol edilmelidir.
+
+## GitHub Pages
+
+Depo main dalının kökünden yayımlanacak şekilde tasarlanmıştır. GitHub'da **Settings → Pages** altında etkin yayın kaynağını doğrula. Yayın URL'si veya depo yolu değiştirilirse canonical, og:url, robots.txt ve sitemap.xml birlikte güncellenmelidir.
+
+Kalite workflow'u dosya değişikliklerini denetler fakat dal korumasını etkinleştirmez. main için gerekli durum kontrolü ve PR üzerinden birleştirme kuralı GitHub depo ayarlarında ayrıca açılmalıdır.
+
+## Bilinen sınırlar ve kararlar
+
+- Katalog bilerek boştur; doğrulanmış içerikleri sahibi ekleyecektir.
+- Site kullanıcı hesabı, veritabanı, analitik veya sunucu tarafı arama içermez.
+- Otomatik testler statik kontrollerdir; gerçek tarayıcı testlerinin yerine geçmez.
+- GitHub Pages sunucu güvenlik başlıklarının tümünü depo dosyalarından kontrol etmek mümkün değildir. Canlı yanıt başlıkları ayrıca incelenmelidir.
+- Proje kodu için lisans henüz belirtilmemiştir. Proje sahibi uygun lisansa karar vermeden lisans dosyası eklenmemiştir. Kod lisansı ile katalog materyallerinin kullanım hakları ayrı konulardır.

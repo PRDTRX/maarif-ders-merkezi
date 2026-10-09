@@ -604,6 +604,28 @@ img, svg { max-width: 100%; }
 .meta-chip { display: inline-flex; align-items: center; max-width: 100%; padding: 5px 8px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface-quiet); color: var(--muted-strong); font-size: 10px; line-height: 1.45; overflow-wrap: anywhere; }
 .meta-chip a { text-decoration: underline; text-decoration-color: var(--line-strong); text-underline-offset: 3px; }
 .meta-chip a:hover { color: var(--green); }
+.usage-details {
+  margin: 0 0 15px;
+  padding-top: 11px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.75;
+}
+.usage-details summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 28px;
+  color: var(--muted-strong);
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 750;
+  list-style-position: inside;
+}
+.usage-details summary:hover { color: var(--green); }
+.usage-details p { margin: 5px 0 0; color: var(--muted); overflow-wrap: anywhere; }
+
 .card-actions { display: flex; flex-wrap: wrap; gap: 9px; margin-top: auto; }
 .card-download {
   display: inline-flex;

@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Maarif Ders Merkezi materyal kataloğu",
+  "description": "Yayımlanmaya hazır, kaynağı ve kullanım koşulları kontrol edilmiş ders materyalleri.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "title",
+      "url",
+      "sourceName",
+      "sourceUrl",
+      "usageRights",
+      "verifiedAt",
+      "verificationStatus"
+    ],
+    "properties": {
+      "title": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 180
+      },
+      "description": {
+        "type": "string",
+        "maxLength": 1200
+      },
+      "subject": {
+        "type": "string",
+        "maxLength": 100
+      },
+      "grade": {
+        "type": "string",
+        "maxLength": 40
+      },
+      "unit": {
+        "type": "string",
+        "maxLength": 180
+      },
+      "topic": {
+        "type": "string",
+        "maxLength": 240
+      },
+      "outcomeCode": {
+        "type": "string",
+        "maxLength": 100
+      },
+      "outcomeTopic": {
+        "type": "string",
+        "maxLength": 500
+      },
+      "outcome": {
+        "type": "string",
+        "maxLength": 1200
+      },
+      "keywords": {
+        "type": "array",
+        "uniqueItems": true,
+        "items": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        }
+      },
+      "url": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 2048,
+        "description": "HTTPS URL veya yayımlanan site yolu içinde bulunan yerel dosya yolu."
+      },
+      "format": {
+        "type": "string",
+        "maxLength": 40
+      },
+      "fileName": {
+        "type": "string",
+        "maxLength": 180
+      },
+      "fileSize": {
+        "type": "string",
+        "maxLength": 40,
+        "description": "Örneğin 2.4 MB. Dosya boyutu bilinmiyorsa alanı eklemeyin."
+      },
+      "sourceName": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 160
+      },
+      "sourceUrl": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 2048,
+        "pattern": "^https://",
+        "description": "Materyalin asıl kaynağına giden HTTPS bağlantısı."
+      },
+      "updatedAt": {
+        "type": "string",
+        "format": "date"
+      },
+      "academicYear": {
+        "type": "string",
+        "maxLength": 20
+      },
+      "curriculumVersion": {
+        "type": "string",
+        "maxLength": 160
+      },
+      "verifiedAt": {
+        "type": "string",
+        "format": "date"
+      },
+      "verificationStatus": {
+        "type": "string",
+        "const": "doğrulandı",
+        "description": "Yalnızca insan tarafından kontrol edilmiş ve yayımlanmaya hazır kayıtlar katalogda yer alır."
+      },
+      "license": {
+        "type": "string",
+        "maxLength": 180
+      },
+      "usageRights": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 500,
+        "description": "Materyalin yeniden yayımlanması veya yalnızca bağlantısının verilmesi gibi kullanım koşullarının açık kaydı."
+      }
+    }
+  }
+}

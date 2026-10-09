@@ -317,7 +317,6 @@
     if (material.academicYear) metadata.append(chip("Eğitim yılı: " + material.academicYear));
     if (material.curriculumVersion) metadata.append(chip("Program: " + material.curriculumVersion));
     if (material.verifiedAt) metadata.append(chip("Kontrol: " + material.verifiedAt));
-    if (material.verificationStatus) metadata.append(chip("Durum: " + material.verificationStatus));
     if (material.license) metadata.append(chip("Lisans: " + material.license));
     article.append(metadata);
 

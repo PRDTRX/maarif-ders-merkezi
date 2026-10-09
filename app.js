@@ -66,7 +66,8 @@
     material.academicYear,
     material.curriculumVersion,
     material.verificationStatus,
-    material.license
+    material.license,
+    material.usageRights
   ].flat().filter(Boolean).join(" ");
 
   const unique = (values) => [...new Set(values.filter(Boolean).map(String))]
@@ -215,11 +216,31 @@
     if (!material || typeof material !== "object" || Array.isArray(material)) return false;
     if (typeof material.title !== "string" || !material.title.trim() || material.title.trim().length > 180) return false;
     if (typeof material.url !== "string" || !material.url.trim()) return false;
+    if (typeof material.sourceName !== "string" || !material.sourceName.trim()) return false;
+    if (!safeHttpsUrl(material.sourceUrl)) return false;
+    if (typeof material.usageRights !== "string" || !material.usageRights.trim()) return false;
+    if (material.verificationStatus !== "doğrulandı") return false;
+
+    const isDate = (value) => {
+      if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+      const date = new Date(value);
+      return !Number.isNaN(date.getTime()) && date.toISOString().slice(0, 10) === value;
+    };
+    if (!isDate(material.verifiedAt)) return false;
+    if (material.updatedAt !== undefined && !isDate(material.updatedAt)) return false;
+
+    const textFields = [
+      "description", "subject", "grade", "unit", "topic", "outcome", "outcomeCode",
+      "outcomeTopic", "format", "fileName", "fileSize", "sourceName", "sourceUrl",
+      "academicYear", "curriculumVersion", "verifiedAt", "verificationStatus", "license", "usageRights"
+    ];
+    if (textFields.some((field) => material[field] !== undefined && typeof material[field] !== "string")) return false;
+    if (material.keywords !== undefined &&
+        (!Array.isArray(material.keywords) || !material.keywords.every((word) => typeof word === "string"))) return false;
 
     const raw = material.url.trim();
     if (raw.startsWith("//") || /[\u0000-\u001f]/.test(raw)) return false;
     const externalUrl = safeHttpsUrl(raw);
-
     if (/^[a-z][a-z0-9+.-]*:/i.test(raw) && !externalUrl) return false;
 
     try {
@@ -235,7 +256,6 @@
       return false;
     }
   }
-
   function addSourceLink(container, material) {
     const sourceUrl = safeHttpsUrl(material.sourceUrl);
     if (!sourceUrl) return;
@@ -298,8 +318,19 @@
     if (material.curriculumVersion) metadata.append(chip("Program: " + material.curriculumVersion));
     if (material.verifiedAt) metadata.append(chip("Kontrol: " + material.verifiedAt));
     if (material.verificationStatus) metadata.append(chip("Durum: " + material.verificationStatus));
-    if (material.license) metadata.append(chip("Kullanım: " + material.license));
+    if (material.license) metadata.append(chip("Lisans: " + material.license));
     article.append(metadata);
+
+    if (material.usageRights) {
+      const usage = document.createElement("details");
+      usage.className = "usage-details";
+      const summary = document.createElement("summary");
+      summary.textContent = "Kullanım koşulları";
+      const description = document.createElement("p");
+      description.textContent = material.usageRights;
+      usage.append(summary, description);
+      article.append(usage);
+    }
 
     const actions = document.createElement("div");
     actions.className = "card-actions";
@@ -340,11 +371,20 @@
   }
 
   function setEmptyState(kind) {
-    emptyEyebrow.textContent = kind === "error" ? "BAĞLANTI DURUMU" : kind === "results" ? "ARAMA SONUCU" : "KÜTÜPHANE DURUMU";
+    emptyEyebrow.textContent = kind === "error" ? "BAĞLANTI DURUMU"
+      : kind === "invalid" ? "İÇERİK KONTROLÜ"
+      : kind === "results" ? "ARAMA SONUCU"
+      : "KÜTÜPHANE DURUMU";
 
     if (kind === "error") {
       emptyTitle.textContent = "Katalog yüklenemedi";
       emptyText.textContent = "Materyal listesi alınırken bir sorun oluştu. Bağlantını kontrol edip yeniden deneyebilirsin.";
+      return;
+    }
+
+    if (kind === "invalid") {
+      emptyTitle.textContent = "Katalog kayıtları doğrulanamadı";
+      emptyText.textContent = "Kayıtlar kaynak, kullanım koşulu veya insan doğrulaması kurallarını karşılamıyor. Geçersiz kayıtlar güvenli biçimde gösterilmedi.";
       return;
     }
 
@@ -357,7 +397,6 @@
     emptyTitle.textContent = "Katalog hazırlanıyor";
     emptyText.textContent = "Doğrulanmış materyaller eklendikçe bu alanda listelenecek. Bu sırada resmî öğretim programlarını inceleyebilirsin.";
   }
-
   function writeUrlState() {
     try {
       const url = new URL(window.location.href);
@@ -402,6 +441,11 @@
       status.dataset.state = "error";
       statusText.textContent = "Bağlantı sorunu";
       count.textContent = "Materyal listesi alınamadı";
+    } else if (state.items.length === 0 && state.invalidCount > 0) {
+      setEmptyState("invalid");
+      status.dataset.state = "error";
+      statusText.textContent = "Kayıt kontrolü gerekli";
+      count.textContent = state.invalidCount + " geçersiz kayıt atlandı";
     } else if (state.items.length === 0) {
       setEmptyState("catalogue");
       status.dataset.state = "empty";

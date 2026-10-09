@@ -4,8 +4,8 @@ Türkiye Yüzyılı Maarif Modeli ile ilişkili ders materyallerini aramak ve in
 
 ## Arayüz ve arama
 
-- Filtre sırası: sınıf → ders → ünite → kazanım kodu → kazanımın konusu
-- Filtreler birbirine bağlıdır; üst filtre değiştiğinde alt filtreler sıfırlanır.
+- Filtreler: sınıf → ders → ünite. Kazanım kodu ve kazanımın konusu arama sonuçlarındaki materyal bilgilerinde gösterilir.
+- Filtreler birbirine bağlıdır; sınıf değiştiğinde ders ve ünite, ders değiştiğinde ünite seçenekleri güncellenir.
 - Arama yazdıkça güncellenir ve büyük/küçük harf farkını gözetmez.
 - Arama; Türkçe karakter normalleştirmesiyle başlık, açıklama, ders, sınıf, ünite, konu, kazanım metni, kazanım kodu, kazanımın konusu ve anahtar kelimeleri tarar.
 - Eşleşen metinler güvenli DOM metin düğümleri ve `<mark>` öğeleriyle vurgulanır.
@@ -33,7 +33,6 @@ Her kayıt için `title` ve `url` zorunludur. Diğer alanlar isteğe bağlıdır
     "grade": "5. sınıf",
     "unit": "Ünite adı",
     "topic": "Konu adı",
-    "outcomeCode": "Öğretim programındaki resmî kod",
     "outcomeCode": "T.D.5.3.",
     "outcomeTopic": "Dinleyeceğinin/izleyeceğinin içeriğine yönelik tahminde bulunabilme",
     "outcome": "Dinleyeceğinin/izleyeceğinin içeriğine yönelik tahminde bulunabilme",

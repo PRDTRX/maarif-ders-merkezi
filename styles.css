@@ -188,6 +188,8 @@ mark { background: #ffe58a; color: #263329; border-radius: 3px; padding: 0 .08em
   .hero { border-color: #2d4033; }
   .eyebrow, .quick-searches-label { color: #a9dfba; }
   .search-form { border-color: #3a4a3f; }
+  .search-form button { background: #176b4d; color: #fff; }
+  .search-form button:hover { background: #10523b; }
   .search-form input::placeholder { color: #b0bdb4; }
   .quick-searches button { background: #1c2a21; border-color: #435b49; color: #d4e9da; }
   .quick-searches button:hover, .card-download:hover, .back-top:hover { background: #263d2d; }

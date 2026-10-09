@@ -273,7 +273,13 @@
     setQuery(input.value);
     scrollToMaterials();
   });
-  $("#back-top").addEventListener("click", () => window.scrollTo({
+  const backTop = $("#back-top");
+  const updateBackTopVisibility = () => {
+    backTop.classList.toggle("is-visible", window.scrollY > 480);
+  };
+  window.addEventListener("scroll", updateBackTopVisibility, { passive: true });
+  updateBackTopVisibility();
+  backTop.addEventListener("click", () => window.scrollTo({
     top: 0,
     behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"
   }));

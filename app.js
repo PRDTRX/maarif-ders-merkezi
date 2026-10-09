@@ -23,9 +23,9 @@ function query(q){state.query=q.trim();input.value=state.query;render()}
 function scrollToMaterials(){$("#materyaller").scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"})}
 function validMaterial(m){
  if(!m||typeof m.title!=="string"||!m.title.trim()||typeof m.url!=="string"||!m.url.trim())return false;
- const raw=m.url.trim();
- if(raw.startsWith("//")||(/^[a-z][a-z0-9+.-]*:/i.test(raw)&&!/^https:\/\//i.test(raw)))return false;
- try{const url=new URL(raw,document.baseURI);return url.protocol==="https:"&&(/^https:\/\//i.test(raw)||url.origin===location.origin)}catch{return false}
+ const raw=m.url.trim(),absoluteHttps=raw.toLowerCase().startsWith("https://");
+ if(raw.startsWith("//")||(/^[a-z][a-z0-9+.-]*:/i.test(raw)&&!absoluteHttps))return false;
+ try{const url=new URL(raw,document.baseURI);return url.protocol==="https:"&&(absoluteHttps||url.origin===location.origin)}catch{return false}
 }
 form.addEventListener("submit",e=>{e.preventDefault();query(input.value);scrollToMaterials()});
 $("#back-top").addEventListener("click",()=>window.scrollTo({top:0,behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"}));input.addEventListener("input",()=>{state.query=input.value;render()});

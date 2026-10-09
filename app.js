@@ -21,7 +21,7 @@ function render(){const terms=norm(state.query).split(/\s+/).filter(Boolean);con
 function resetFilters(){state.subject=state.grade=state.unit="";subject.value=grade.value=unit.value="";filters()}
 function query(q){state.query=q.trim();input.value=state.query;render()}
 form.addEventListener("submit",e=>{e.preventDefault();query(input.value);$("#materyaller").scrollIntoView({behavior:"smooth",block:"start"})});
-$("#back-top").addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));input.addEventListener("input",()=>{state.query=input.value;render()});
+$("#back-top").addEventListener("click",()=>window.scrollTo({top:0,behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"}));input.addEventListener("input",()=>{state.query=input.value;render()});
 grade.addEventListener("change",()=>{state.grade=grade.value;state.subject=state.unit="";subject.value=unit.value="";filters();render()});
 subject.addEventListener("change",()=>{state.subject=subject.value;state.unit="";unit.value="";filters();render()});
 unit.addEventListener("change",()=>{state.unit=unit.value;filters();render()});

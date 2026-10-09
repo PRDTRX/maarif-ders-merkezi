@@ -3,3 +3,107 @@
 mark{background:#ffe58a;color:#263329;border-radius:3px;padding:0 .08em}.filter-control select:focus-visible{border-color:var(--green)}.source-section{padding:48px 24px 54px;background:#edf3ee;border-top:1px solid #e5ece6}.source-section>div{max-width:760px;margin:auto}.source-section h2{margin:0 0 12px;font-size:clamp(24px,3vw,31px);line-height:1.25;letter-spacing:-.04em}.source-section p:not(.section-kicker){max-width:720px;margin:0 0 14px;color:#59685f;font-size:15px;line-height:1.85}.source-link{display:inline-block;color:var(--green);font-size:14px;font-weight:750;text-decoration:underline;text-underline-offset:3px}@media(max-width:520px){.source-section{padding:38px 20px}.filter-control{min-width:100%}}
 /* Kütüphane önce gelir; üç temel filtre */
 @media(min-width:761px){.filter-control{min-width:150px}.filter-row{align-items:stretch}.filter-control select{min-height:40px}}
+
+
+/* Düzeltilmiş okunabilirlik, hizalama ve sayfa başına dönüş aracı */
+body{font-size:17px}
+.hero-inner{padding:78px 24px 68px}
+.eyebrow{
+  display:flex;align-items:center;justify-content:center;gap:11px;
+  width:fit-content;max-width:100%;margin:0 auto 24px;padding:0;
+  border:0;border-radius:0;background:transparent;box-shadow:none;
+  color:var(--green);font-size:clamp(20px,2.5vw,25px);
+  font-weight:850;letter-spacing:-.035em;line-height:1.3;text-align:center
+}
+.eyebrow-dot{width:9px;height:9px;flex:0 0 9px}
+.hero h1{font-size:clamp(42px,6.4vw,70px);line-height:1.06}
+.hero-description{max-width:610px;margin:22px auto 30px;font-size:18px;line-height:1.7}
+.search-form{max-width:720px}
+.search-form input{font-size:17px}
+.search-form button{font-size:16px;padding:13px 21px}
+.quick-searches{
+  display:flex;width:100%;max-width:780px;justify-content:center;align-items:center;
+  flex-wrap:wrap;gap:10px 12px;margin:26px auto 0;padding:0 10px;
+  text-align:center;font-size:15px;line-height:1.5
+}
+.quick-searches-label{font-size:15px;font-weight:750;color:#52665a}
+.quick-searches button{
+  padding:8px 14px;border:1px solid #d0dfd4;border-radius:999px;
+  background:#fff;color:#315b43;font-size:14px;font-weight:650;line-height:1.4;
+  white-space:normal;cursor:pointer;transition:background .18s,border-color .18s
+}
+.quick-searches button:hover{background:#e8f2eb;border-color:#9dbfa8}
+.content-section{padding-top:42px}
+.section-heading{margin-bottom:27px}
+.section-kicker{font-size:12px;margin-bottom:10px}
+.library-title{font-size:clamp(30px,3.8vw,39px)}
+.result-count{font-size:15px}
+.filter-row{gap:14px;padding:18px;margin-bottom:27px}
+.filter-control{gap:7px}
+.filter-control span{font-size:14px}
+.filter-control select{min-height:44px;padding:10px 13px;font-size:15px}
+.clear-filters{font-size:14px;padding:10px 12px}
+.active-query{font-size:14px}
+.materials-grid{gap:18px}
+.material-card{padding:22px}
+.card-topline{margin-bottom:18px}
+.type-label{font-size:12px;padding:5px 9px}
+.file-size{font-size:12px}
+.material-card h3{font-size:19px;line-height:1.4}
+.card-description{font-size:15px;line-height:1.7}
+.card-meta{gap:8px}
+.meta-chip{font-size:13px;padding:6px 9px}
+.card-download{font-size:15px;padding:12px}
+.empty-state{padding:60px 22px}
+.empty-state h3{font-size:20px}
+.empty-state p{font-size:15px;line-height:1.7}
+.text-button{font-size:14px}
+.source-section{padding:52px 24px 58px}
+.source-section h2{font-size:clamp(28px,3.4vw,36px)}
+.source-section p:not(.section-kicker){font-size:16px;line-height:1.85}
+.source-link{font-size:15px}
+.site-footer{width:0;max-width:none;min-height:0;height:0;margin:0;padding:0;overflow:visible}
+.back-top{
+  position:fixed;right:24px;bottom:24px;z-index:50;
+  width:54px;height:54px;border:1px solid #c7dccd;border-radius:50%;
+  background:#fff;color:var(--green);box-shadow:0 8px 26px #19342726;
+  transition:transform .18s,background .18s,box-shadow .18s
+}
+.back-top:hover{background:#e7f3eb;transform:translateY(-2px);box-shadow:0 10px 30px #19342730}
+.back-top svg{width:25px;height:25px}
+@media(max-width:760px){
+  .hero-inner{padding:62px 22px 56px}
+  .hero h1{font-size:clamp(39px,7.7vw,58px)}
+  .hero-description{font-size:17px}
+  .content-section{padding-top:34px}
+  .material-card{padding:20px}
+}
+@media(max-width:520px){
+  body{font-size:16px}
+  .hero-inner{padding:48px 16px 43px}
+  .eyebrow{font-size:19px;gap:9px;margin-bottom:20px}
+  .hero h1{font-size:clamp(34px,9.5vw,46px);letter-spacing:-.045em}
+  .hero-description{font-size:16px;margin:18px auto 23px;line-height:1.65}
+  .search-form{gap:7px;padding:6px 6px 6px 11px;border-radius:13px}
+  .search-icon{width:20px;height:20px}
+  .search-form input{font-size:14px;padding:10px 0}
+  .search-form button{font-size:14px;padding:11px 12px}
+  .quick-searches{gap:9px;margin-top:22px;padding:0 2px}
+  .quick-searches-label{width:100%;font-size:14px;margin-bottom:1px}
+  .quick-searches button{font-size:13px;padding:7px 11px}
+  .content-section{padding:32px 16px 44px}
+  .section-heading{margin-bottom:22px}
+  .library-title{font-size:30px}
+  .filter-control span{font-size:14px}
+  .filter-control select{font-size:15px}
+  .material-card{padding:18px}
+  .material-card h3{font-size:18px}
+  .meta-chip{font-size:12px}
+  .source-section{padding:38px 18px 44px}
+  .source-section h2{font-size:27px}
+  .source-section p:not(.section-kicker){font-size:15px}
+  .back-top{right:16px;bottom:16px;width:49px;height:49px}
+}
+@media(prefers-reduced-motion:reduce){
+  .quick-searches button,.back-top{transition:none}
+}

@@ -16,6 +16,9 @@
   --decorative-line: #dce8de;
   --soft-border: #e1e9e2;
   --shadow-soft: 0 10px 30px #1e422e12;
+  --chip-bg: #f5f7f5;
+  --chip-border: #e0e7e1;
+  --chip-text: #46554b;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 * { box-sizing: border-box; }
@@ -111,7 +114,7 @@ h1, h2, h3, p { margin-top: 0; }
 .material-card h3 { margin: 0 0 8px; font-size: 19px; line-height: 1.4; letter-spacing: -.02em; overflow-wrap: anywhere; }
 .card-description { margin: 0 0 17px; color: var(--muted); font-size: 15px; line-height: 1.7; }
 .card-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; margin-bottom: 17px; }
-.meta-chip { padding: 6px 9px; background: #f5f7f5; border: 1px solid #e0e7e1; border-radius: 6px; color: #46554b; font-size: 13px; overflow-wrap: anywhere; }
+.meta-chip { padding: 6px 9px; background: var(--chip-bg); border: 1px solid var(--chip-border); border-radius: 6px; color: var(--chip-text); font-size: 13px; overflow-wrap: anywhere; }
 mark { background: #ffe58a; color: #263329; border-radius: 3px; padding: 0 .08em; }
 .card-download {
   display: flex; justify-content: center; align-items: center; gap: 8px; min-height: 46px; padding: 12px;
@@ -200,6 +203,9 @@ mark { background: #ffe58a; color: #263329; border-radius: 3px; padding: 0 .08em
     --decorative-line: #2a3e30;
     --soft-border: #2d4033;
     --shadow-soft: 0 10px 30px #00000024;
+    --chip-bg: #202b23;
+    --chip-border: #35443a;
+    --chip-text: #d2ddd5;
   }
   .hero { border-color: var(--soft-border); }
   .eyebrow, .quick-searches-label { color: #a9dfba; }
@@ -211,7 +217,7 @@ mark { background: #ffe58a; color: #263329; border-radius: 3px; padding: 0 .08em
   .quick-searches button:hover, .card-download:hover, .back-top:hover { background: var(--green-hover); }
   .filter-control select { border-color: #45564a; }
   .type-label { background: var(--green-soft); color: #c2e8cc; }
-  .meta-chip { background: #202b23; border-color: #35443a; color: #d2ddd5; }
+
   .empty-icon { background: #26392c; color: #b8e5c5; }
   .source-section { border-color: var(--soft-border); }
   .back-top { border-color: var(--green-border); }

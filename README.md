@@ -59,3 +59,15 @@ Kazanım kodunu ve kazanım konusunu ayrı alanlara, ilgili resmî öğretim pro
 - `app.js` — arama, filtreler ve materyal kartları
 - `data/materials.json` — materyal kataloğu
 - `materials/` — indirilebilir dosyalar için dizin
+
+
+## Otomatik kalite kontrolleri
+
+Pull request açıldığında ve `main` dalına commit gönderildiğinde GitHub Actions, JavaScript sözdizimini ve temel HTML/CSS gerekliliklerini kontrol eder; materyal kataloğunun JSON yapısını ve URL kurallarını doğrular. Yerel olarak aynı kontrolleri çalıştırmak için Node.js 22 veya uyumlu bir sürümle şu komutları kullanın:
+
+```sh
+node --check app.js
+node scripts/validate-site.mjs
+```
+
+Bu kontroller tarayıcı tabanlı görsel, erişilebilirlik veya performans testlerinin yerine geçmez.

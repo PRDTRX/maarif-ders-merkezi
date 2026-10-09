@@ -20,13 +20,20 @@ function card(m,terms){const a=document.createElement("article");a.className="ma
 function render(){const terms=norm(state.query).split(/\s+/).filter(Boolean);const found=state.items.filter(m=>terms.every(t=>norm(searchText(m)).includes(t))&&(!state.subject||m.subject===state.subject)&&(!state.grade||m.grade===state.grade)&&(!state.unit||m.unit===state.unit));grid.replaceChildren(...found.map(m=>card(m,terms)));grid.setAttribute("aria-busy","false");count.textContent=found.length+" materyal";empty.hidden=found.length>0;grid.hidden=!found.length;if(!state.items.length){emptyTitle.textContent="Henüz materyal eklenmedi";emptyText.textContent="Materyaller eklendikçe burada listelenecek."}else if(state.query||state.subject||state.grade||state.unit){emptyTitle.textContent="Eşleşen materyal bulunamadı";emptyText.textContent="Arama ifadesini sadeleştir veya filtreleri temizleyerek yeniden dene"}else{emptyTitle.textContent="Materyaller henüz hazır değil";emptyText.textContent="Yeni materyaller eklendiğinde bu alanda görünecek"}const parts=[state.query?'Arama: “'+state.query+'”':"",state.grade,state.subject,state.unit].filter(Boolean);active.hidden=!parts.length;active.textContent=parts.join(" · ")}
 function resetFilters(){state.subject=state.grade=state.unit="";subject.value=grade.value=unit.value="";filters()}
 function query(q){state.query=q.trim();input.value=state.query;render()}
-form.addEventListener("submit",e=>{e.preventDefault();query(input.value);$("#materyaller").scrollIntoView({behavior:"smooth",block:"start"})});
+function scrollToMaterials(){$("#materyaller").scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"})}
+function validMaterial(m){
+ if(!m||typeof m.title!=="string"||!m.title.trim()||typeof m.url!=="string"||!m.url.trim())return false;
+ const raw=m.url.trim(),absoluteHttps=raw.toLowerCase().startsWith("https://");
+ if(raw.startsWith("//")||(/^[a-z][a-z0-9+.-]*:/i.test(raw)&&!absoluteHttps))return false;
+ try{const url=new URL(raw,document.baseURI);return url.protocol==="https:"&&(absoluteHttps||url.origin===location.origin)}catch{return false}
+}
+form.addEventListener("submit",e=>{e.preventDefault();query(input.value);scrollToMaterials()});
 $("#back-top").addEventListener("click",()=>window.scrollTo({top:0,behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"}));input.addEventListener("input",()=>{state.query=input.value;render()});
 grade.addEventListener("change",()=>{state.grade=grade.value;state.subject=state.unit="";subject.value=unit.value="";filters();render()});
 subject.addEventListener("change",()=>{state.subject=subject.value;state.unit="";unit.value="";filters();render()});
 unit.addEventListener("change",()=>{state.unit=unit.value;filters();render()});
 $("#clear-filters").addEventListener("click",()=>{resetFilters();render()});
 $("#reset-search").addEventListener("click",()=>{state.query="";input.value="";resetFilters();render();input.focus()});
-document.querySelectorAll("[data-query]").forEach(b=>b.addEventListener("click",()=>{query(b.dataset.query);$("#materyaller").scrollIntoView({behavior:"smooth",block:"start"});input.focus({preventScroll:true})}));
-fetch("data/materials.json").then(r=>{if(!r.ok)throw Error("catalogue");return r.json()}).then(data=>{state.items=Array.isArray(data)?data.filter(m=>m&&typeof m.title==="string"&&typeof m.url==="string"&&/^(https?:|\.\.?\/|\/)/.test(m.url)):[];filters();render()}).catch(()=>{state.items=[];filters();render();emptyTitle.textContent="Materyaller yüklenemedi";emptyText.textContent="Bağlantını kontrol edip sayfayı yenile.";count.textContent="Liste alınamadı"});
+document.querySelectorAll("[data-query]").forEach(b=>b.addEventListener("click",()=>{query(b.dataset.query);scrollToMaterials();input.focus({preventScroll:true})}));
+fetch("data/materials.json").then(r=>{if(!r.ok)throw Error("catalogue");return r.json()}).then(data=>{state.items=Array.isArray(data)?data.filter(validMaterial):[];filters();render()}).catch(()=>{state.items=[];filters();render();emptyTitle.textContent="Materyaller yüklenemedi";emptyText.textContent="Bağlantını kontrol edip sayfayı yenile.";count.textContent="Liste alınamadı"});
 })();

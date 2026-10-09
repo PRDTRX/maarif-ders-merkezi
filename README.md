@@ -4,7 +4,7 @@ Türkiye Yüzyılı Maarif Modeli ile ilişkili ders materyallerini aramak ve in
 
 ## Arayüz ve arama
 
-- Filtre sırası: sınıf → ders → ünite → kazanım kodu
+- Filtre sırası: sınıf → ders → ünite → öğrenme çıktısı / kazanım kodu
 - Filtreler birbirine bağlıdır; üst filtre değiştiğinde alt filtreler sıfırlanır.
 - Arama yazdıkça güncellenir ve büyük/küçük harf farkını gözetmez.
 - Arama; Türkçe karakter normalleştirmesiyle başlık, açıklama, ders, sınıf, ünite, konu, kazanım, kazanım kodu ve anahtar kelimeleri tarar.
@@ -42,7 +42,7 @@ Her kayıt için `title` ve `url` zorunludur. Diğer alanlar isteğe bağlıdır
 ]
 ```
 
-Kazanım kodunu yalnızca ilgili resmî öğretim programında yer aldığı biçimiyle girin. Mevcut olmayan dosyalara bağlantı vermeyin.
+Öğrenme çıktısı kodunu yalnızca ilgili resmî öğretim programında yer aldığı biçimiyle girin. Maarif Modeli dokümanlarında kullanılan resmî terim “öğrenme çıktısı”dır. Mevcut olmayan dosyalara bağlantı vermeyin.
 
 ## GitHub Pages yayını
 

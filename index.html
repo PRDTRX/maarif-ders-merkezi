@@ -4,150 +4,105 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
-  <meta name="theme-color" content="#f5f1e8">
-  <meta name="description" content="Öğretmenler için ders materyalleri. Sınıfa, derse ve öğrenme çıktısına göre kaynak bulun ve indirin.">
+  <meta name="theme-color" content="#f7f8f4">
+  <meta name="description" content="Öğretmenler için ders materyallerini sınıf, ders ve öğrenme çıktısına göre keşfedin.">
   <link rel="canonical" href="https://prdtrx.github.io/maarif-ders-merkezi/">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://prdtrx.github.io/maarif-ders-merkezi/">
-  <meta property="og:title" content="Maarif Ders Merkezi — Öğretmen materyal kütüphanesi">
-  <meta property="og:description" content="Öğretmenlerin ders hazırlığında kullanabileceği materyalleri sınıf, ders ve öğrenme çıktısına göre bulun.">
+  <meta property="og:title" content="Maarif Ders Merkezi — Öğretmen çalışma alanı">
+  <meta property="og:description" content="Ders materyallerini keşfet, filtrele ve kaynaklarını incele.">
   <meta property="og:image" content="https://prdtrx.github.io/maarif-ders-merkezi/social-preview.svg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Maarif Ders Merkezi — kaynak odaklı öğrenme materyalleri">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Maarif Ders Merkezi">
-  <meta name="twitter:description" content="Öğretmenler için kaynakları açık, ders hazırlığına yardımcı materyaller.">
+  <meta name="twitter:description" content="Öğretmenler için ders materyali keşif alanı.">
   <meta name="twitter:image" content="https://prdtrx.github.io/maarif-ders-merkezi/social-preview.svg">
-  <meta name="twitter:image:alt" content="Maarif Ders Merkezi — kaynak odaklı öğrenme materyalleri">
-  <title>Maarif Ders Merkezi — Öğretmen materyal kütüphanesi</title>
+  <meta name="twitter:image:alt" content="Maarif Ders Merkezi — öğretmenler için ders materyali keşif alanı">
+  <title>Maarif Ders Merkezi — Öğretmen çalışma alanı</title>
   <link rel="stylesheet" href="styles.css">
   <script src="app.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Ana içeriğe geç</a>
-  <header class="site-header">
-    <div class="container header-inner">
+  <header class="topbar">
+    <div class="topbar-inner">
       <a class="brand" href="./" aria-label="Maarif Ders Merkezi ana sayfa">
-        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M8 12.5c5.8-2.1 11.1-.8 16 3.1 4.9-3.9 10.2-5.2 16-3.1v22c-5.8-2.1-11.1-.8-16 3.1-4.9-3.9-10.2-5.2-16-3.1v-22Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M24 16v21M13.5 19.5c3.4-.2 5.8.6 7.7 2M34.5 19.5c-3.4-.2-5.8.6-7.7 2M13.5 26c3.4-.2 5.8.6 7.7 2M34.5 26c-3.4-.2-5.8-.6-7.7 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
-        <span class="brand-copy"><strong>maarif<span class="brand-period">.</span></strong><span>DERS MERKEZİ</span></span>
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none"><path d="M5 10.5c5.4-1.8 10.2-.7 15 2.8 4.8-3.5 9.6-4.6 15-2.8v20c-5.4-1.8-10.2-.7-15 2.8-4.8-3.5-9.6-4.6-15-2.8v-20Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M20 13.5v19" stroke="currentColor" stroke-width="2"/></svg></span>
+        <span class="brand-copy"><strong>maarif<span>.</span></strong><small>DERS MERKEZİ</small></span>
       </a>
       <nav class="site-nav" aria-label="Ana navigasyon">
-        <a class="nav-link nav-link--active" href="#materyaller">Kütüphane <span>01</span></a>
-        <a class="nav-link" href="#yaklasim">İlkeler <span>02</span></a>
+        <a class="nav-link nav-link--active" href="#materyaller">Keşfet</a>
+        <a class="nav-link" href="#yaklasim">Nasıl çalışır?</a>
       </nav>
-      <div class="header-actions">
-        <span class="header-note">ÖĞRETMENİN ÇALIŞMA ALANI</span>
-        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Koyu temaya geç" aria-pressed="false" title="Temayı değiştir">
-          <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.2 15.1A8.2 8.2 0 0 1 8.9 3.8 8.4 8.4 0 1 0 20.2 15.1Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-        </button>
+      <div class="topbar-end"><span class="workspace-label"><span class="live-dot"></span> ÖĞRETMEN ÇALIŞMA ALANI</span>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Koyu temaya geç" aria-pressed="false" title="Temayı değiştir"><svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 15A8.5 8.5 0 0 1 9 4 8.5 8.5 0 1 0 20 15Z" stroke="currentColor" stroke-width="1.8"/></svg><svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
       </div>
     </div>
   </header>
 
   <main id="main">
     <section class="hero" aria-labelledby="hero-title">
-      <div class="container hero-grid">
+      <div class="hero-grid">
         <div class="hero-copy">
-          <p class="eyebrow"><span class="eyebrow-index">M.D.M. / 2026</span><span class="eyebrow-rule"></span> ÖĞRENME İÇİN KAYNAK</p>
-          <h1 id="hero-title">Dersin fikri<br>burada <em>başlar.</em></h1>
-          <p class="hero-lead">Dersini planlamak için ihtiyacın olan kaynakları bul. Sınıf, ders ve öğrenme çıktısı arasında anlamlı bir bağ kur.</p>
-          <div class="hero-actions">
-            <a class="button button--primary" href="#materyaller">Kütüphaneye gir <span aria-hidden="true">↘</span></a>
-            <a class="text-link" href="#yaklasim">Yaklaşımımızı oku <span aria-hidden="true">↗</span></a>
-          </div>
-          <div class="hero-footnote"><span class="hero-footnote-mark" aria-hidden="true">✳</span><span>Kaynağı gör. Bağlamı anla.<br><strong>Son kararı sen ver.</strong></span></div>
+          <div class="hero-kicker"><span class="kicker-dot"></span> ÖĞRETMEK İÇİN YENİ BİR ALAN <span class="kicker-year">/ 2026</span></div>
+          <h1 id="hero-title">İyi ders,<br>iyi bir <span>fikirle</span><br>başlar<span class="title-period">.</span></h1>
+          <p class="hero-lead">Dersini hazırlarken aradığın materyali bul. Kaynağını incele. Kendi sınıfına göre şekillendir.</p>
+          <div class="hero-actions"><a class="button button--primary" href="#materyaller">Materyalleri keşfet <span aria-hidden="true">↗</span></a><a class="hero-secondary" href="#yaklasim">Bu alanı tanı <span aria-hidden="true">↓</span></a></div>
+          <div class="hero-trust"><span class="trust-icon" aria-hidden="true">✓</span><span><strong>Öğretmen karar verir.</strong> Kaynaklar yol gösterir.</span></div>
         </div>
-        <div class="hero-art" aria-label="Açık kitap ve öğrenme katmanlarından oluşan soyut illüstrasyon" role="img">
-          <div class="art-index">ARAŞTIRMA NOTU <span>NO. 001</span></div>
-          <div class="art-canvas">
-            <div class="art-shape art-shape--circle"></div>
-            <div class="art-shape art-shape--block"></div>
-            <div class="art-shape art-shape--line"></div>
-            <div class="art-paper art-paper--back"><span>ÖĞRENME ROTASI</span><b>02</b><i></i><i></i><i></i><small>PLANLA / KEŞFET / UYGULA</small></div>
-            <div class="art-paper art-paper--front">
-              <span class="paper-label">NOT DEFTERİ · 01</span>
-              <svg class="paper-book" viewBox="0 0 240 170" fill="none" aria-hidden="true"><path d="M22 35c32-10 63-4 98 17v91c-35-21-66-27-98-17V35Z" fill="#F6E9C9" stroke="#24271F" stroke-width="2"/><path d="M120 52c35-21 66-27 98-17v91c-32-10-63-4-98 17V52Z" fill="#E8EDDA" stroke="#24271F" stroke-width="2"/><path d="M120 52v91M37 55c21-4 42 0 61 10M37 72c21-4 42 0 61 10M37 89c21-4 42 0 61 10M139 66c20-10 41-14 63-11M139 83c20-10 41-14 63-11M139 100c20-10 41-14 63-11" stroke="#24271F" stroke-width="2" stroke-linecap="round"/><path d="m184 22 11-12 11 12-11 12-11-12Z" fill="#E87555"/><circle cx="48" cy="20" r="7" fill="#7C8D64"/></svg>
-              <strong>Merak et.<br><em>İlişki kur.</em></strong>
-              <div class="paper-footer"><span>ÖĞRENMEYE AÇIK</span><span>↗</span></div>
-            </div>
-            <div class="art-stamp">BİLGİ<br>BAĞLAMLA<br>ANLAM KAZANIR.</div>
-            <div class="art-cross" aria-hidden="true">＋</div>
+        <div class="hero-visual" aria-label="Ders planı, kitap ve öğrenme notlarından oluşan grafik kompozisyon" role="img">
+          <div class="visual-topline"><span>STÜDYO / 001</span><span>ÖĞRENMEYE AÇIK</span></div>
+          <div class="visual-board">
+            <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+            <div class="visual-index">FİKİR<br><b>→</b><br>DENEYİM</div>
+            <div class="note-card note-back"><span class="note-eyebrow">DERS NOTU / 03</span><div class="note-lines"><i></i><i></i><i></i><i></i></div><span class="note-tag">BAĞLAM KUR</span></div>
+            <div class="note-card note-front"><div class="note-head"><span>MAARİF DEFTERİ</span><span>✳</span></div><svg class="book-art" viewBox="0 0 260 160" fill="none" aria-hidden="true"><path d="M18 30c35-11 70-4 112 19v89c-42-23-77-30-112-19V30Z" fill="#F5F4EC" stroke="#182820" stroke-width="2.5"/><path d="M130 49c42-23 77-30 112-19v89c-35-11-70-4-112 19V49Z" fill="#D6F36A" stroke="#182820" stroke-width="2.5"/><path d="M130 49v89M34 52c25-4 49 1 75 12M34 71c25-4 49 1 75 12M34 90c25-4 49 1 75 12M151 64c24-11 48-16 75-12M151 83c24-11 48-16 75-12M151 102c24-11 48-16 75-12" stroke="#182820" stroke-width="2.5" stroke-linecap="round"/><circle cx="215" cy="20" r="9" fill="#FF765D"/></svg><h2>Merak et.<br><em>Bağlantı kur.</em></h2><div class="note-bottom"><span>ÖĞRENME ROTASI</span><span>01 — 03</span></div></div>
+            <div class="visual-sticker">BİLGİ<br>BAĞLAMLA<br>ANLAM KAZANIR</div>
+            <div class="visual-plus">＋</div>
           </div>
-          <div class="art-caption"><span>ŞEKİL 01</span><span>ÖĞRENMENİN KATMANLARI</span></div>
+          <div class="visual-caption"><span>KEŞFET</span><span>DEĞERLENDİR</span><span>UYARLA ↗</span></div>
         </div>
       </div>
-      <div class="container hero-bottom"><span>01 — KEŞFET</span><span>02 — DEĞERLENDİR</span><span>03 — DERSİNE UYARLA</span><span class="hero-bottom-note">Öğretmenin uzmanlığı merkezde.</span></div>
+      <div class="hero-bottom"><span class="bottom-number">01</span><span>ARA</span><span class="bottom-line"></span><span class="bottom-number">02</span><span>İNCELE</span><span class="bottom-line"></span><span class="bottom-number">03</span><span>DERSİNE UYARLA</span><span class="bottom-message">Hazırlık sürecinin kontrolü sende.</span></div>
     </section>
 
     <section class="catalog-section section-anchor" id="materyaller" aria-labelledby="catalog-title">
-      <div class="container">
-        <div class="section-heading">
-          <div><p class="eyebrow"><span class="eyebrow-index">01 / KÜTÜPHANE</span><span class="eyebrow-rule"></span> KAYNAK KEŞFİ</p><h2 id="catalog-title">İhtiyacını bul.<br><em>Gerisini birlikte düşün.</em></h2></div>
-          <p class="section-heading-note">Kataloğu daralt, sonuçları incele ve materyalin dayandığı kaynağı gör.</p>
-        </div>
-
-        <div class="workspace">
-          <aside class="catalog-sidebar" aria-label="Katalog arama ve filtreleri">
-            <div class="sidebar-heading"><span>ARAMA PANELİ</span><span class="sidebar-number">A—01</span></div>
-            <form class="search-form" id="search-form" role="search">
-              <label for="search-input">Ne arıyorsun?</label>
-              <div class="search-field"><svg class="search-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" stroke-width="1.8"/><path d="m16 16 4.3 4.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><input id="search-input" name="q" type="search" placeholder="Konu, kazanım, anahtar kelime…" autocomplete="off" spellcheck="false"></div>
-              <button type="submit" class="search-submit">Kaynak ara <span aria-hidden="true">↗</span></button>
-            </form>
-            <div class="filter-panel" role="group" aria-label="Materyal filtreleri">
-              <p class="filter-title">SONUÇLARI DARALT <span>04 FİLTRE</span></p>
-              <label class="filter-control"><span><b>01</b> Sınıf düzeyi</span><select id="grade-filter"><option value="">Tüm sınıflar</option></select></label>
-              <label class="filter-control"><span><b>02</b> Ders</span><select id="subject-filter"><option value="">Tüm dersler</option></select></label>
-              <label class="filter-control"><span><b>03</b> Ünite / konu</span><select id="unit-filter"><option value="">Tüm üniteler</option></select></label>
-              <label class="filter-control"><span><b>04</b> Materyal türü</span><select id="format-filter"><option value="">Tüm türler</option></select></label>
-              <button type="button" class="filter-reset" id="clear-filters"><span aria-hidden="true">↺</span> Filtreleri temizle</button>
-            </div>
-            <div class="sidebar-note"><span class="sidebar-note-mark">i</span><p>Kaynakları kullanmadan önce içeriği, programla uyumunu ve kullanım koşullarını kontrol et.</p></div>
-          </aside>
-
-          <div class="catalog-results">
-            <div class="results-heading"><div><p class="eyebrow">KATALOĞUN İÇİNDE</p><h3>Materyal arşivi</h3></div><div class="catalog-status" id="catalog-status"><span class="status-dot" aria-hidden="true"></span><span id="catalog-status-text">Katalog yükleniyor</span></div></div>
-            <div class="results-toolbar"><p class="result-count" id="result-count" role="status" aria-live="polite" aria-atomic="true">JavaScript etkinleştirildiğinde katalog yüklenir.</p><label class="sort-control"><span>SIRALAMA</span><select id="sort-filter" aria-label="Sonuçları sıralama"><option value="relevance">Önerilen</option><option value="title-asc">Başlık: A–Z</option><option value="updated-desc">En son güncellenen</option></select></label></div>
-            <p class="active-query" id="active-query" hidden></p>
-            <div class="materials-grid" id="materials-grid" aria-busy="true" aria-describedby="result-count"></div>
-            <section class="empty-state" id="empty-state" aria-labelledby="empty-title" hidden>
-              <div class="empty-illustration" aria-hidden="true"><svg viewBox="0 0 88 88" fill="none"><rect x="17" y="13" width="43" height="55" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M28 28h21M28 36h21M28 44h13" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="58" cy="57" r="15" fill="var(--surface)" stroke="currentColor" stroke-width="1.7"/><path d="m69 68 8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
-              <p class="eyebrow eyebrow--muted" id="empty-eyebrow">KÜTÜPHANE DURUMU</p>
-              <h3 id="empty-title">Katalog hazırlanıyor</h3>
-              <p class="empty-description" id="empty-description">Doğrulanmış öğretmen materyalleri eklendikçe burada listelenecek. Bu sırada resmî öğretim programlarını inceleyebilirsiniz.</p>
-              <div class="empty-actions"><button type="button" class="button button--primary" id="reset-search">Filtreleri temizle</button><a class="button button--secondary" href="https://tymm.meb.gov.tr/ogretim-programlari/" target="_blank" rel="noopener noreferrer">Resmî programları incele <span aria-hidden="true">↗</span></a></div>
-            </section>
-            <div class="catalog-endnote"><span>ARŞİV NOTU / 001</span><p>Doğrulanmamış kaynaklar listelenmez. Materyal ekleme süreci kaynak ve kullanım hakkı kontrolüyle ilerler.</p></div>
-          </div>
-        </div>
-        <noscript><p class="noscript-notice">Arama ve filtreleme için JavaScript gereklidir.</p></noscript>
+      <div class="section-intro">
+        <div><div class="section-kicker"><span>01</span> / KAYNAK KÜTÜPHANESİ</div><h2 id="catalog-title">Aradığın şey<br><span>burada olabilir.</span></h2></div>
+        <p>Konunu yaz, filtreleri kullan ve materyalin neye dayandığını gör. Daha az gezin, daha bilinçli seç.</p>
       </div>
+      <div class="workspace">
+        <aside class="catalog-sidebar" aria-label="Katalog arama ve filtreleri">
+          <div class="panel-heading"><span><span class="panel-icon">⌕</span> Arama ve filtreler</span><span class="panel-code">FILTER / 01</span></div>
+          <form class="search-form" id="search-form" role="search"><label for="search-input">Ne hazırlıyorsun?</label><div class="search-field"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" stroke-width="1.8"/><path d="m16 16 4.3 4.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><input id="search-input" name="q" type="search" placeholder="Konu, kazanım, anahtar kelime…" autocomplete="off" spellcheck="false"></div><button type="submit" class="search-submit">Materyal ara <span aria-hidden="true">↗</span></button></form>
+          <div class="filter-panel" role="group" aria-label="Materyal filtreleri"><div class="filter-title">KATALOĞU DARALT <span>04 FİLTRE</span></div>
+            <label class="filter-control"><span>Sınıf düzeyi</span><select id="grade-filter"><option value="">Tüm sınıflar</option></select></label>
+            <label class="filter-control"><span>Ders</span><select id="subject-filter"><option value="">Tüm dersler</option></select></label>
+            <label class="filter-control"><span>Ünite / konu</span><select id="unit-filter"><option value="">Tüm üniteler</option></select></label>
+            <label class="filter-control"><span>Materyal türü</span><select id="format-filter"><option value="">Tüm türler</option></select></label>
+            <button type="button" class="filter-reset" id="clear-filters"><span aria-hidden="true">↺</span> Tüm filtreleri sıfırla</button>
+          </div>
+          <div class="sidebar-note"><span class="sidebar-note-mark">i</span><p>Kaynağı kullanmadan önce içeriğini, programla uyumunu ve kullanım koşullarını kontrol et.</p></div>
+        </aside>
+        <div class="catalog-results">
+          <div class="results-heading"><div><div class="section-kicker">KÜTÜPHANE <span>/</span> SONUÇLAR</div><h3>Materyal akışı</h3></div><div class="catalog-status" id="catalog-status"><span class="status-dot" aria-hidden="true"></span><span id="catalog-status-text">Katalog yükleniyor</span></div></div>
+          <div class="results-toolbar"><p class="result-count" id="result-count" role="status" aria-live="polite" aria-atomic="true">JavaScript etkinleştirildiğinde katalog yüklenir.</p><label class="sort-control"><span>SIRALA</span><select id="sort-filter" aria-label="Sonuçları sıralama"><option value="relevance">Önerilen</option><option value="title-asc">Başlık: A–Z</option><option value="updated-desc">En son güncellenen</option></select></label></div>
+          <p class="active-query" id="active-query" hidden></p>
+          <div class="materials-grid" id="materials-grid" aria-busy="true" aria-describedby="result-count"></div>
+          <section class="empty-state" id="empty-state" aria-labelledby="empty-title" hidden><div class="empty-illustration" aria-hidden="true"><svg viewBox="0 0 88 88" fill="none"><rect x="17" y="13" width="43" height="55" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M28 28h21M28 36h21M28 44h13" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="58" cy="57" r="15" fill="var(--surface)" stroke="currentColor" stroke-width="1.7"/><path d="m69 68 8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><p class="eyebrow eyebrow--muted" id="empty-eyebrow">KÜTÜPHANE DURUMU</p><h3 id="empty-title">Katalog hazırlanıyor</h3><p class="empty-description" id="empty-description">Doğrulanmış öğretmen materyalleri eklendikçe burada listelenecek. Bu sırada resmî öğretim programlarını inceleyebilirsiniz.</p><div class="empty-actions"><button type="button" class="button button--primary" id="reset-search">Filtreleri temizle</button><a class="button button--secondary" href="https://tymm.meb.gov.tr/ogretim-programlari/" target="_blank" rel="noopener noreferrer">Resmî programları incele <span aria-hidden="true">↗</span></a></div></section>
+          <div class="catalog-endnote"><span>ARŞİV NOTU / 001</span><p>Doğrulanmamış kaynaklar listelenmez. Materyal ekleme süreci kaynak ve kullanım hakkı kontrolüyle ilerler.</p></div>
+        </div>
+      </div>
+      <noscript><p class="noscript-notice">Arama ve filtreleme için JavaScript gereklidir.</p></noscript>
     </section>
 
     <section class="approach-section section-anchor" id="yaklasim" aria-labelledby="approach-title">
-      <div class="container">
-        <div class="approach-header"><p class="eyebrow"><span class="eyebrow-index">02 / YAKLAŞIM</span><span class="eyebrow-rule"></span> TASARIM İLKELERİ</p><h2 id="approach-title">Bir kaynak listesi değil.<br><em>Düşünmek için bir başlangıç.</em></h2></div>
-        <div class="principle-list">
-          <article class="principle-card"><span class="principle-number">01</span><div class="principle-copy"><h3>Kaynağın izini sür</h3><p>Materyalin nereden geldiğini, hangi kaynağa dayandığını ve kullanım koşullarını incele.</p></div><span class="principle-arrow" aria-hidden="true">↗</span></article>
-          <article class="principle-card"><span class="principle-number">02</span><div class="principle-copy"><h3>Bağlamı kur</h3><p>Sınıf, ders, ünite ve öğrenme çıktısı arasındaki ilişkiyi birlikte değerlendir.</p></div><span class="principle-arrow" aria-hidden="true">↗</span></article>
-          <article class="principle-card"><span class="principle-number">03</span><div class="principle-copy"><h3>Uzmanlığını merkeze al</h3><p>Materyaller kararın yerine geçmez; öğretmenin incelemesi ve uyarlaması için başlangıç sunar.</p></div><span class="principle-arrow" aria-hidden="true">↗</span></article>
-        </div>
-        <div class="approach-source"><span>RESMÎ REFERANS</span><a href="https://tymm.meb.gov.tr/ogretim-programlari/" target="_blank" rel="noopener noreferrer">Türkiye Yüzyılı Maarif Modeli — öğretim programları <span aria-hidden="true">↗</span></a></div>
+      <div class="approach-inner"><div class="approach-lead"><div class="section-kicker"><span>02</span> / TASARIM YAKLAŞIMI</div><h2 id="approach-title">Bir katalogdan<br><span>daha fazlası.</span></h2><p>Materyal, öğretmenin uzmanlığının yerini almaz. Doğru soruları sormak için başlangıç noktasıdır.</p><a class="approach-link" href="https://tymm.meb.gov.tr/ogretim-programlari/" target="_blank" rel="noopener noreferrer">Resmî öğretim programları <span>↗</span></a></div>
+        <div class="principle-list"><article class="principle-card"><span class="principle-number">01</span><div class="principle-copy"><h3>Kaynağın izini sür</h3><p>Materyalin nereden geldiğini, dayandığı kaynağı ve kullanım koşullarını incele.</p></div><span class="principle-arrow" aria-hidden="true">↗</span></article><article class="principle-card"><span class="principle-number">02</span><div class="principle-copy"><h3>Bağlamı kur</h3><p>Sınıf, ders, ünite ve öğrenme çıktısı arasındaki ilişkiyi birlikte değerlendir.</p></div><span class="principle-arrow" aria-hidden="true">↗</span></article><article class="principle-card"><span class="principle-number">03</span><div class="principle-copy"><h3>Uzmanlığını merkeze al</h3><p>Materyali sınıfının ihtiyacına göre değerlendir ve uyarla. Son karar senin.</p></div><span class="principle-arrow" aria-hidden="true">↗</span></article></div>
       </div>
     </section>
   </main>
-
-  <footer class="site-footer">
-    <div class="container footer-main">
-      <a class="brand brand--footer" href="./" aria-label="Maarif Ders Merkezi ana sayfa"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M8 12.5c5.8-2.1 11.1-.8 16 3.1 4.9-3.9 10.2-5.2 16-3.1v22c-5.8-2.1-11.1-.8-16 3.1-4.9-3.9-10.2-.8-16-3.1v-22Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M24 16v21" stroke="currentColor" stroke-width="1.8"/></svg></span><span class="brand-copy"><strong>maarif<span class="brand-period">.</span></strong><span>DERS MERKEZİ</span></span></a>
-      <p class="footer-note">Ders hazırlığına farklı bir bakış.</p>
-      <div class="footer-links"><a href="https://tymm.meb.gov.tr/ogretim-programlari/" target="_blank" rel="noopener noreferrer">MEB öğretim programları <span aria-hidden="true">↗</span></a><a href="https://github.com/PRDTRX/maarif-ders-merkezi" target="_blank" rel="noopener noreferrer">GitHub deposu <span aria-hidden="true">↗</span></a></div>
-    </div>
-    <div class="container footer-bottom"><p>Bağımsız materyal kataloğudur; resmî MEB sitesi değildir.</p><a href="#main" class="back-to-top">Başa dön ↑</a></div>
-  </footer>
+  <footer class="site-footer"><div class="footer-main"><a class="brand" href="./" aria-label="Maarif Ders Merkezi ana sayfa"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none"><path d="M5 10.5c5.4-1.8 10.2-.7 15 2.8 4.8-3.5 9.6-4.6 15-2.8v20c-5.4-1.8-10.2-.7-15 2.8-4.8-3.5-9.6-4.6-15-2.8v-20Z" stroke="currentColor" stroke-width="2.2"/><path d="M20 13.5v19" stroke="currentColor" stroke-width="2"/></svg></span><span class="brand-copy"><strong>maarif<span>.</span></strong><small>DERS MERKEZİ</small></span></a><p class="footer-note">Ders hazırlığına farklı bir bakış.</p><div class="footer-links"><a href="https://tymm.meb.gov.tr/ogretim-programlari/" target="_blank" rel="noopener noreferrer">MEB öğretim programları ↗</a><a href="https://github.com/PRDTRX/maarif-ders-merkezi" target="_blank" rel="noopener noreferrer">GitHub deposu ↗</a></div></div><div class="footer-bottom"><p>Bağımsız materyal kataloğudur; resmî MEB sitesi değildir.</p><a href="#main" class="back-to-top">Başa dön ↑</a></div></footer>
   <div class="toast-region" id="toast-region" role="status" aria-live="polite" aria-atomic="true"></div>
 </body>
 </html>

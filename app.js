@@ -388,13 +388,13 @@
     }
 
     if (kind === "results") {
-      emptyTitle.textContent = "Aramana uygun materyal bulunamadı";
-      emptyText.textContent = "Arama kelimelerini sadeleştir veya filtreleri temizleyerek yeniden dene.";
+      emptyTitle.textContent = "Aramanıza uygun materyal bulunamadı";
+      emptyText.textContent = "Arama terimlerini sadeleştirin veya filtreleri temizleyip yeniden deneyin.";
       return;
     }
 
     emptyTitle.textContent = "Katalog hazırlanıyor";
-    emptyText.textContent = "Doğrulanmış materyaller eklendikçe bu alanda listelenecek. Bu sırada resmî öğretim programlarını inceleyebilirsin.";
+    emptyText.textContent = "Doğrulanmış öğretmen materyalleri eklendikçe burada listelenecek. Bu sırada resmî öğretim programlarını inceleyebilirsiniz.";
   }
   function writeUrlState() {
     try {

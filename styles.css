@@ -327,6 +327,12 @@ svg { display: block; width: 1.25em; height: 1.25em; }
   .footer-links { gap:13px 18px; }
   .footer-bottom { align-items:flex-start; flex-direction:column; gap:12px; }
 }
+@media (max-width: 540px) {
+  .container { width: calc(100% - 32px); }
+  .hero-visual { min-height: 360px; }
+  .visual-card--main { left: 4%; }
+  .visual-card--back { right: 3%; }
+}
 @media (max-width:390px) {
   .container { width:calc(100% - 28px); }
   .brand-copy strong { font-size:16px; }

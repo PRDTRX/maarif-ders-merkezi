@@ -1,43 +1,26 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title description">
-  <title id="title">Maarif Ders Merkezi</title>
-  <desc id="description">Kaynak odaklı öğrenme materyalleri için bağımsız ders kataloğu.</desc>
-  <rect width="1200" height="630" fill="#f2f4ec"/>
-  <path d="M0 0h1200v630H0z" fill="url(#grid)" opacity=".7"/>
-  <circle cx="1090" cy="110" r="280" fill="none" stroke="#d7e2d3" stroke-width="2"/>
-  <circle cx="1090" cy="110" r="220" fill="none" stroke="#d7e2d3" stroke-width="2"/>
-  <circle cx="1090" cy="110" r="160" fill="none" stroke="#d7e2d3" stroke-width="2"/>
-  <rect x="82" y="72" width="58" height="58" rx="17" fill="#173f2e"/>
-  <path d="M94 91c7-2 13-.5 17 3 4-3.5 10-5 17-3v25c-7-2-13-.5-17 3-4-3.5-10-5-17-3V91Z" stroke="#f5f7ef" stroke-width="2.4" fill="none" stroke-linejoin="round"/>
-  <path d="M111 94v25" stroke="#f5f7ef" stroke-width="2" stroke-linecap="round"/>
-  <text x="158" y="96" fill="#183629" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" letter-spacing="-1">Maarif</text>
-  <text x="158" y="118" fill="#68786c" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" letter-spacing="2.2">DERS MERKEZİ</text>
-  <rect x="84" y="206" width="10" height="10" rx="3" fill="#367451"/>
-  <text x="110" y="216" fill="#426a4d" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" letter-spacing="2.8">ÖĞRENMEYE AÇILAN YENİ BİR MERKEZ</text>
-  <text x="80" y="306" fill="#18291f" font-family="Georgia, 'Times New Roman', serif" font-size="74" letter-spacing="-3">Aradığın kaynak,</text>
-  <text x="80" y="390" fill="#1a6348" font-family="Georgia, 'Times New Roman', serif" font-size="80" font-style="italic" letter-spacing="-3">öğrenmenin</text>
-  <text x="80" y="472" fill="#18291f" font-family="Georgia, 'Times New Roman', serif" font-size="74" letter-spacing="-3">doğru yerinde.</text>
-  <text x="84" y="532" fill="#5c6c60" font-family="Arial, Helvetica, sans-serif" font-size="18">Kaynağı görünür, öğrenme odağı belirgin ders materyalleri.</text>
-  <rect x="822" y="220" width="270" height="294" rx="22" fill="#ffffff" stroke="#dce5d8" stroke-width="2" transform="rotate(7 957 367)"/>
-  <rect x="786" y="206" width="270" height="294" rx="22" fill="#fffefa" stroke="#dce5d8" stroke-width="2" transform="rotate(-5 921 353)"/>
-  <rect x="821" y="240" width="42" height="5" rx="2.5" fill="#8daa8b" transform="rotate(-5 821 240)"/>
-  <g transform="translate(852 274) rotate(-5)">
-    <path d="M0 10c26-8 45-3 64 14 19-17 38-22 64-14v96c-26-8-45-3-64 14C45 93 26 88 0 96V10Z" fill="#e1ede2" stroke="#54785f" stroke-width="2.2" stroke-linejoin="round"/>
-    <path d="M64 24v96M13 27c18-3 32 1 42 10M115 27c-18-3-32 1-42 10M13 45c18-3 32 1 42 10M115 45c-18-3-32 1-42 10" fill="none" stroke="#71917a" stroke-width="2.2" stroke-linecap="round"/>
-  </g>
-  <g transform="translate(840 423) rotate(-5)">
-    <rect width="105" height="7" rx="3.5" fill="#d5e2d2"/>
-    <rect y="18" width="145" height="7" rx="3.5" fill="#e3e9df"/>
-    <rect y="36" width="120" height="7" rx="3.5" fill="#e3e9df"/>
-  </g>
-  <rect x="82" y="572" width="1036" height="1" fill="#d5ded2"/>
-  <text x="84" y="601" fill="#426a4d" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" letter-spacing="3">KAYNAK</text>
-  <circle cx="170" cy="596" r="3" fill="#8aa58a"/>
-  <text x="188" y="601" fill="#426a4d" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" letter-spacing="3">BAĞLAM</text>
-  <circle cx="284" cy="596" r="3" fill="#8aa58a"/>
-  <text x="302" y="601" fill="#426a4d" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" letter-spacing="3">GÜNCELLİK</text>
-  <defs>
-    <pattern id="grid" width="44" height="44" patternUnits="userSpaceOnUse">
-      <path d="M44 0H0V44" fill="none" stroke="#dfe6dc" stroke-width="1"/>
-    </pattern>
-  </defs>
+  <title id="title">Maarif Ders Merkezi — Dersini tasarla</title>
+  <desc id="description">Öğretmenler için ders materyali keşif alanı; güçlü tipografi, geometrik formlar ve canlı limon yeşiliyle yeni tasarım.</desc>
+  <rect width="1200" height="630" fill="#f4f0e6"/>
+  <path d="M0 0h1200v68H0z" fill="#171916"/>
+  <rect x="72" y="18" width="32" height="32" fill="#d9ff3f"/>
+  <path d="M78 43 86 25h5l8 18h-6l-1-4h-7l-1 4z" fill="#171916"/>
+  <text x="122" y="40" fill="#f4f0e6" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="900" letter-spacing="2">MAARİF DERS MERKEZİ</text>
+  <text x="1100" y="40" fill="#d9ff3f" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" letter-spacing="2">MDM / 2026</text>
+  <rect x="0" y="68" width="700" height="562" fill="#d9ff3f"/>
+  <text x="76" y="132" fill="#171916" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="900" letter-spacing="3">MERAK ET. ARA. TASARLA.</text>
+  <text x="66" y="270" fill="#171916" font-family="Arial Black, Arial, sans-serif" font-size="110" font-weight="900" letter-spacing="-8">DERSİN</text>
+  <text x="66" y="372" fill="#171916" font-family="Arial Black, Arial, sans-serif" font-size="110" font-weight="900" letter-spacing="-8">SENİN.</text>
+  <text x="70" y="440" fill="#fa5b35" font-family="Arial Black, Arial, sans-serif" font-size="70" font-weight="900" letter-spacing="-4">FİKRİN SERBEST.</text>
+  <text x="76" y="515" fill="#30352e" font-family="Arial, Helvetica, sans-serif" font-size="20">Kaynakları keşfet. Bağlantıları kur.</text>
+  <text x="76" y="545" fill="#30352e" font-family="Arial, Helvetica, sans-serif" font-size="20">Kendi sınıfın için karar ver.</text>
+  <rect x="770" y="145" width="340" height="340" fill="#fa5b35"/>
+  <circle cx="970" cy="294" r="132" fill="#d9ff3f" stroke="#171916" stroke-width="3"/>
+  <path d="M840 390 965 190 1090 390Z" fill="#171916"/>
+  <path d="M925 330 966 255 1007 330Z" fill="#d9ff3f"/>
+  <text x="802" y="177" fill="#171916" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="900" letter-spacing="2">FİKİR ATÖLYESİ</text>
+  <text x="1080" y="463" fill="#171916" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="900" letter-spacing="2">ARA ↗ YORUMLA ↗ UYARLA</text>
+  <path d="M770 520H1110" stroke="#171916" stroke-width="2"/>
+  <text x="770" y="553" fill="#171916" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="900">BAĞIMSIZ ÖĞRETMEN MATERYAL KATALOĞU</text>
+  <text x="770" y="580" fill="#5e6258" font-family="Arial, Helvetica, sans-serif" font-size="13">Kaynak, bağlam ve öğretmen yorumu.</text>
 </svg>

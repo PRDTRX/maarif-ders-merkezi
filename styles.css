@@ -355,3 +355,32 @@ mark { background: var(--yellow); color: #17213d; border-radius: 2px; }
   .material-card { break-inside: avoid; box-shadow: none; border: 1px solid #aaa; }
   a { text-decoration: underline; }
 }
+
+@media (forced-colors: active) {
+  :focus-visible {
+    outline: 2px solid Highlight;
+    outline-offset: 3px;
+  }
+
+  .button--primary,
+  .card-download,
+  .search-submit {
+    border: 1px solid ButtonText;
+  }
+
+  .material-card,
+  .catalog-shell,
+  .search-form,
+  .filter-control select,
+  .sort-control select,
+  .theme-toggle,
+  .source-link {
+    border: 1px solid CanvasText;
+  }
+
+  .type-label,
+  .file-type,
+  .nav-link--active {
+    border: 1px solid currentColor;
+  }
+}

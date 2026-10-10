@@ -384,3 +384,17 @@ mark { background: var(--yellow); color: #17213d; border-radius: 2px; }
     border: 1px solid currentColor;
   }
 }
+
+@media (max-width: 540px) {
+  .hero-grid {
+    padding-block: 48px 18px;
+  }
+
+  .hero-art {
+    min-height: 360px;
+  }
+
+  .materials-grid {
+    grid-template-columns: 1fr;
+  }
+}

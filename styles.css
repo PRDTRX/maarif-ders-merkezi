@@ -294,7 +294,6 @@ svg { display: block; width: 1.25em; height: 1.25em; }
 .index-row strong { display: block; font-size: 12px; font-weight: 800; }
 .index-row small { display: block; margin-top: 2px; color: rgba(255,255,255,.75); font-size: 10px; }
 .index-arrow { text-align: right; color: #ffb49f; }
-.visual-stamp { position: absolute; top: 48%; right: 17px; color: rgba(255,255,255,.14); font-size: 8px; font-weight: 900; letter-spacing: .12em; writing-mode: vertical-rl; }
 .visual-caption { padding-top: 12px; border-top: 1px solid var(--line-strong); }
 .visual-caption span:last-child { color: var(--coral); }
 .hero-bottom {
@@ -613,7 +612,6 @@ svg { display: block; width: 1.25em; height: 1.25em; }
   .visual-board { min-height: 330px; padding: 20px; }
   .visual-index strong { font-size: 58px; }
   .visual-prompt h2 { font-size: 33px; }
-  .visual-stamp { right: 10px; }
   .filter-panel { grid-template-columns: 1fr; }
   .results-heading { align-items: flex-start; flex-direction: column; gap: 11px; }
   .results-toolbar { flex-direction: column; }

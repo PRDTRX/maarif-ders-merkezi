@@ -573,7 +573,7 @@
     themeToggle.setAttribute("aria-label", dark ? "Açık temaya geç" : "Koyu temaya geç");
     themeToggle.setAttribute("title", dark ? "Açık temaya geç" : "Koyu temaya geç");
     const themeColor = $("meta[name='theme-color']");
-    if (themeColor) themeColor.setAttribute("content", dark ? "#121a2b" : "#f7f4ec");
+    if (themeColor) themeColor.setAttribute("content", dark ? "#171916" : "#f4f0e6");
   }
 
   function toggleTheme() {

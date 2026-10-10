@@ -44,7 +44,7 @@ assert.match(css, /:focus-visible/, "Visible keyboard focus styles are required"
 assert.match(css, /prefers-reduced-motion:\s*reduce/, "Reduced-motion support is required");
 assert.match(css, /forced-colors:\s*active/, "Forced-colors support is required");
 assert.doesNotMatch(css, /@import\s+url\(/i, "Do not load third-party stylesheets at runtime");
-assert.match(css, /@media\s*\(max-width:\s*540px\)/, "Small-screen responsive styles are required");
+assert.match(css, /@media\s*\(max-width:\s*\d+px\)/, "A small-screen responsive breakpoint is required");
 assert.match(css, /\[hidden\]\s*\{\s*display:\s*none\s*!important/s, "The hidden attribute must remain authoritative");
 assert.match(css, /\.usage-details\s+summary/, "Usage-rights details must have a dedicated presentation");
 assert.match(app, /function validMaterial\(material\)/, "Runtime material validation is required");

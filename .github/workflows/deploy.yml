@@ -20,6 +20,17 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+      - name: Validate JavaScript syntax
+        run: node --check assets/js/app.js
+      - name: Validate catalog and resource schema JSON
+        run: |
+          python - <<'PY'
+          import json
+          for path in ("data/catalog.json", "templates/resource.schema.json"):
+              with open(path, encoding="utf-8") as handle:
+                  json.load(handle)
+              print(f"Valid JSON: {path}")
+          PY
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
       - name: Upload static site

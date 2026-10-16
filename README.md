@@ -4,7 +4,7 @@ Türkiye Yüzyılı Maarif Modeli kapsamında öğretmenlerin süreç odaklı de
 
 ## Tasarım yaklaşımı
 
-Bu arayüz, Apple ürün sayfalarındaki görsel hiyerarşi ve ritimden esinlenen özgün bir tasarımdır: geniş boşluklar, büyük tipografi, az ama anlamlı renk, editoryal bölüm geçişleri ve kaynak arşivinin gerçek bir ürün gibi gösterildiği özel bir arayüz ön izlemesi. Apple markası veya tasarım dosyaları kopyalanmamıştır.
+Bu arayüz, Apple ürün sayfalarındaki görsel hiyerarşi ve ritimden esinlenen özgün bir tasarımdır: geniş boşluklar, büyük tipografi, az ama anlamlı renk, editoryal bölüm geçişleri ve kaynak arşivinin gerçek bir ürün gibi gösterildiği özel bir arayüz ön izlemesi. Apple markası veya tasarım dosyaları kopyalanmamıştır. Yazı tipi olarak yalnızca sistem yığını (`-apple-system`, SF Pro) kullanılır; SF Pro web'e gömülmez, bu yüzden Apple dışı cihazlarda Segoe UI veya Helvetica görünür.
 
 ## Özellikler
 

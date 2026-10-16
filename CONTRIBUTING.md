@@ -29,7 +29,7 @@ data/catalog.json dosyasındaki resources dizisine yeni bir nesne ekleyin. Aşa�
       "status": "published"
     }
 
-templates/resource.schema.json, kayıtların beklenen alanlarını ve kabul edilen değerleri tarif eder. Yeni kategori eklenirse katalog, arayüz filtresi ve JSON şemasındaki kategori tanımı da güncellenmelidir.
+templates/resource.schema.json, kayıtların beklenen alanlarını ve kabul edilen değerleri tarif eder. Yeni kategori eklenirse `data/catalog.json` içindeki kategori listesi ve `templates/resource.schema.json` içindeki `categoryId` değerleri güncellenmelidir. Ana sayfadaki alan şeridi (`index.html` içindeki `data-jump-category` bağlantıları) elle yazıldığı için, şeritte görünmesini istediğin kategoriyi oraya da ekle; başlığı katalogdaki `title` ile aynı yaz.
 
 ### Alanlar
 

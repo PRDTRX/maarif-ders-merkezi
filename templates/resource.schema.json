@@ -1,0 +1,25 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://prdtrx.github.io/maarif-ders-merkezi/templates/resource.schema.json",
+  "title":"Maarif Ders Merkezi kaynak kaydı",
+  "description":"data/catalog.json içindeki her resources öğesinin alan yapısı.",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["id","title","summary","categoryId","type","grades","subjects","format","tags","file","sourceType","updatedAt","status"],
+  "properties":{
+    "id":{"type":"string","pattern":"^[a-z0-9]+(?:-[a-z0-9]+)*$","description":"Benzersiz, URL ve dosya adı dostu kimlik."},
+    "title":{"type":"string","minLength":3,"maxLength":120},
+    "summary":{"type":"string","minLength":10,"maxLength":280,"description":"Kaynağın amacı ve içeriği; kısa ve somut açıklama."},
+    "categoryId":{"type":"string","enum":["olcme-degerlendirme","etkinlikler","egilimler","erdem-deger-eylem","sosyal-duygusal-beceriler","farklilastirma","planlama-raporlama"]},
+    "type":{"type":"string","enum":["performans-gorevi","rubrik","gozlem-formu","portfolyo","etkinlik","calisma-kagidi","oz-akran-degerlendirme","kilavuz","diger"]},
+    "grades":{"type":"array","minItems":1,"uniqueItems":true,"items":{"type":"string","enum":["okul-oncesi","ilkokul","ortaokul","lise","tum-duzeyler"]}},
+    "subjects":{"type":"array","items":{"type":"string","minLength":1},"uniqueItems":true},
+    "format":{"type":"string","enum":["PDF","DOCX","XLSX","PPTX","LINK","HTML","OTHER"]},
+    "tags":{"type":"array","items":{"type":"string","minLength":1},"uniqueItems":true},
+    "file":{"type":"string","description":"content/ altındaki göreli dosya yolu. Haricî bağlantılar için sourceUrl alanını doldurun."},
+    "sourceType":{"type":"string","enum":["official","adapted","original","external"],"description":"Resmî, uyarlanmış, özgün veya dış kaynak türü."},
+    "sourceUrl":{"type":"string","format":"uri-reference","default":"","description":"Kaynağın doğrulanabilir asıl bağlantısı; varsa ekleyin."},
+    "updatedAt":{"type":"string","format":"date"},
+    "status":{"type":"string","enum":["draft","published","archived"],"description":"Yalnızca published durumundaki kaynaklar sitede listelenir."}
+  }
+}

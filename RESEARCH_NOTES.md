@@ -18,7 +18,21 @@ Resmî portalda sosyal-duygusal öğrenme, Erdem-Değer-Eylem, öğrenme kanıtl
 
 Ürün kararına etkisi: Bu konular ayrı içerik kategorileri olur; kullanıcılar materyalleri ortak arama ve filtreleme üzerinden keşfedebilir.
 
-## 3. Eğilimler
+## 3. Sosyal-Duygusal Öğrenme Becerileri
+
+Kaynak: https://tymm.meb.gov.tr/beceriler/sosyal-duygusal-ogrenme-becerileri
+
+MEB, sosyal-duygusal öğrenmeyi öğrenme yaşantılarıyla geliştirilebilen; benlik becerileri, sosyal yaşam becerileri ve ortak/birleşik beceriler olarak ele alınan bir beceri seti şeklinde açıklar. Sayfada beceriler için süreç bileşenleri ve göstergeler bulunur.
+
+Ürün kararına etkisi: Gelecekte eklenen araçlar, uygun olduğunda gözlem bağlamını ve ilgili göstergeleri açıklayabilir. Öğrenciyi kalıcı bir kişilik etiketiyle tanımlayan puanlama yerine gelişimsel kanıtlar ve geri bildirim önceliklendirilir.
+
+## 4. Erdem-Değer-Eylem Çerçevesi
+
+Kaynak: https://tymm.meb.gov.tr/beceriler/erdem-deger-eylem-cercevesi
+
+Ürün kararına etkisi: Değer odaklı materyaller için ayrı kategori bulunur; kaynak kayıtları değer, eylem bağlamı ve kullanım amacına göre etiketlenebilir. Sadece soyut değer adından yola çıkarak öğrenci hakkında kesin hüküm verilmesini destekleyen otomatik puanlama tasarlanmaz.
+
+## 5. Eğilimler
 
 Kaynak: https://tymm.meb.gov.tr/beceriler/egilimler
 
@@ -26,7 +40,7 @@ Bu sayfa eğilimleri modelin diğer bileşenleri ve becerileriyle ilişkili bir 
 
 Ürün kararına etkisi: Eğilimler ayrı bir kategori olarak yer alır; ileride eklenecek materyallerin bağlamı ve gözlenebilir göstergeleri açıklamalarında belirtilebilir. Site, eğilimleri kişilik etiketi veya bağlamdan kopuk bir puana indirgemeyi teşvik etmez.
 
-## 4. Öğretmen görüşlerine dayalı izleme ve değerlendirme raporları
+## 6. Öğretmen görüşlerine dayalı izleme ve değerlendirme raporları
 
 Kaynak: https://ttkb.meb.gov.tr/www/ogretmen-goruslerine-dayali-olarak-hazirlanan-turkiye-yuzyili-maarif-modeli-izleme-ve-degerlendirme-raporlari-tamamlandi/icerik/907/tr
 

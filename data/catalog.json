@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "lastReviewed": "2026-10-16",
+  "categories": [
+    {"id":"olcme-degerlendirme","title":"Ölçme ve değerlendirme","description":"Performans görevleri, rubrikler, gözlem formları, portfolyolar ve geri bildirim araçları.","symbol":"◎"},
+    {"id":"etkinlikler","title":"Etkinlik ve çalışma kâğıtları","description":"Ders akışına eklenebilen etkinlikler, çalışma yaprakları ve uygulama materyalleri.","symbol":"▦"},
+    {"id":"egilimler","title":"Eğilimler","description":"Eğilimlerin gelişimini gözlenebilir göstergeler ve öğrenme kanıtlarıyla ele alan araçlar.","symbol":"⌁"},
+    {"id":"erdem-deger-eylem","title":"Erdem · değer · eylem","description":"Değerleri bağlam, davranış göstergeleri ve yansıtıcı etkinliklerle ilişkilendiren kaynaklar.","symbol":"◇"},
+    {"id":"sosyal-duygusal-beceriler","title":"Sosyal-duygusal öğrenme","description":"Sosyal-duygusal becerileri desteklemeye ve gelişimi izlemeye yönelik kaynaklar.","symbol":"↔"},
+    {"id":"farklilastirma","title":"Farklılaştırma","description":"Öğrenci ihtiyaçlarına, öğrenme profillerine ve farklılaştırılmış uygulamalara uygun materyaller.","symbol":"◫"},
+    {"id":"planlama-raporlama","title":"Planlama ve raporlama","description":"Öğrenme kanıtlarını düzenleme, gelişimi izleme ve geri bildirim hazırlama araçları.","symbol":"↗"}
+  ],
+  "filters": {
+    "types":[
+      {"value":"performans-gorevi","label":"Performans görevi"},
+      {"value":"rubrik","label":"Rubrik / dereceli puanlama anahtarı"},
+      {"value":"gozlem-formu","label":"Gözlem formu"},
+      {"value":"portfolyo","label":"Portfolyo / gelişim dosyası"},
+      {"value":"etkinlik","label":"Etkinlik"},
+      {"value":"calisma-kagidi","label":"Çalışma kâğıdı"},
+      {"value":"oz-akran-degerlendirme","label":"Öz / akran değerlendirme"},
+      {"value":"kilavuz","label":"Kılavuz / açıklayıcı kaynak"},
+      {"value":"diger","label":"Diğer"}
+    ],
+    "grades":[
+      {"value":"okul-oncesi","label":"Okul öncesi"},
+      {"value":"ilkokul","label":"İlkokul (1–4)"},
+      {"value":"ortaokul","label":"Ortaokul (5–8)"},
+      {"value":"lise","label":"Lise (9–12)"},
+      {"value":"tum-duzeyler","label":"Tüm düzeyler"}
+    ],
+    "subjects":[
+      {"value":"Türkçe","label":"Türkçe"},{"value":"Matematik","label":"Matematik"},{"value":"Fen Bilimleri","label":"Fen Bilimleri"},
+      {"value":"Sosyal Bilgiler","label":"Sosyal Bilgiler"},{"value":"Hayat Bilgisi","label":"Hayat Bilgisi"},{"value":"İngilizce","label":"İngilizce"},
+      {"value":"Türk Dili ve Edebiyatı","label":"Türk Dili ve Edebiyatı"},{"value":"Fizik","label":"Fizik"},{"value":"Kimya","label":"Kimya"},
+      {"value":"Biyoloji","label":"Biyoloji"},{"value":"Tarih","label":"Tarih"},{"value":"Coğrafya","label":"Coğrafya"},
+      {"value":"Felsefe","label":"Felsefe"},{"value":"Din Kültürü ve Ahlak Bilgisi","label":"Din Kültürü ve Ahlak Bilgisi"}
+    ]
+  },
+  "resources": []
+}

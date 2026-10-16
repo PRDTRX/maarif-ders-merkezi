@@ -2,13 +2,13 @@
   "schemaVersion": 1,
   "lastReviewed": "2026-10-16",
   "categories": [
-    {"id":"olcme-degerlendirme","title":"Ölçme ve değerlendirme","description":"Performans görevleri, rubrikler, gözlem formları, portfolyolar ve geri bildirim araçları.","symbol":"◎"},
-    {"id":"etkinlikler","title":"Etkinlik ve çalışma kâğıtları","description":"Ders akışına eklenebilen etkinlikler, çalışma yaprakları ve uygulama materyalleri.","symbol":"▦"},
-    {"id":"egilimler","title":"Eğilimler","description":"Eğilimlerin gelişimini gözlenebilir göstergeler ve öğrenme kanıtlarıyla ele alan araçlar.","symbol":"⌁"},
-    {"id":"erdem-deger-eylem","title":"Erdem · değer · eylem","description":"Değerleri bağlam, davranış göstergeleri ve yansıtıcı etkinliklerle ilişkilendiren kaynaklar.","symbol":"◇"},
-    {"id":"sosyal-duygusal-beceriler","title":"Sosyal-duygusal öğrenme","description":"Sosyal-duygusal becerileri desteklemeye ve gelişimi izlemeye yönelik kaynaklar.","symbol":"↔"},
-    {"id":"farklilastirma","title":"Farklılaştırma","description":"Öğrenci ihtiyaçlarına, öğrenme profillerine ve farklılaştırılmış uygulamalara uygun materyaller.","symbol":"◫"},
-    {"id":"planlama-raporlama","title":"Planlama ve raporlama","description":"Öğrenme kanıtlarını düzenleme, gelişimi izleme ve geri bildirim hazırlama araçları.","symbol":"↗"}
+    {"id":"olcme-degerlendirme","title":"Ölçme ve değerlendirme","description":"Performans görevleri, rubrikler, gözlem formları, portfolyolar ve geri bildirim araçları."},
+    {"id":"etkinlikler","title":"Etkinlik ve çalışma kâğıtları","description":"Ders akışına eklenebilen etkinlikler, çalışma yaprakları ve uygulama materyalleri."},
+    {"id":"egilimler","title":"Eğilimler","description":"Eğilimlerin gelişimini gözlenebilir göstergeler ve öğrenme kanıtlarıyla ele alan araçlar."},
+    {"id":"erdem-deger-eylem","title":"Erdem, değer, eylem","description":"Değerleri bağlam, davranış göstergeleri ve yansıtıcı etkinliklerle ilişkilendiren kaynaklar."},
+    {"id":"sosyal-duygusal-beceriler","title":"Sosyal-duygusal öğrenme","description":"Sosyal-duygusal becerileri desteklemeye ve gelişimi izlemeye yönelik kaynaklar."},
+    {"id":"farklilastirma","title":"Farklılaştırma","description":"Öğrenci ihtiyaçlarına, öğrenme profillerine ve farklılaştırılmış uygulamalara uygun materyaller."},
+    {"id":"planlama-raporlama","title":"Planlama ve raporlama","description":"Öğrenme kanıtlarını düzenleme, gelişimi izleme ve geri bildirim hazırlama araçları."}
   ],
   "filters": {
     "types":[

@@ -7,8 +7,8 @@ const TYPE_LABELS={
  "etkinlik":"Etkinlik","calisma-kagidi":"Çalışma kâğıdı","oz-akran-degerlendirme":"Öz / akran değerlendirme","kilavuz":"Kılavuz","diger":"Diğer"
 };
 const GRADE_LABELS={"okul-oncesi":"Okul öncesi","ilkokul":"İlkokul (1–4)","ortaokul":"Ortaokul (5–8)","lise":"Lise (9–12)","tum-duzeyler":"Tüm düzeyler"};
-const FORMAT_LABELS={PDF:"PDF",DOCX:"Word",XLSX:"Excel",PPTX:"PowerPoint",LINK:"Bağlantı",HTML:"Web",OTHER:"Diğer"};
-const ICONS={"olcme-degerlendirme":"◎","etkinlikler":"▤","egilimler":"⌁","erdem-deger-eylem":"◇","sosyal-duygusal-beceriler":"↔","farklilastirma":"◫","planlama-raporlama":"↗"};
+const FORMAT_SHORT={PDF:"PDF",DOCX:"DOC",XLSX:"XLS",PPTX:"PPT",LINK:"Web",HTML:"Web",OTHER:"Dosya"};
+const SMOOTH=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth";
 function normalize(value){return String(value==null?"":value).toLocaleLowerCase("tr-TR").normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/ı/g,"i").trim();}
 function setText(node,value){node.textContent=value==null?"":String(value);}
 function appendOptions(select,items,valueKey,labelKey){items.forEach(item=>{const option=document.createElement("option");option.value=item[valueKey];option.textContent=item[labelKey];select.appendChild(option);});}
@@ -22,14 +22,13 @@ function renderCategories(){
  const list=$("#category-list");clearElement(list);
  categories().forEach((category,index)=>{
   const button=make("button","category-option");button.type="button";button.setAttribute("aria-pressed",state.category===category.id?"true":"false");button.setAttribute("aria-label",category.title+" kategorisini filtrele");
-  button.append(make("span","category-option-index",String(index+1).padStart(2,"0")));
-  const title=make("span","category-option-title");title.append(make("span","category-option-icon",category.symbol||ICONS[category.id]||"◇"),make("span","",category.title));button.append(title);
+  button.append(make("span","category-option-title",category.title));
   button.append(make("span","category-option-description",category.description));
   const matches=visibleResources().filter(item=>item.categoryId===category.id).length;
-  button.append(make("span","category-option-count",matches?matches+" kaynak":"İncele"));
-  button.append(make("span","category-option-arrow","↗"));button.addEventListener("click",()=>{state.category=state.category===category.id?"":category.id;$("#filter-category").value=state.category;renderCategories();renderResources();$("#results").scrollIntoView({behavior:"smooth",block:"start"});});list.append(button);
+  button.append(make("span","category-option-count",matches?matches+" kaynak":"Yakında"));
+  button.append(make("span","category-option-arrow","›"));button.addEventListener("click",()=>{state.category=state.category===category.id?"":category.id;$("#filter-category").value=state.category;renderCategories();renderResources();$("#results").scrollIntoView({behavior:SMOOTH,block:"start"});});list.append(button);
  });
- $("#category-count").textContent=String(categories().length).padStart(2,"0")+" ALAN";
+ $("#category-count").textContent=categories().length+" alan";
 }
 function filteredResources(){
  const categoryNames=new Map(categories().map(item=>[item.id,item.title]));const query=normalize(state.query);
@@ -58,11 +57,10 @@ function renderResource(resource,index){
  const link=safeResourceUrl(resource);const external=link.startsWith("http://")||link.startsWith("https://");
  const anchor=make("a","resource-link");anchor.href=link||"#";if(external){anchor.target="_blank";anchor.rel="noopener noreferrer";}else if(link){anchor.setAttribute("download","");}
  const main=make("span","resource-main");
- const glyph=resource.format==="PDF"?"↗":resource.format==="XLSX"?"▦":resource.format==="PPTX"?"▧":"▤";
- main.append(make("span","resource-file-icon",glyph));
+  main.append(make("span","resource-file-icon",FORMAT_SHORT[resource.format]||"Dosya"));
  const copy=make("span","resource-main-text");copy.append(make("strong","",resource.title||"Başlıksız kaynak"),make("small","",resource.summary||"Açıklama henüz eklenmedi."));main.append(copy);anchor.append(main);
  const kind=make("span","resource-kind");const category=categories().find(item=>item.id===resource.categoryId);if(category)kind.append(make("span","",category.title));kind.append(make("span","",TYPE_LABELS[resource.type]||resource.type||"Diğer"));anchor.append(kind);
- anchor.append(make("span","resource-level",levelLabel(resource)));anchor.append(make("span","resource-arrow","↗"));
+ anchor.append(make("span","resource-level",levelLabel(resource)));anchor.append(make("span","resource-arrow","›"));
  if(!link){anchor.removeAttribute("href");anchor.setAttribute("aria-disabled","true");anchor.classList.add("resource-link-disabled");}
  row.append(anchor);return row;
 }
@@ -70,11 +68,11 @@ function renderResources(){
  const list=$("#resource-list");clearElement(list);const all=visibleResources();const matches=filteredResources();updateClearButton();
  $("#result-summary").textContent=all.length?(matches.length+" / "+all.length+" kaynak gösteriliyor"):"Kaynaklar içerik eklendikçe burada görünecek";
  if(!all.length){
-  const empty=make("div","empty-state");empty.append(make("span","empty-state-symbol","m."));
-  const copy=make("div","empty-state-copy");copy.append(make("h4","", "Kütüphane hazır. Sıra kaynaklarda."),make("p","","Kaynak dosyalarını content/ klasörüne ekle; başlık, tür, sınıf düzeyi ve dosya bağlantısını data/catalog.json dosyasında tanımla. Yeni kaynaklar otomatik olarak bu listede aranabilir hâle gelir."));empty.append(copy);
-  const guide=make("a","empty-state-code","İçerik ekleme rehberi ↗");guide.href="CONTRIBUTING.md";empty.append(guide);list.append(empty);return;
+  const empty=make("div","empty-state");
+  const copy=make("div","empty-state-copy");copy.append(make("h4","","Kaynaklar yakında burada."),make("p","","Kütüphane şu an hazırlanıyor. Kaynak eklemek istiyorsan içerik ekleme rehberine göz at."));empty.append(copy);
+  const guide=make("a","empty-state-code","İçerik ekleme rehberi");guide.href="CONTRIBUTING.md";empty.append(guide);list.append(empty);return;
  }
- if(!matches.length){const empty=make("div","empty-state");empty.append(make("span","empty-state-symbol","⌕"));const copy=make("div","empty-state-copy");copy.append(make("h4","","Bu aramayla eşleşen kaynak bulunamadı."),make("p","","Arama sözcüğünü değiştir veya filtreleri temizleyip yeniden dene."));empty.append(copy);const clear=make("button","empty-state-code","Filtreleri temizle ×");clear.type="button";clear.addEventListener("click",clearFilters);empty.append(clear);list.append(empty);return;}
+ if(!matches.length){const empty=make("div","empty-state");const copy=make("div","empty-state-copy");copy.append(make("h4","","Bu aramayla eşleşen kaynak bulunamadı."),make("p","","Arama sözcüğünü değiştir veya filtreleri temizleyip yeniden dene."));empty.append(copy);const clear=make("button","empty-state-code","Filtreleri temizle");clear.type="button";clear.addEventListener("click",clearFilters);empty.append(clear);list.append(empty);return;}
  matches.forEach((resource,index)=>list.append(renderResource(resource,index)));
 }
 function clearFilters(){
@@ -89,9 +87,10 @@ function bindUI(){
  $("#filter-grade").addEventListener("change",event=>{state.grade=event.target.value;renderResources();});
  $("#filter-subject").addEventListener("change",event=>{state.subject=event.target.value;renderResources();});
  $("#clear-filters").addEventListener("click",clearFilters);
- document.querySelectorAll("[data-jump-category]").forEach(link=>link.addEventListener("click",event=>{event.preventDefault();const id=link.getAttribute("data-jump-category");state.category=state.category===id?"":id;$("#filter-category").value=state.category;renderCategories();renderResources();$("#kutuphane").scrollIntoView({behavior:"smooth",block:"start"});}));
+ document.querySelectorAll("[data-jump-category]").forEach(link=>link.addEventListener("click",event=>{event.preventDefault();const id=link.getAttribute("data-jump-category");state.category=state.category===id?"":id;$("#filter-category").value=state.category;renderCategories();renderResources();$("#kutuphane").scrollIntoView({behavior:SMOOTH,block:"start"});}));
  const toggle=$(".mobile-menu-toggle");const menu=$("#mobile-nav");
  toggle.addEventListener("click",()=>{const expanded=toggle.getAttribute("aria-expanded")==="true";toggle.setAttribute("aria-expanded",expanded?"false":"true");menu.hidden=expanded;});
+ document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!menu.hidden){menu.hidden=true;toggle.setAttribute("aria-expanded","false");toggle.focus();}});
  menu.querySelectorAll("a").forEach(link=>link.addEventListener("click",()=>{menu.hidden=true;toggle.setAttribute("aria-expanded","false");}));
 }
 async function init(){
@@ -105,8 +104,8 @@ async function init(){
   appendOptions($("#filter-subject"),(state.catalog.filters||{}).subjects||[],"value","label");
   renderCategories();renderResources();
  }catch(error){
-  console.error(error);$("#category-list").textContent="Kategoriler yüklenemedi. data/catalog.json dosyasını kontrol et.";
-  $("#resource-list").textContent="Katalog okunamadı.";$("#result-summary").textContent="Kurulum kontrol edilmeli";
+  console.error(error);$("#category-list").textContent="Kategoriler yüklenemedi. Sayfayı yenilemeyi dene.";
+  $("#resource-list").textContent="Kaynak listesi şu an yüklenemiyor.";$("#result-summary").textContent="Yükleme başarısız";
  }
 }
 document.addEventListener("DOMContentLoaded",init);

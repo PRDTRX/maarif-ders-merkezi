@@ -62,8 +62,10 @@ function safeResourceUrl(resource){
  const raw=resource.sourceType==="external"&&resource.sourceUrl?resource.sourceUrl:resource.file;
  if(!raw)return "";
  if(raw.startsWith("https://")||raw.startsWith("http://"))return raw;
- const validPath=raw.startsWith("content/")&&raw.split("/").every(part=>part&&part!=="."&&part!==".."&&/^[a-zA-Z0-9._-]+$/.test(part));
- return validPath?raw:"";
+ const SEGMENT=/^[\p{L}\p{N}\p{M}][\p{L}\p{N}\p{M} ._()',-]*$/u;
+ const parts=raw.split("/");
+ const validPath=raw.startsWith("content/")&&parts.every(part=>part&&part!=="."&&part!==".."&&SEGMENT.test(part));
+ return validPath?parts.map(encodeURIComponent).join("/"):"";
 }
 function levelLabel(resource){
  const levels=(resource.grades||[]).map(grade=>GRADE_LABELS[grade]||grade);

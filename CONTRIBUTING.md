@@ -6,7 +6,7 @@ Bu proje içerik arşivini daha sonra doldurmak üzere tasarlanmıştır. Siteye
 
 Dosyayı content/ altında ilgili klasöre koyun. Önerilen klasörler: olcme-degerlendirme/, etkinlikler/, egilimler/, erdem-deger-eylem/, sosyal-duygusal-beceriler/, farklilastirma/ ve planlama-raporlama/.
 
-Dosya isimlerinde küçük harf, rakam ve tire kullanmak bağlantı sorunlarını azaltır. Öğrenci adı, numarası, fotoğrafı veya başka kişisel veri içeren dosyaları yayımlamayın.
+Dosya adlarında Türkçe karakter (ç, ğ, ı, ö, ş, ü), boşluk ve büyük harf kullanılabilir; site bağlantıyı otomatik olarak kodlar. Yine de okunaklı ve kısa adlar (ör. sunum-rubriği.docx) tercih edin. Adda / \\ ? # % * : " < > | karakterleri ve '..' kullanmayın. Dosya adındaki harf büyüklüğü ve yazım, katalogdaki file alanıyla birebir aynı olmalıdır; aksi hâlde yayın doğrulaması hata verir. Öğrenci adı, numarası, fotoğrafı veya başka kişisel veri içeren dosyaları yayımlamayın.
 
 ## 2. Kataloğa kayıt ekleyin
 

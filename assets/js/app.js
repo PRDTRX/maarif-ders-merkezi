@@ -54,7 +54,7 @@ function filteredResources(){
   if(state.type&&resource.type!==state.type)return false;
   if(state.grade&&!(resource.grades||[]).includes(state.grade)&&!(resource.grades||[]).includes("tum-duzeyler"))return false;
   if(state.subject&&!(resource.subjects||[]).some(subject=>normalize(subject)===normalize(state.subject)||normalize(subject)==="tum dersler"))return false;
-  const haystack=[resource.title,resource.summary,resource.type,resource.categoryId,categoryNames.get(resource.categoryId),(resource.tags||[]).join(" "),(resource.grades||[]).map(grade=>GRADE_LABELS[grade]||grade).join(" "),(resource.subjects||[]).join(" ")].join(" ");
+  const haystack=[resource.title,resource.summary,resource.type,resource.categoryId,categoryNames.get(resource.categoryId),(resource.tags||[]).join(" "),(resource.grades||[]).map(grade=>GRADE_LABELS[grade]||grade).join(" "),(resource.subjects||[]).join(" "),(resource.outcomes||[]).join(" ")].join(" ");
   return !query||normalize(haystack).includes(query);
  });
 }
@@ -77,7 +77,7 @@ function renderResource(resource,index){
   main.append(make("span","resource-file-icon",FORMAT_SHORT[resource.format]||"Dosya"));
  const copy=make("span","resource-main-text");copy.append(make("strong","",resource.title||"Başlıksız kaynak"),make("small","",resource.summary||"Açıklama henüz eklenmedi."));main.append(copy);anchor.append(main);
  const kind=make("span","resource-kind");const category=categories().find(item=>item.id===resource.categoryId);if(category)kind.append(make("span","",category.title));kind.append(make("span","",TYPE_LABELS[resource.type]||resource.type||"Diğer"));anchor.append(kind);
- anchor.append(make("span","resource-level",levelLabel(resource)));anchor.append(make("span","resource-arrow","›"));
+ const level=make("span","resource-level",levelLabel(resource));if(resource.updatedAt){const d=new Date(resource.updatedAt);if(!isNaN(d))level.append(make("small","","Güncelleme: "+d.toLocaleDateString("tr-TR")));}anchor.append(level);anchor.append(make("span","resource-arrow","›"));
  if(!link){anchor.removeAttribute("href");anchor.setAttribute("aria-disabled","true");anchor.classList.add("resource-link-disabled");}
  row.append(anchor);return row;
 }
@@ -87,8 +87,8 @@ function renderResources(){
  if(!all.length){
   const empty=make("div","empty-state");
   empty.append(make("span","empty-state-symbol","↗"));
-  const copy=make("div","empty-state-copy");copy.append(make("h4","","Kaynaklar yakında burada."),make("p","","Kütüphane şu an hazırlanıyor. Kaynak eklemek istiyorsan içerik ekleme rehberine göz at."));empty.append(copy);
-  const guide=make("a","empty-state-code","İçerik ekleme rehberi");guide.href="https://github.com/PRDTRX/maarif-ders-merkezi/blob/main/CONTRIBUTING.md";guide.target="_blank";guide.rel="noopener noreferrer";empty.append(guide);list.append(empty);return;
+  const copy=make("div","empty-state-copy");copy.append(make("h4","","Kaynaklar yakında burada."),make("p","","Kütüphane şu an hazırlanıyor. Öneri ve eksik kaynak bildirimi için bize yazabilirsin."));empty.append(copy);
+  const guide=make("a","empty-state-code","Kaynak öner");guide.href="#katki";empty.append(guide);list.append(empty);return;
  }
  if(!matches.length){const empty=make("div","empty-state");empty.append(make("span","empty-state-symbol","⌕"));const copy=make("div","empty-state-copy");copy.append(make("h4","","Bu aramayla eşleşen kaynak bulunamadı."),make("p","","Arama sözcüğünü değiştir veya filtreleri temizleyip yeniden dene."));empty.append(copy);const clear=make("button","empty-state-code","Filtreleri temizle");clear.type="button";clear.addEventListener("click",clearFilters);empty.append(clear);list.append(empty);return;}
  matches.forEach((resource,index)=>list.append(renderResource(resource,index)));
@@ -106,6 +106,8 @@ function bindUI(){
  $("#filter-subject").addEventListener("change",event=>{state.subject=event.target.value;renderResources();});
  $("#clear-filters").addEventListener("click",clearFilters);
  document.querySelectorAll("[data-jump-category]").forEach(link=>link.addEventListener("click",event=>{event.preventDefault();const id=link.getAttribute("data-jump-category");state.category=state.category===id?"":id;$("#filter-category").value=state.category;renderCategories();renderResources();$("#kutuphane").scrollIntoView({behavior:SMOOTH,block:"start"});}));
+ $("#hero-search-form").addEventListener("submit",event=>{event.preventDefault();const value=$("#hero-search").value;state.query=value;$("#resource-search").value=value;if(state.catalog)renderResources();$("#kutuphane").scrollIntoView({behavior:SMOOTH,block:"start"});$("#resource-search").focus({preventScroll:true});});
+ $("#resource-search").addEventListener("input",event=>{$("#hero-search").value=event.target.value;});
  const toggle=$(".mobile-menu-toggle");const menu=$("#mobile-nav");
  toggle.addEventListener("click",()=>{const expanded=toggle.getAttribute("aria-expanded")==="true";toggle.setAttribute("aria-expanded",expanded?"false":"true");menu.hidden=expanded;});
  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!menu.hidden){menu.hidden=true;toggle.setAttribute("aria-expanded","false");toggle.focus();}});

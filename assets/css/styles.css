@@ -102,13 +102,15 @@ h1,h2,h3,h4,p{margin:0}
 .category-option:hover{background:var(--tile)}
 .category-option[aria-pressed=true]{background:var(--tile);box-shadow:inset 3px 0 0 var(--blue)}
 .category-option-index{font-size:13px;font-variant-numeric:tabular-nums;color:var(--muted)}
-.category-option-title{display:flex;align-items:center;gap:12px;min-width:0;font-size:19px;font-weight:600;letter-spacing:-.01em}\n.category-option-label{min-width:0}
+.category-option-title{display:flex;align-items:center;gap:12px;min-width:0;font-size:19px;font-weight:600;letter-spacing:-.01em}
+.category-option-label{min-width:0}
 .category-option-icon{width:36px;height:36px;display:grid;place-items:center;flex:none;border-radius:10px;background:var(--tile);color:var(--ink);font-size:17px}
 .category-option[aria-pressed=true] .category-option-icon{background:#fff}
 .category-option-description{font-size:15px;line-height:1.45;color:var(--muted)}
 .category-option-count{justify-self:end;font-size:14px;color:var(--muted);white-space:nowrap}
 .category-option-arrow{justify-self:end;font-size:20px;color:var(--muted)}
-.category-option:hover .category-option-arrow,.category-option[aria-pressed=true] .category-option-arrow{color:var(--blue)}\n.category-option[aria-pressed=true] .category-option-index{color:var(--blue)}
+.category-option:hover .category-option-arrow,.category-option[aria-pressed=true] .category-option-arrow{color:var(--blue)}
+.category-option[aria-pressed=true] .category-option-index{color:var(--blue)}
 .resource-area{padding-top:80px}
 .resource-list-head{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(180px,1fr) 130px 20px;gap:18px;padding:0 12px 10px;border-bottom:1px solid var(--line);font-size:14px;color:var(--muted)}
 .resource-list{border-bottom:1px solid var(--line)}
@@ -133,6 +135,12 @@ h1,h2,h3,h4,p{margin:0}
 .empty-state p{max-width:540px;margin-top:6px;font-size:15px;color:var(--muted)}
 .empty-state-code{padding:8px 14px;border-radius:980px;background:#fff;font-size:14px;white-space:nowrap}
 .resource-loading{padding:40px 12px;color:var(--muted)}
+
+/* 404 */
+.not-found{min-height:calc(100vh - 48px - 90px);display:grid;place-items:center;padding:96px 0;text-align:center}
+.not-found .lede{max-width:28em;margin:20px auto 0}
+.not-found .button{margin-top:32px}
+.brand{display:inline-flex;align-items:center}
 
 /* Katkı bölümü */
 .editorial-section{background:var(--tile);text-align:center}

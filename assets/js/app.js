@@ -88,7 +88,7 @@ function renderResources(){
   const empty=make("div","empty-state");
   empty.append(make("span","empty-state-symbol","↗"));
   const copy=make("div","empty-state-copy");copy.append(make("h4","","Kaynaklar yakında burada."),make("p","","Kütüphane şu an hazırlanıyor. Kaynak eklemek istiyorsan içerik ekleme rehberine göz at."));empty.append(copy);
-  const guide=make("a","empty-state-code","İçerik ekleme rehberi");guide.href="CONTRIBUTING.md";empty.append(guide);list.append(empty);return;
+  const guide=make("a","empty-state-code","İçerik ekleme rehberi");guide.href="https://github.com/PRDTRX/maarif-ders-merkezi/blob/main/CONTRIBUTING.md";guide.target="_blank";guide.rel="noopener noreferrer";empty.append(guide);list.append(empty);return;
  }
  if(!matches.length){const empty=make("div","empty-state");empty.append(make("span","empty-state-symbol","⌕"));const copy=make("div","empty-state-copy");copy.append(make("h4","","Bu aramayla eşleşen kaynak bulunamadı."),make("p","","Arama sözcüğünü değiştir veya filtreleri temizleyip yeniden dene."));empty.append(copy);const clear=make("button","empty-state-code","Filtreleri temizle");clear.type="button";clear.addEventListener("click",clearFilters);empty.append(clear);list.append(empty);return;}
  matches.forEach((resource,index)=>list.append(renderResource(resource,index)));
@@ -123,7 +123,7 @@ async function init(){
   renderCategories();renderResources();
  }catch(error){
   console.error(error);$("#category-list").textContent="Kategoriler yüklenemedi. Sayfayı yenilemeyi dene.";
-  $("#resource-list").textContent="Kaynak listesi şu an yüklenemiyor.";$("#result-summary").textContent="Yükleme başarısız";
+  $("#resource-list").textContent=location.protocol==="file:"?"Dosyayı doğrudan açtığında katalog okunamaz. Klasörde `python -m http.server 8000` çalıştırıp localhost:8000 adresini aç.":"Kaynak listesi şu an yüklenemiyor.";$("#result-summary").textContent="Yükleme başarısız";
  }
 }
 document.addEventListener("DOMContentLoaded",init);

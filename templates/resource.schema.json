@@ -17,7 +17,7 @@
     "format":{"type":"string","enum":["PDF","DOCX","XLSX","PPTX","LINK","HTML","OTHER"]},
     "outcomes":{"type":"array","items":{"type":"string","minLength":1},"uniqueItems":true,"description":"İsteğe bağlı: kazanım kodları (örn. T.5.3.1). Aramada bulunur."},
     "tags":{"type":"array","items":{"type":"string","minLength":1},"uniqueItems":true},
-    "file":{"type":"string","description":"content/ altındaki göreli dosya yolu. Haricî bağlantılar için sourceUrl alanını doldurun."},
+    "file":{"type":"string","description":"content/ altındaki göreli dosya yolu. Türkçe karakter, boşluk ve büyük harf kullanılabilir; yazım dosya adıyla birebir aynı olmalıdır. Haricî bağlantılar için sourceUrl alanını doldurun."},
     "sourceType":{"type":"string","enum":["official","adapted","original","external"],"description":"Resmî, uyarlanmış, özgün veya dış kaynak türü."},
     "sourceUrl":{"type":"string","format":"uri-reference","default":"","description":"Kaynağın doğrulanabilir asıl bağlantısı; varsa ekleyin."},
     "updatedAt":{"type":"string","format":"date"},

@@ -31,6 +31,29 @@ jobs:
                   json.load(handle)
               print(f"Valid JSON: {path}")
           PY
+      - name: Validate catalog references
+        run: |
+          python - <<'PY'
+          import json, os, sys
+          cat = json.load(open("data/catalog.json", encoding="utf-8"))
+          schema = json.load(open("templates/resource.schema.json", encoding="utf-8"))["properties"]
+          cats = {c["id"] for c in cat["categories"]}
+          if cats != set(schema["categoryId"]["enum"]):
+              sys.exit("categoryId enum (schema) ile catalog.json kategorileri uyumsuz")
+          errors, seen = [], set()
+          for r in cat["resources"]:
+              rid = r.get("id")
+              if rid in seen: errors.append(f"Yinelenen id: {rid}")
+              seen.add(rid)
+              if r.get("categoryId") not in cats: errors.append(f"{rid}: geçersiz categoryId")
+              if r.get("type") not in schema["type"]["enum"]: errors.append(f"{rid}: geçersiz type")
+              f = r.get("file", "")
+              if r.get("sourceType") != "external" and (not f or not os.path.isfile(f)):
+                  errors.append(f"{rid}: dosya bulunamadı ({f})")
+          if errors:
+              sys.exit("\n".join(errors))
+          print(f"Catalog OK: {len(cat['resources'])} kaynak")
+          PY
 
   pages-check:
     runs-on: ubuntu-latest

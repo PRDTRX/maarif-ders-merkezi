@@ -21,7 +21,7 @@
         <a href="#yaklasim">Değerlendirme yaklaşımı</a>
         <a href="#resmi-kaynaklar">MEB kaynakları</a>
       </nav>
-      <a class="nav-action" href="#kutuphane">Kaynakları keşfet</a>
+      <a class="nav-action" href="#katki">Kaynak öner</a>
       <button class="mobile-menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menüyü aç veya kapat"><span></span><span></span></button>
     </div>
     <nav class="mobile-nav" id="mobile-nav" aria-label="Mobil menü" hidden>
@@ -35,33 +35,47 @@
     <section class="hero" id="top">
       <div class="wrap">
         <h1>İyi öğretimin arkasında iyi araçlar var.</h1>
-        <p class="lede">Rubrikler, gözlem formları, performans görevleri ve çalışma kâğıtları. Maarif Modeli için aradığın her araç, tek bir aramada.</p>
-        <div class="hero-actions">
-          <a class="button button-primary" href="#kutuphane">Kütüphaneyi keşfet</a>
-          <a class="text-link" href="#yaklasim">Yaklaşımı tanı</a>
-        </div>
-        <div class="hero-preview" aria-hidden="true">
-          <div class="preview-search">
-            <svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 4.3 4.3"></path></svg>
-            <span>Rubrik, gözlem formu, etkinlik…</span>
-          </div>
-          <div class="preview-grid">
-            <div class="preview-card"><b>Performans görevleri</b><span>Ölçme ve değerlendirme</span></div>
-            <div class="preview-card"><b>Rubrikler</b><span>Açık ölçütlerle değerlendirme</span></div>
-            <div class="preview-card"><b>Gözlem formları</b><span>Süreç içindeki gelişim</span></div>
-            <div class="preview-card"><b>Etkinlik ve çalışma kâğıtları</b><span>Derse hazır materyaller</span></div>
-          </div>
-        </div>
+        <p class="lede">Maarif Modeli için rubrik, gözlem formu, performans görevi ve çalışma kâğıtlarını tek yerde ara, filtrele ve indir.</p>
+        <form class="hero-search" id="hero-search-form" role="search">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 4.3 4.3"></path></svg>
+          <input id="hero-search" type="search" placeholder="Rubrik, gözlem formu, kazanım kodu…" aria-label="Kaynak ara" autocomplete="off">
+          <button class="button button-primary" type="submit">Ara</button>
+        </form>
+        <p class="hero-note">Bağımsız bir projedir; MEB'in resmî sitesi değildir. <a class="text-link" href="#yaklasim">Değerlendirme yaklaşımı</a></p>
       </div>
     </section>
 
-    <section class="category-ribbon" aria-label="Kaynak alanları">
-      <div class="wrap ribbon-inner">
-        <a href="#kutuphane" data-jump-category="olcme-degerlendirme">Ölçme ve değerlendirme</a>
-        <a href="#kutuphane" data-jump-category="etkinlikler">Etkinlik ve çalışma kâğıtları</a>
-        <a href="#kutuphane" data-jump-category="egilimler">Eğilimler</a>
-        <a href="#kutuphane" data-jump-category="erdem-deger-eylem">Erdem, değer, eylem</a>
-        <a href="#kutuphane" data-jump-category="sosyal-duygusal-beceriler">Sosyal-duygusal öğrenme</a>
+    <section class="library-section" id="kutuphane">
+      <div class="wrap library-shell">
+        <div class="library-intro">
+          <h2 class="display">İhtiyacını bul.</h2>
+          <p class="lede">Kaynakları ara, filtrele ve sınıf düzeyine uygun olanı keşfet.</p>
+        </div>
+
+        <div class="library-tools">
+          <label class="search-field" for="resource-search">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 4.3 4.3"></path></svg>
+            <input id="resource-search" type="search" placeholder="Örn. öz değerlendirme rubriği veya kazanım kodu" autocomplete="off">
+          </label>
+          <div class="filter-line">
+            <label class="filter-select"><span>Kategori</span><select id="filter-category"><option value="">Tüm kategoriler</option></select></label>
+            <label class="filter-select"><span>Araç türü</span><select id="filter-type"><option value="">Tüm araçlar</option></select></label>
+            <label class="filter-select"><span>Sınıf düzeyi</span><select id="filter-grade"><option value="">Tüm düzeyler</option></select></label>
+            <label class="filter-select"><span>Ders</span><select id="filter-subject"><option value="">Tüm dersler</option></select></label>
+            <button class="clear-filters" id="clear-filters" type="button" hidden>Filtreleri temizle</button>
+          </div>
+        </div>
+
+        <div class="category-area">
+          <div class="category-area-heading"><h3>Alana göre gözat</h3><span id="category-count"></span></div>
+          <div class="category-list" id="category-list" aria-label="Kaynak kategorileri"></div>
+        </div>
+
+        <div class="resource-area" id="results">
+          <div class="resource-area-heading"><h3>Kaynaklar</h3><span id="result-summary" aria-live="polite">Katalog hazırlanıyor…</span></div>
+          <div class="resource-list-head" aria-hidden="true"><span>Kaynak</span><span>Kategori ve araç türü</span><span>Düzey</span><span></span></div>
+          <div class="resource-list" id="resource-list"><div class="resource-loading">Kaynaklar yükleniyor…</div></div>
+        </div>
       </div>
     </section>
 
@@ -95,45 +109,11 @@
       </div>
     </section>
 
-    <section class="library-section" id="kutuphane">
-      <div class="wrap library-shell">
-        <div class="library-intro">
-          <h2 class="display">İhtiyacını bul.</h2>
-          <p class="lede">Kaynakları ara, filtrele ve sınıf düzeyine uygun olanı keşfet.</p>
-        </div>
-
-        <div class="library-tools">
-          <label class="search-field" for="resource-search">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 4.3 4.3"></path></svg>
-            <input id="resource-search" type="search" placeholder="Ne arıyorsun? Örn. öz değerlendirme rubriği" autocomplete="off">
-          </label>
-          <div class="filter-line">
-            <label class="filter-select"><span>Kategori</span><select id="filter-category"><option value="">Tüm kategoriler</option></select></label>
-            <label class="filter-select"><span>Araç türü</span><select id="filter-type"><option value="">Tüm araçlar</option></select></label>
-            <label class="filter-select"><span>Sınıf düzeyi</span><select id="filter-grade"><option value="">Tüm düzeyler</option></select></label>
-            <label class="filter-select"><span>Ders</span><select id="filter-subject"><option value="">Tüm dersler</option></select></label>
-            <button class="clear-filters" id="clear-filters" type="button" hidden>Filtreleri temizle</button>
-          </div>
-        </div>
-
-        <div class="category-area">
-          <div class="category-area-heading"><h3>Bir alan seç</h3><span id="category-count"></span></div>
-          <div class="category-list" id="category-list" aria-label="Kaynak kategorileri"></div>
-        </div>
-
-        <div class="resource-area" id="results">
-          <div class="resource-area-heading"><h3>Kaynaklar</h3><span id="result-summary" aria-live="polite">Katalog hazırlanıyor…</span></div>
-          <div class="resource-list-head" aria-hidden="true"><span>Kaynak</span><span>Kategori ve araç türü</span><span>Düzey</span><span></span></div>
-          <div class="resource-list" id="resource-list"><div class="resource-loading">Kaynaklar yükleniyor…</div></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="editorial-section">
+    <section class="editorial-section" id="katki">
       <div class="wrap editorial-shell">
-        <h2 class="display">Daha az arama. Daha çok öğretim.</h2>
-        <p class="lede">Kütüphane, senin ekleyeceğin belgelerle büyür. Her kaynak amacı, düzeyi ve türüyle düzenli kalır.</p>
-        <a class="button button-primary" href="https://github.com/PRDTRX/maarif-ders-merkezi/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">İçerik ekleme rehberi</a>
+        <h2 class="display">Eksik bir kaynak mı var?</h2>
+        <p class="lede">Kullandığın bir rubrik, form ya da çalışma kâğıdını öner. İncelenip uygun görülenler amacı, düzeyi ve türüyle kütüphaneye eklenir.</p>
+        <a class="button button-primary" href="mailto:EPOSTA_ADRESINI_YAZ?subject=Maarif%20Ders%20Merkezi%20-%20Kaynak%20%C3%B6nerisi">Kaynak öner</a>
       </div>
     </section>
 

@@ -218,3 +218,15 @@ h1,h2,h3,h4,p{margin:0}
   html{scroll-behavior:auto}
   *,*:before,*:after{transition-duration:.01ms!important;animation-duration:.01ms!important}
 }
+
+/* Hero arama (sahte önizlemenin yerine) */
+.hero{padding-bottom:56px}
+.hero-search{display:flex;align-items:center;gap:12px;width:min(640px,100%);margin:36px auto 0;min-height:56px;padding:6px 6px 6px 20px;border-radius:980px;background:var(--tile);text-align:left}
+.hero-search:focus-within{box-shadow:0 0 0 2px var(--blue)}
+.hero-search svg{width:20px;height:20px;fill:none;stroke:var(--muted);stroke-width:1.7;flex:none}
+.hero-search input{flex:1;min-width:0;border:0;background:transparent;font:inherit;font-size:17px;color:var(--ink);outline:0}
+.hero-search .button{flex:none;border:0;cursor:pointer}
+.hero-note{margin-top:18px;font-size:14px;color:var(--muted)}
+.hero-note .text-link{margin-left:10px}
+.resource-level small{display:block;margin-top:4px;font-size:12px;color:var(--muted)}
+.library-section{padding-top:24px}

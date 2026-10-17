@@ -34,22 +34,36 @@ jobs:
       - name: Validate catalog references
         run: |
           python - <<'PY'
-          import json, os, sys
+          import json, os, re, sys, unicodedata
           cat = json.load(open("data/catalog.json", encoding="utf-8"))
           schema = json.load(open("templates/resource.schema.json", encoding="utf-8"))["properties"]
           cats = {c["id"] for c in cat["categories"]}
           if cats != set(schema["categoryId"]["enum"]):
               sys.exit("categoryId enum (schema) ile catalog.json kategorileri uyumsuz")
+          SEG = re.compile(r"^[\w][\w ._()',-]*$", re.UNICODE)
           errors, seen = [], set()
+          required = ["id","title","summary","categoryId","type","grades","subjects","format","tags","file","sourceType","updatedAt","status"]
           for r in cat["resources"]:
               rid = r.get("id")
               if rid in seen: errors.append(f"Yinelenen id: {rid}")
               seen.add(rid)
               if r.get("categoryId") not in cats: errors.append(f"{rid}: geçersiz categoryId")
               if r.get("type") not in schema["type"]["enum"]: errors.append(f"{rid}: geçersiz type")
+              for k in required:
+                  if k not in r: errors.append(f"{rid}: eksik alan {k}")
+              for g in r.get("grades", []):
+                  if g not in schema["grades"]["items"]["enum"]: errors.append(f"{rid}: geçersiz grade {g}")
+              if r.get("format") not in schema["format"]["enum"]: errors.append(f"{rid}: geçersiz format")
+              if r.get("status") not in schema["status"]["enum"]: errors.append(f"{rid}: geçersiz status")
               f = r.get("file", "")
-              if r.get("sourceType") != "external" and (not f or not os.path.isfile(f)):
-                  errors.append(f"{rid}: dosya bulunamadı ({f})")
+              if r.get("sourceType") != "external":
+                  parts = f.split("/")
+                  if f != unicodedata.normalize("NFC", f):
+                      errors.append(f"{rid}: file yolu NFC değil (macOS kaynaklı olabilir); dosyayı yeniden adlandır ({f})")
+                  elif not f.startswith("content/") or not all(p and p not in (".", "..") and SEG.match(p) for p in parts):
+                      errors.append(f"{rid}: file yolu geçersiz karakter içeriyor, sitede bağlantı çalışmaz ({f})")
+                  elif not os.path.isfile(f):
+                      errors.append(f"{rid}: dosya bulunamadı, ad ve harf büyüklüğü birebir aynı olmalı ({f})")
           if errors:
               sys.exit("\n".join(errors))
           print(f"Catalog OK: {len(cat['resources'])} kaynak")

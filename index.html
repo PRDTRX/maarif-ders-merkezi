@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Maarif Ders Merkezi – 5, 6 ve 7. sınıf etkinlik kâğıtları</title>
 <meta name="description" content="Türkiye Yüzyılı Maarif Modeli'ne göre hazırlanmış 5, 6 ve 7. sınıf etkinlik kâğıtlarını sınıf, ders, ünite ve kazanıma göre bulun.">
-<meta name="theme-color" content="#176b63">
+<meta name="theme-color" content="#319795">
 <link rel="canonical" href="https://prdtrx.github.io/maarif-ders-merkezi/">
 <meta property="og:type" content="website"><meta property="og:locale" content="tr_TR">
 <meta property="og:title" content="Maarif Ders Merkezi"><meta property="og:description" content="5, 6 ve 7. sınıf etkinlik kâğıtlarını kazanıma göre bulun.">
 <meta property="og:url" content="https://prdtrx.github.io/maarif-ders-merkezi/"><meta name="twitter:card" content="summary">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Maarif Ders Merkezi","inLanguage":"tr","url":"https://prdtrx.github.io/maarif-ders-merkezi/"}</script>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23176b63'/%3E%3Cpath d='M16 18c7-3 13-2 16 1v28c-4-3-10-4-16-1zM48 18c-7-3-13-2-16 1v28c4-3 10-4 16-1z' fill='none' stroke='%23fff' stroke-width='3' stroke-linejoin='round'/%3E%3Cpath d='M23 25h4M23 32h4M37 25h4M37 32h4' stroke='%23b9e4d8' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23319795'/%3E%3Cpath d='M16 18c7-3 13-2 16 1v28c-4-3-10-4-16-1zM48 18c-7-3-13-2-16 1v28c4-3 10-4 16-1 z' fill='none' stroke='%23fff' stroke-width='3' stroke-linejoin='round'/%3E%3Cpath d='M23 25h4M23 32h4M37 25h4M37 32h4' stroke='%23e6fffa' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -23,7 +23,6 @@
 
 <header class="hero" id="top"><div class="wrap">
   <p class="kicker">5, 6 ve 7. sınıflar için</p>
-  <div class="hero-orbit hero-orbit-a" aria-hidden="true"></div><div class="hero-orbit hero-orbit-b" aria-hidden="true"></div>
   <h1>Doğru etkinliği<br><span>saniyeler içinde bul.</span></h1>
   <p class="lead">Maarif Modeli kazanımlarına göre hazırlanmış etkinlik kâğıtları. Sınıfı, dersi, üniteyi ya da kazanımı yaz; gerisini biz bulalım.</p>
   <form class="search" role="search" onsubmit="return false">
@@ -35,13 +34,12 @@
 </div></header>
 
 <main class="wrap" id="bul">
-  <p class="data-note" role="note">Bilgilendirme: Bu depoda şu an örnek kayıtlar bulunmaktadır. PDF dosyalarını ve kazanım eşleştirmelerini yayınlamadan önce ekleyip doğrulayın.</p>
   <section class="filters simple-filters" aria-label="Etkinlik seçimi">
     <label><span>Sınıf</span><select id="grade" aria-label="Sınıf"><option value="">Tüm sınıflar</option></select></label>
     <label><span>Ders</span><select id="subject" aria-label="Ders"><option value="">Önce sınıf seç</option></select></label>
     <label><span>Ünite</span><select id="unit" aria-label="Ünite"><option value="">Önce ders seç</option></select></label>
   </section>
-  <div class="bar"><p id="count" aria-live="polite"></p><div class="barr"><label class="sort-control"><span>Sıralama</span><select id="sort" aria-label="Sonuçları sıralama"><option value="rel">İlgililik</option><option value="new">En yeni</option><option value="az">Başlık (A–Z)</option></select></label><button id="favt" class="pill favorite-filter" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 8.8c0 5.1-8.8 10-8.8 10s-8.8-4.9-8.8-10A4.7 4.7 0 0 1 12 6.5a4.7 4.7 0 0 1 8.8 2.3Z"/></svg><span>Favoriler</span><span id="favn" class="count-bubble">0</span></button><button id="prt" class="link show">Listeyi yazdır</button><button id="reset" class="link">Filtreleri temizle</button></div></div>
+  <div class="bar"><p id="count" aria-live="polite"></p><div class="barr"><label class="sort-control"><span>Sıralama</span><select id="sort" aria-label="Sonuçları sıralama"><option value="rel">İlgililik</option><option value="new">En yeni</option><option value="az">Başlık (A–Z)</option></select></label><button id="favt" class="pill favorite-filter" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 8.8c0 5.1-8.8 10-8.8 10s-8.8-4.9-8.8-10A4.7 4.7 0 0 1 12 6.5a4.7 4.7 0 0 1 8.8 2.3Z"/></svg><span>Favoriler</span><span id="favn" class="count-bubble">0</span></button><button id="reset" class="link">Filtreleri temizle</button></div></div>
   <section id="grid" class="grid" aria-label="Sonuçlar"></section>
   <noscript><p class="empty">Etkinlikleri görmek için JavaScript gerekir.</p></noscript>
   <div id="empty" class="empty" hidden><h3>Sonuç bulunamadı</h3><p>Yazımı kontrol et ya da filtreleri temizleyip yeniden dene.</p></div>

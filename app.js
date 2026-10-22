@@ -5,7 +5,6 @@
   const SORT_OPTIONS = ['rel', 'new', 'az'];
   const STATE_KEYS = ['q', 'grade', 'subject', 'unit', 'fav', 'a', 'sort'];
 
-  // Önceki sürümün sıralı kimlikleri; veri kaydı sırası sonradan değişse de geçiş doğru kalsın.
   const LEGACY_IDS = new Map([
     ['1', 'mat5-dogal-sayilar-01'],
     ['2', 'mat5-kesirler-01'],
@@ -81,10 +80,7 @@
     const result = [];
 
     source.forEach((raw, index) => {
-      if (!raw || typeof raw !== 'object' || Array.isArray(raw)) {
-        console.warn('Geçersiz etkinlik kaydı atlandı. Sıra:', index + 1);
-        return;
-      }
+      if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return;
 
       const item = {
         g: String(raw.g ?? '').trim(),
@@ -98,14 +94,10 @@
 
       if (!item.g || !/^\d+$/.test(item.g) || Number(item.g) < 1 ||
           !item.s || !item.u || !item.k || !item.kt || !item.t ||
-          !Number.isFinite(duration) || duration < 1) {
-        console.warn('Zorunlu alanı eksik veya hatalı etkinlik kaydı atlandı. Sıra:', index + 1);
-        return;
-      }
+          !Number.isFinite(duration) || duration < 1) return;
 
       let id = String(raw.id ?? index + 1).trim();
       if (!/^[A-Za-z0-9][A-Za-z0-9._-]{0,79}$/.test(id) || usedIds.has(id)) {
-        console.warn('Geçersiz veya yinelenen etkinlik kimliği düzeltildi. Sıra:', index + 1);
         id = String(index + 1);
         let suffix = 0;
         while (usedIds.has(id)) {
@@ -195,7 +187,6 @@
 
   function score(item, query) {
     if (!query) return 0;
-
     let points = 0;
     if (normalize(item.t).includes(query)) points += 5;
     if (normalize(item.k) === query) points += 8;
@@ -216,7 +207,6 @@
     return parts.join('');
   }
 
-  // PALET 3: BENTO BOX (GÖRSELDEN BİREBİR UYARLANAN KART TASARIMI)
   function card(item) {
     const pdfBtn = item.f
       ? '<a class="btn btn-action" href="' + escapeHtml(item.f) + '" target="_blank" rel="noopener noreferrer">İndir ↗</a>'
@@ -232,24 +222,23 @@
       '<div class="card-body">' +
         '<div class="bento-grid-inner">' +
           '<div class="bento-thumbnail">' +
-            '<div class="thumb-icon">' +
-              '<svg viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M5 17v3h14v-3"/></svg>' +
+            '<div class="thumb-placeholder-content">' +
+              '<svg viewBox="0 0 24 24"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>' +
+              '<span class="thumb-label">' + escapeHtml(item.ty) + '</span>' +
             '</div>' +
-            '<span class="thumb-label">' + escapeHtml(item.ty) + '</span>' +
           '</div>' +
           '<div class="bento-content">' +
             '<span class="unit-tag">' + escapeHtml(item.u) + '</span>' +
             '<h3><button class="open" data-id="' + escapeHtml(item.id) + '">' + escapeHtml(item.t) + '</button></h3>' +
             '<p class="kz-preview"><b>' + escapeHtml(item.k) + '</b> ' + escapeHtml(item.kt) + '</p>' +
             '<div class="meta-inline">' +
-              '<span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> ' + item.m + ' dk</span>' +
               metrics(item) +
             '</div>' +
           '</div>' +
         '</div>' +
       '</div>' +
       '<div class="card-footer-dual">' +
-        '<button class="btn btn-outline open" data-id="' + escapeHtml(item.id) + '">İncele</button>' +
+        '<button class="btn btn-outline open" data-id="' + escapeHtml(item.id) + '">Önizle</button>' +
         pdfBtn +
       '</div>' +
     '</article>';
@@ -448,13 +437,6 @@
   }
 
   const dialog = $('#dlg');
-  const formatDate = (value) => value
-    ? new Date(value + 'T12:00:00').toLocaleDateString('tr-TR', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric'
-    })
-    : '—';
 
   function updateFavoriteUi() {
     $('#favn').textContent = favs.size;
@@ -496,41 +478,19 @@
     syncUrl();
     dialog.dataset.g = item.g;
 
-    const similar = D
-      .filter((other) => other.id !== item.id &&
-        (other.k === item.k || (other.u === item.u && other.g === item.g)))
-      .sort((a, b) => Number(b.k === item.k) - Number(a.k === item.k))
-      .slice(0, 3);
-
-    const pdf = item.f
-      ? '<a class="btn" href="' + escapeHtml(item.f) + '" target="_blank" rel="noopener noreferrer">PDF aç</a>'
-      : '<span class="btn unavailable" aria-disabled="true">PDF henüz eklenmedi</span>';
-
-    const dl = item.dl
-      ? '<div><dt>İndirme</dt><dd>' + numberFormat.format(item.dl) + '</dd></div>'
-      : '';
-    const fv = item.fv
-      ? '<div><dt>Favori</dt><dd>' + numberFormat.format(item.fv) + '</dd></div>'
-      : '';
-    const related = similar.length
-      ? '<h4>Benzer etkinlikler</h4><div class="sim">' + similar.map((other) =>
-        '<button class="pill" data-open="' + escapeHtml(other.id) + '">' +
-        escapeHtml(other.t) + '</button>'
-      ).join('') + '</div>'
-      : '';
+    const pdfPreview = item.f
+      ? '<div class="dialog-preview-container"><iframe src="' + escapeHtml(item.f) + '" title="' + escapeHtml(item.t) + ' Önizleme" class="pdf-iframe"></iframe></div>' +
+        '<div class="acts"><a class="btn btn-action" href="' + escapeHtml(item.f) + '" target="_blank" rel="noopener noreferrer">Tam Ekran Aç ↗</a></div>'
+      : '<div class="dialog-preview-placeholder"><p>Bu belge için henüz PDF önizlemesi eklenmedi.</p></div>';
 
     $('#dc').innerHTML =
       '<button class="x" data-close aria-label="Kapat">✕</button>' +
-      '<span class="chip">' + escapeHtml(item.g) + '. sınıf · ' + escapeHtml(item.s) + '</span>' +
-      '<h2 id="dialog-title">' + escapeHtml(item.t) + '</h2>' +
-      '<p class="unit">' + escapeHtml(item.u) + '</p>' +
-      '<p class="kz"><b>' + escapeHtml(item.k) + '</b> ' + escapeHtml(item.kt) + '</p>' +
-      '<dl><div><dt>Süre</dt><dd>' + item.m + ' dk</dd></div>' +
-      '<div><dt>Eklenme</dt><dd>' + formatDate(item.dt) + '</dd></div>' + dl + fv + '</dl>' +
-      '<div class="acts">' + pdf +
-      '<button class="pill heart dialog-heart" data-id="' + escapeHtml(item.id) + '">' +
-      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 8.8c0 5.1-8.8 10-8.8 10s-8.8-4.9-8.8-10A4.7 4.7 0 0 1 12 6.5a4.7 4.7 0 0 1 8.8 2.3Z"/></svg>' +
-      '<span>Favori</span></button></div>' + related;
+      '<div class="dialog-header-info">' +
+        '<span class="chip">' + escapeHtml(item.g) + '. Sınıf · ' + escapeHtml(item.s) + '</span>' +
+        '<h2 id="dialog-title">' + escapeHtml(item.t) + '</h2>' +
+        '<p class="unit">' + escapeHtml(item.u) + ' &bull; <b>' + escapeHtml(item.k) + '</b> ' + escapeHtml(item.kt) + '</p>' +
+      '</div>' +
+      pdfPreview;
 
     updateFavoriteUi();
     if (!dialog.open) dialog.showModal();
@@ -561,7 +521,6 @@
     F.fav = F.fav ? '' : '1';
     render();
   });
-  $('#prt').addEventListener('click', () => window.print());
 
   window.addEventListener('popstate', () => {
     loadState();

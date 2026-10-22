@@ -216,32 +216,41 @@
     return parts.join('');
   }
 
-  // BENTO BOX / APPLE TARZI KART YAPISI
+  // PALET 3: BENTO BOX (GÖRSELDEN BİREBİR UYARLANAN KART TASARIMI)
   function card(item) {
-    const pdf = item.f
-      ? '<a class="btn" href="' + escapeHtml(item.f) + '" target="_blank" rel="noopener noreferrer" aria-label="' +
-        escapeHtml(item.t) + ' PDF aç"><span>PDF\'yi İndir / Aç</span> <span aria-hidden="true">↗</span></a>'
-      : '<span class="btn unavailable" aria-disabled="true">PDF Hazırlanıyor</span>';
+    const pdfBtn = item.f
+      ? '<a class="btn btn-action" href="' + escapeHtml(item.f) + '" target="_blank" rel="noopener noreferrer">İndir ↗</a>'
+      : '<span class="btn btn-action unavailable" aria-disabled="true">Yakında</span>';
 
     return '<article class="card" data-g="' + escapeHtml(item.g) + '">' +
       '<div class="card-banner">' +
-        '<span class="chip grade-chip">' + escapeHtml(item.g) + '. Sınıf</span>' +
-        '<span class="doc-type">' + escapeHtml(item.ty) + '</span>' +
+        '<span class="banner-title">' + escapeHtml(item.g) + '. Sınıf ' + escapeHtml(item.s) + '</span>' +
         '<button class="heart" data-id="' + escapeHtml(item.id) + '" aria-pressed="false" aria-label="Favorilere ekle" title="Favorilere ekle">' +
           '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 8.8c0 5.1-8.8 10-8.8 10s-8.8-4.9-8.8-10A4.7 4.7 0 0 1 12 6.5a4.7 4.7 0 0 1 8.8 2.3Z"/></svg>' +
         '</button>' +
       '</div>' +
       '<div class="card-body">' +
-        '<div class="kazanim-box">' +
-          '<span class="kz-tag">KAZANIM</span>' +
-          '<span class="kz-code">' + escapeHtml(item.k) + '</span> ' + escapeHtml(item.kt) +
+        '<div class="bento-grid-inner">' +
+          '<div class="bento-thumbnail">' +
+            '<div class="thumb-icon">' +
+              '<svg viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M5 17v3h14v-3"/></svg>' +
+            '</div>' +
+            '<span class="thumb-label">' + escapeHtml(item.ty) + '</span>' +
+          '</div>' +
+          '<div class="bento-content">' +
+            '<span class="unit-tag">' + escapeHtml(item.u) + '</span>' +
+            '<h3><button class="open" data-id="' + escapeHtml(item.id) + '">' + escapeHtml(item.t) + '</button></h3>' +
+            '<p class="kz-preview"><b>' + escapeHtml(item.k) + '</b> ' + escapeHtml(item.kt) + '</p>' +
+            '<div class="meta-inline">' +
+              '<span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> ' + item.m + ' dk</span>' +
+              metrics(item) +
+            '</div>' +
+          '</div>' +
         '</div>' +
-        '<h3><button class="open" data-id="' + escapeHtml(item.id) + '">' + escapeHtml(item.t) + '</button></h3>' +
-        '<p class="sub-info">' + escapeHtml(item.s) + ' &bull; ' + escapeHtml(item.u) + '</p>' +
       '</div>' +
-      '<div class="card-footer">' +
-        '<div class="meta"><span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>' +
-        item.m + ' dk</span><span>' + metrics(item) + '</span></div>' + pdf +
+      '<div class="card-footer-dual">' +
+        '<button class="btn btn-outline open" data-id="' + escapeHtml(item.id) + '">İncele</button>' +
+        pdfBtn +
       '</div>' +
     '</article>';
   }

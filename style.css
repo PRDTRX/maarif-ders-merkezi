@@ -9,7 +9,7 @@ a{color:inherit;text-decoration:none}
 .nav{position:sticky;top:0;z-index:20;backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);background:color-mix(in srgb,var(--bg) 86%,transparent);border-bottom:1px solid color-mix(in srgb,var(--ln) 72%,transparent)}
 .navin{display:flex;align-items:center;justify-content:space-between;height:72px}
 .brand{display:flex;align-items:center;gap:12px;font-weight:600;font-size:16px;letter-spacing:-.035em}
-.logo{width:42px;height:42px;border-radius:14px;background:linear-gradient(145deg,#1a766a,#124a45);display:grid;place-items:center;box-shadow:0 7px 16px rgba(23,107,99,.2)}
+.logo{width:42px;height:42px;border-radius:14px;background:linear-gradient(145deg,#f43f5e,#e11d48);display:grid;place-items:center;box-shadow:0 7px 16px rgba(225,29,72,.25)}
 .logo svg{width:26px;height:26px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .brand-copy{display:flex;flex-direction:column;line-height:1.1;font-weight:750}.brand-copy span{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--mu);font-weight:650;margin-top:3px}
 .navr{display:flex;align-items:center;gap:28px;font-size:14px;font-weight:550;color:var(--mu)}
@@ -19,19 +19,19 @@ a{color:inherit;text-decoration:none}
 .theme-icon{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 
 /* Hero Header */
-.hero{isolation:isolate;position:relative;overflow:hidden;text-align:center;padding:88px 0 64px;background:linear-gradient(180deg,color-mix(in srgb,var(--ac) 7%,var(--bg)) 0%,var(--bg) 80%);border-bottom:1px solid color-mix(in srgb,var(--ln) 65%,transparent)}
-.kicker{display:inline-flex;align-items:center;gap:9px;padding:7px 15px;margin-bottom:20px;border:1px solid color-mix(in srgb,var(--ac) 18%,var(--ln));border-radius:99px;background:color-mix(in srgb,var(--card) 70%,transparent);color:var(--ac);font-size:12px;font-weight:750;letter-spacing:.12em;text-transform:uppercase}
-.kicker::before{content:"";width:6px;height:6px;background:var(--ac);border-radius:50%;box-shadow:0 0 0 4px color-mix(in srgb,var(--ac) 12%,transparent)}
+.hero{isolation:isolate;position:relative;overflow:hidden;text-align:center;padding:88px 0 64px;background:linear-gradient(180deg,color-mix(in srgb,var(--ac) 9%,var(--bg)) 0%,var(--bg) 80%);border-bottom:1px solid color-mix(in srgb,var(--ln) 65%,transparent)}
+.kicker{display:inline-flex;align-items:center;gap:9px;padding:7px 15px;margin-bottom:20px;border:1px solid color-mix(in srgb,var(--ac) 20%,var(--ln));border-radius:99px;background:color-mix(in srgb,var(--card) 70%,transparent);color:var(--ac);font-size:12px;font-weight:750;letter-spacing:.12em;text-transform:uppercase}
+.kicker::before{content:"";width:6px;height:6px;background:var(--ac);border-radius:50%;box-shadow:0 0 0 4px color-mix(in srgb,var(--ac) 15%,transparent)}
 h1{font-size:clamp(40px,6.8vw,76px);line-height:1.02;letter-spacing:-.05em;font-weight:760;margin:0 auto .35em;max-width:960px}
-h1 span{background:linear-gradient(100deg,var(--ac) 4%,#399a82 55%,#9b8258 105%);-webkit-background-clip:text;background-clip:text;color:transparent}
-:root[data-theme=dark] h1 span{background-image:linear-gradient(100deg,#8ce0c5,#9fdbc4 50%,#e1bd8c)}
+h1 span{background:linear-gradient(100deg,#f43f5e 0%,#e11d48 45%,#d97706 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+:root[data-theme=dark] h1 span{background-image:linear-gradient(100deg,#fb7185,#f43f5e 50%,#f59e0b)}
 .lead{max-width:600px;margin:20px auto 32px;font-size:clamp(16px,2vw,19px);line-height:1.65;color:var(--mu)}
 
 /* Search Bar */
 .search{position:relative;max-width:630px;margin:0 auto;color:var(--mu)}
 .search svg{position:absolute;left:22px;top:50%;transform:translateY(-50%)}
-.search input{width:100%;height:64px;padding:0 56px 0 58px;font:inherit;font-size:16px;color:var(--tx);background:var(--card);border:1px solid color-mix(in srgb,var(--ln) 80%,transparent);border-radius:19px;box-shadow:0 12px 36px rgba(18,65,54,.07);transition:box-shadow .2s,border-color .2s}
-.search input:focus{outline:0;border-color:var(--ac);box-shadow:0 0 0 4px color-mix(in srgb,var(--ac) 14%,transparent),0 12px 36px rgba(18,65,54,.07)}
+.search input{width:100%;height:64px;padding:0 56px 0 58px;font:inherit;font-size:16px;color:var(--tx);background:var(--card);border:1px solid color-mix(in srgb,var(--ln) 80%,transparent);border-radius:19px;box-shadow:0 12px 36px rgba(225,29,72,.06);transition:box-shadow .2s,border-color .2s}
+.search input:focus{outline:0;border-color:var(--ac);box-shadow:0 0 0 4px color-mix(in srgb,var(--ac) 16%,transparent),0 12px 36px rgba(225,29,72,.08)}
 kbd{position:absolute;right:20px;top:50%;transform:translateY(-50%);font:13px ui-monospace,Menlo,monospace;border:1px solid var(--ln);border-radius:8px;padding:3px 8px;background:var(--bg2);color:var(--mu)}
 .stats{list-style:none;display:flex;justify-content:center;gap:clamp(25px,5vw,68px);padding:0;margin-top:40px;color:var(--mu);font-size:12px;text-transform:uppercase;letter-spacing:.09em;font-weight:650}
 .stats li{display:flex;flex-direction:column;gap:2px}.stats b{font-size:28px;color:var(--tx);letter-spacing:-.04em;font-weight:750}
@@ -60,11 +60,11 @@ select:disabled{opacity:.48;cursor:not-allowed;background-color:var(--bg2);color
 .link.show{visibility:visible}
 
 /* Card Grid Layout */
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:24px;padding-bottom:88px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,350px),1fr));gap:24px;padding-bottom:88px}
 
-/* ==========================================
-   KONSEPT 2: BENTO BOX / APPLE TARZI KARTLAR
-   ========================================== */
+/* ====================================================================
+   PALET 3: BENTO BOX - GÜN BATIMI MERCAN VE SICAK KEHRİBAR (GÖRSELDEN BİREBİR)
+   ==================================================================== */
 .card{
   --c: var(--g5);
   position: relative;
@@ -73,7 +73,7 @@ select:disabled{opacity:.48;cursor:not-allowed;background-color:var(--bg2);color
   background: var(--card);
   border: 1px solid var(--ln);
   border-radius: 20px;
-  box-shadow: 0 6px 20px rgba(0,0,0,.035);
+  box-shadow: 0 8px 24px rgba(225,29,72,.05);
   transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
   overflow: hidden;
 }
@@ -81,46 +81,34 @@ select:disabled{opacity:.48;cursor:not-allowed;background-color:var(--bg2);color
 .card[data-g="7"]{--c:var(--g7)}
 
 .card:hover{
-  transform: translateY(-4px);
-  box-shadow: 0 16px 36px rgba(0,0,0,.08);
-  border-color: color-mix(in srgb, var(--c) 40%, var(--ln));
+  transform: translateY(-5px);
+  box-shadow: 0 18px 40px rgba(225,29,72,.12);
+  border-color: color-mix(in srgb, var(--c) 50%, var(--ln));
 }
 
-/* Üst Pastel Şerit (Banner) */
+/* Canlı Renkli Dolgulu Üst Banner */
 .card-banner{
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 14px 18px;
-  background: color-mix(in srgb, var(--c) 10%, var(--bg2));
-  border-bottom: 1px solid color-mix(in srgb, var(--ln) 50%, transparent);
+  background: var(--c);
+  color: #ffffff;
 }
-.card-banner .chip{
-  background: var(--card);
-  color: var(--c);
-  font-weight: 750;
-  font-size: 11px;
-  padding: 4px 10px;
-  border-radius: 8px;
-  border: 1px solid color-mix(in srgb, var(--c) 25%, transparent);
-  letter-spacing: .03em;
-}
-.doc-type{
-  font-size: 11px;
-  font-weight: 650;
-  color: var(--mu);
-  text-transform: uppercase;
-  letter-spacing: .06em;
+.banner-title{
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: -.01em;
 }
 
-/* Kalp Butonu (Bento Box Tarzı) */
+/* Kalp Butonu (Banner İçinde) */
 .heart{
   width: 32px;
   height: 32px;
-  border: 1px solid color-mix(in srgb, var(--ln) 80%, transparent);
-  border-radius: 9px;
-  background: var(--card);
-  color: var(--mu);
+  border: 0;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
   display: grid;
   place-items: center;
   cursor: pointer;
@@ -128,20 +116,19 @@ select:disabled{opacity:.48;cursor:not-allowed;background-color:var(--bg2);color
   padding: 0;
 }
 .heart:hover{
-  color: #e54865;
-  border-color: color-mix(in srgb, #e54865 40%, var(--ln));
+  background: rgba(255, 255, 255, 0.35);
+  transform: scale(1.06);
 }
 .heart.on{
-  color: #e54865;
-  background: color-mix(in srgb, #e54865 12%, var(--card));
-  border-color: color-mix(in srgb, #e54865 30%, var(--ln));
+  background: #ffffff;
+  color: #e11d48;
 }
 .heart svg{
   width: 17px;
   height: 17px;
   fill: none;
   stroke: currentColor;
-  stroke-width: 1.8;
+  stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
@@ -149,38 +136,68 @@ select:disabled{opacity:.48;cursor:not-allowed;background-color:var(--bg2);color
   fill: currentColor;
 }
 
-/* Card Body & Kazanım Kutusu (Bento İç Kutusu) */
+/* Bento İç Grid Yapısı (Sol Küçük Modül + Sağ İçerik) */
 .card-body{
-  display: flex;
-  flex-direction: column;
-  padding: 18px 20px 16px;
+  padding: 16px;
   flex: 1;
 }
+.bento-grid-inner{
+  display: grid;
+  grid-template-columns: 88px 1fr;
+  gap: 14px;
+  height: 100%;
+}
 
-.kazanim-box{
-  background: var(--bg2);
-  border: 1px solid color-mix(in srgb, var(--ln) 60%, transparent);
-  border-radius: 12px;
-  padding: 10px 12px;
-  font-size: 12px;
-  line-height: 1.5;
-  color: var(--mu);
-  margin-bottom: 14px;
+/* Sol Küçük Bento Kutusu (Thumbnail) */
+.bento-thumbnail{
+  background: color-mix(in srgb, var(--c) 12%, var(--bg2));
+  border: 1px solid color-mix(in srgb, var(--c) 20%, transparent);
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 6px;
+  text-align: center;
 }
-.kz-tag{
-  display: block;
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: .1em;
-  color: var(--c);
-  margin-bottom: 2px;
-  text-transform: uppercase;
+.thumb-icon{
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--c);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 4px 10px color-mix(in srgb, var(--c) 30%, transparent);
 }
-.kz-code{
+.thumb-icon svg{
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.thumb-label{
+  font-size: 10px;
   font-weight: 750;
-  color: var(--tx);
+  color: var(--c);
+  line-height: 1.2;
 }
 
+/* Sağ Bento Kutusu (Başlık, Ünite, Kazanım) */
+.bento-content{
+  display: flex;
+  flex-direction: column;
+}
+.unit-tag{
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--mu);
+  margin-bottom: 3px;
+}
 .card h3{
   margin-bottom: 6px;
 }
@@ -188,8 +205,8 @@ select:disabled{opacity:.48;cursor:not-allowed;background-color:var(--bg2);color
   all: unset;
   cursor: pointer;
   display: block;
-  font-size: 18px;
-  font-weight: 760;
+  font-size: 16px;
+  font-weight: 800;
   line-height: 1.3;
   color: var(--tx);
   letter-spacing: -.02em;
@@ -202,80 +219,89 @@ select:disabled{opacity:.48;cursor:not-allowed;background-color:var(--bg2);color
   border-radius: 20px;
 }
 
-.sub-info{
-  font-size: 13px;
-  color: var(--mu);
-  font-weight: 600;
-  margin-top: auto;
-}
-
-/* Card Footer */
-.card-footer{
-  padding: 14px 20px 18px;
-  border-top: 1px solid color-mix(in srgb, var(--ln) 50%, transparent);
-  background: color-mix(in srgb, var(--bg2) 40%, var(--card));
-  position: relative;
-  z-index: 2;
-}
-.meta{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.kz-preview{
   font-size: 12px;
   color: var(--mu);
-  margin-bottom: 12px;
-  font-weight: 600;
+  line-height: 1.45;
+  margin-bottom: 10px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
-.meta svg{
-  width: 14px;
-  height: 14px;
+.kz-preview b{
+  color: var(--c);
+}
+
+.meta-inline{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 650;
+  color: var(--mu);
+  margin-top: auto;
+}
+.meta-inline svg{
+  width: 13px;
+  height: 13px;
   fill: none;
   stroke: currentColor;
-  stroke-width: 1.8;
+  stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
-.meta > span:first-child{
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-}
-.metric{
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  margin-left: 8px;
-  font-variant-numeric: tabular-nums;
+
+/* Çift Butonlu Bento Alt Alanı (İncele & İndir) */
+.card-footer-dual{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 12px 16px 16px;
+  background: color-mix(in srgb, var(--bg2) 50%, var(--card));
+  border-top: 1px solid color-mix(in srgb, var(--ln) 60%, transparent);
+  position: relative;
+  z-index: 2;
 }
 
 .btn{
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  width: 100%;
-  height: 42px;
-  background: var(--ac);
-  color: #fff;
-  font-weight: 700;
+  height: 40px;
+  font-weight: 750;
   font-size: 13px;
-  border-radius: 11px;
-  box-shadow: 0 4px 12px color-mix(in srgb, var(--ac) 20%, transparent);
-  transition: transform .2s, filter .2s;
-  position: relative;
-  z-index: 3;
+  border-radius: 12px;
+  transition: all .2s;
+  cursor: pointer;
+  border: 0;
+  text-decoration: none;
 }
-.btn:hover{
+.btn-outline{
+  background: color-mix(in srgb, var(--c) 12%, var(--card));
+  color: var(--c);
+  border: 1px solid color-mix(in srgb, var(--c) 30%, transparent);
+}
+.btn-outline:hover{
+  background: color-mix(in srgb, var(--c) 22%, var(--card));
+}
+
+.btn-action{
+  background: var(--c);
+  color: #ffffff;
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--c) 25%, transparent);
+}
+.btn-action:hover{
   transform: translateY(-1px);
-  filter: brightness(1.06);
+  filter: brightness(1.08);
 }
-.btn.unavailable{
+.btn-action.unavailable{
   background: var(--bg2);
   color: var(--mu);
   border: 1px solid var(--ln);
   box-shadow: none;
   cursor: not-allowed;
-  font-weight: 600;
 }
 
 /* About & Footer */
@@ -299,10 +325,52 @@ dl{display:grid;grid-template-columns:1fr 1fr;gap:12px 20px;margin:8px 0}dt{font
 
 .empty{text-align:center;padding:80px 0 120px;color:var(--mu)}.empty h3{color:var(--tx);font-size:24px;margin-bottom:6px}
 
-/* Variables & Dark Mode */
-:root{--bg:#f7f8f6;--bg2:#edf2ef;--card:#ffffff;--tx:#162826;--mu:#647571;--ln:#dce5e0;--ac:#176b63;--g5:#176b63;--g6:#b06f38;--g7:#705da1;color-scheme:light}
-:root[data-theme=dark]{--bg:#0f1614;--bg2:#16201d;--card:#1a2622;--tx:#ecf4ef;--mu:#9eb0a8;--ln:#2d3e37;--ac:#70c7ae;--g5:#70c7ae;--g6:#dfb17e;--g7:#b5a4ef;color-scheme:dark}
-@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0f1614;--bg2:#16201d;--card:#1a2622;--tx:#ecf4ef;--mu:#9eb0a8;--ln:#2d3e37;--ac:#70c7ae;--g5:#70c7ae;--g6:#dfb17e;--g7:#b5a4ef;color-scheme:dark}}
+/* ====================================================================
+   PALET 3 DEĞİŞKENLERİ: GÜN BATIMI MERCAN & SICAK KEHRİBAR
+   ==================================================================== */
+:root{
+  --bg: #f8faf9;
+  --bg2: #f1f5f3;
+  --card: #ffffff;
+  --tx: #172522;
+  --mu: #60726e;
+  --ln: #dbe4e0;
+  --ac: #e11d48;
+  --g5: #e11d48; /* 5. Sınıf: Mercan Kırmızı */
+  --g6: #d97706; /* 6. Sınıf: Kehribar Turuncusu */
+  --g7: #dc2626; /* 7. Sınıf: Sıcak Kırmızı */
+  color-scheme: light;
+}
+
+:root[data-theme=dark]{
+  --bg: #111716;
+  --bg2: #18221f;
+  --card: #1d2a26;
+  --tx: #edf5f1;
+  --mu: #a0b2aa;
+  --ln: #2f4039;
+  --ac: #fb7185;
+  --g5: #fb7185;
+  --g6: #f59e0b;
+  --g7: #f87171;
+  color-scheme: dark;
+}
+
+@media(prefers-color-scheme:dark){
+  :root:not([data-theme=light]){
+    --bg: #111716;
+    --bg2: #18221f;
+    --card: #1d2a26;
+    --tx: #edf5f1;
+    --mu: #a0b2aa;
+    --ln: #2f4039;
+    --ac: #fb7185;
+    --g5: #fb7185;
+    --g6: #f59e0b;
+    --g7: #f87171;
+    color-scheme: dark;
+  }
+}
 
 /* Responsive */
 @media(max-width:640px){
@@ -312,7 +380,9 @@ dl{display:grid;grid-template-columns:1fr 1fr;gap:12px 20px;margin:8px 0}dt{font
   .bar{align-items:flex-start;gap:12px;flex-direction:column}.barr{justify-content:flex-start;width:100%}
   .sort-control{width:100%;justify-content:space-between}.sort-control select{flex:1;max-width:200px}
   .grid{grid-template-columns:minmax(0,1fr);gap:16px}
+  .bento-grid-inner{grid-template-columns:72px 1fr;gap:10px}
+  .thumb-icon{width:30px;height:30px}
 }
-@media(hover:none){.card:hover{transform:none;box-shadow:0 6px 20px rgba(0,0,0,.035)}}
+@media(hover:none){.card:hover{transform:none;box-shadow:0 8px 24px rgba(225,29,72,.05)}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 @media print{.nav,.hero,.simple-filters,.data-note,.barr,.about,dialog,.foot{display:none!important}body{background:#fff;color:#000}.grid{grid-template-columns:1fr 1fr;gap:12px;padding:0}.card{box-shadow:none;border:1px solid #ccc;break-inside:avoid}}

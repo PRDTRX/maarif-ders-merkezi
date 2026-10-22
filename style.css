@@ -436,7 +436,9 @@ dialog::backdrop{
   body { background: #fff !important; color: #111 !important; font-size: 10pt; }
   .nav, .hero, .simple-filters, .bar, .about, .foot, .card-footer-dual, .heart, .empty, .kicker, .stats { display: none !important; }
   main.wrap { max-width: none; padding: 0; margin: 0; }
-  #grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8mm; padding: 0; }
+  #grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; padding: 0; }
+  body.printing-card #grid .card:not(.print-target) { display: none !important; }
+  body.printing-card #grid .print-target { width: 100%; max-width: none; }
   .card { break-inside: avoid; border: 1px solid #bbb; border-radius: 6px; box-shadow: none; transform: none; background: #fff !important; color: #111 !important; }
   .card-banner { background: #f1f1f1 !important; color: #111 !important; padding: 6px 8px; }
   .card-body { padding: 8px; }

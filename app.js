@@ -239,6 +239,7 @@
       '</div>' +
       '<div class="card-footer-dual">' +
         '<button class="btn btn-outline open" data-id="' + escapeHtml(item.id) + '">Önizle</button>' +
+        '<button class="btn btn-outline print-card" data-print="' + escapeHtml(item.id) + '" type="button">Yazdır</button>' +
         pdfBtn +
       '</div>' +
     '</article>';
@@ -362,8 +363,25 @@
     render();
   });
 
-  $('#print').addEventListener('click', () => {
+  function printCard(id) {
+    const target = [...document.querySelectorAll('.card')].find((element) =>
+      element.querySelector('[data-print]')?.dataset.print === id
+    );
+    if (!target) return;
+
+    document.querySelectorAll('.card.print-target').forEach((element) =>
+      element.classList.remove('print-target')
+    );
+    target.classList.add('print-target');
+    document.body.classList.add('printing-card');
     window.print();
+  }
+
+  window.addEventListener('afterprint', () => {
+    document.body.classList.remove('printing-card');
+    document.querySelectorAll('.card.print-target').forEach((element) =>
+      element.classList.remove('print-target')
+    );
   });
 
   $('#reset').addEventListener('click', () => {
@@ -503,7 +521,9 @@
   $('#grid').addEventListener('click', (event) => {
     const favorite = event.target.closest('.heart');
     const open = event.target.closest('.open');
+    const print = event.target.closest('[data-print]');
     if (favorite) toggleFavorite(favorite.dataset.id);
+    else if (print) printCard(print.dataset.print);
     else if (open) openDialog(open.dataset.id);
   });
 

@@ -362,6 +362,10 @@
     render();
   });
 
+  $('#print').addEventListener('click', () => {
+    window.print();
+  });
+
   $('#reset').addEventListener('click', () => {
     Object.assign(F, { q: '', grade: '', subject: '', unit: '', fav: '' });
     $('#q').value = '';
@@ -375,9 +379,9 @@
         !event.ctrlKey &&
         !event.metaKey &&
         !event.altKey &&
-        active.tagName !== 'INPUT' &&
-        active.tagName !== 'SELECT' &&
-        !active.isContentEditable) {
+        !['INPUT', 'TEXTAREA', 'SELECT'].includes(active.tagName) &&
+        !active.isContentEditable &&
+        !event.repeat) {
       event.preventDefault();
       $('#q').focus();
     }

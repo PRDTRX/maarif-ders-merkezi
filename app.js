@@ -181,7 +181,6 @@
     F.unit = fillOptions('#unit', F.grade && F.subject ? 'Tüm üniteler' : 'Önce ders seç',
       units.map((value) => [value, value]), F.unit);
 
-    // Bağlı filtrelerin disabled durumunu yönetme
     subjectEl.disabled = !F.grade;
     unitEl.disabled = !(F.grade && F.subject);
   }
@@ -217,6 +216,7 @@
     return parts.join('');
   }
 
+  // BENTO BOX / APPLE TARZI KART YAPISI
   function card(item) {
     const pdf = item.f
       ? '<a class="btn" href="' + escapeHtml(item.f) + '" target="_blank" rel="noopener noreferrer" aria-label="' +
@@ -224,17 +224,20 @@
       : '<span class="btn unavailable" aria-disabled="true">PDF Hazırlanıyor</span>';
 
     return '<article class="card" data-g="' + escapeHtml(item.g) + '">' +
-      '<button class="heart" data-id="' + escapeHtml(item.id) + '" aria-pressed="false" aria-label="Favorilere ekle" title="Favorilere ekle">' +
-        '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 8.8c0 5.1-8.8 10-8.8 10s-8.8-4.9-8.8-10A4.7 4.7 0 0 1 12 6.5a4.7 4.7 0 0 1 8.8 2.3Z"/></svg>' +
-      '</button>' +
-      '<div class="card-header-meta">' +
-        '<span>' + escapeHtml(item.g) + '. SINIF · ' + escapeHtml(item.s) + '</span>' +
+      '<div class="card-banner">' +
+        '<span class="chip grade-chip">' + escapeHtml(item.g) + '. Sınıf</span>' +
         '<span class="doc-type">' + escapeHtml(item.ty) + '</span>' +
+        '<button class="heart" data-id="' + escapeHtml(item.id) + '" aria-pressed="false" aria-label="Favorilere ekle" title="Favorilere ekle">' +
+          '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 8.8c0 5.1-8.8 10-8.8 10s-8.8-4.9-8.8-10A4.7 4.7 0 0 1 12 6.5a4.7 4.7 0 0 1 8.8 2.3Z"/></svg>' +
+        '</button>' +
       '</div>' +
       '<div class="card-body">' +
+        '<div class="kazanim-box">' +
+          '<span class="kz-tag">KAZANIM</span>' +
+          '<span class="kz-code">' + escapeHtml(item.k) + '</span> ' + escapeHtml(item.kt) +
+        '</div>' +
         '<h3><button class="open" data-id="' + escapeHtml(item.id) + '">' + escapeHtml(item.t) + '</button></h3>' +
-        '<p class="unit-text">' + escapeHtml(item.u) + '</p>' +
-        '<div class="kz"><span class="kz-code">' + escapeHtml(item.k) + '</span> ' + escapeHtml(item.kt) + '</div>' +
+        '<p class="sub-info">' + escapeHtml(item.s) + ' &bull; ' + escapeHtml(item.u) + '</p>' +
       '</div>' +
       '<div class="card-footer">' +
         '<div class="meta"><span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>' +
@@ -386,9 +389,7 @@
   try {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark' || savedTheme === 'light') root.dataset.theme = savedTheme;
-  } catch {
-    // Depolama kapalı
-  }
+  } catch {}
 
   function syncThemeButton() {
     const dark = root.dataset.theme
@@ -410,9 +411,7 @@
     root.dataset.theme = dark ? 'light' : 'dark';
     try {
       localStorage.setItem('theme', root.dataset.theme);
-    } catch {
-      // Depolama kapalı
-    }
+    } catch {}
     syncThemeButton();
   });
 
@@ -432,9 +431,7 @@
       if (migrated.length !== stored.length || stored.some((id) => !ids.has(String(id)))) {
         try {
           localStorage.setItem('favs', JSON.stringify([...favs]));
-        } catch {
-          // Saklama alanı yazmaya kapalı
-        }
+        } catch {}
       }
     }
   } catch {
@@ -471,9 +468,7 @@
 
     try {
       localStorage.setItem('favs', JSON.stringify([...favs]));
-    } catch {
-      // Depolama kapalı
-    }
+    } catch {}
 
     if (F.fav) render();
     else updateFavoriteUi();

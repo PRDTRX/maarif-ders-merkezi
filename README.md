@@ -35,6 +35,6 @@
 3. Favori ekleyip sayfayı yenileyin; favorinin korunduğunu doğrulayın.
 4. Bir etkinlik ayrıntısını açın, bağlantıyı kopyalayıp yeni sekmede açın ve geri tuşunu deneyin.
 5. PDF alanını boş bırakın ve güvenli olmayan bir bağlantı girin; açma bağlantısının gösterilmediğini doğrulayın.
-6. Açık/koyu tema, dar ekran ve yazdırma görünümünü kontrol edin.
+6. Açık/koyu tema, dar ekran, klavye odağı ve yazdırma görünümünü kontrol edin.
 
 Kazanım eşleştirmeleri yayınlanmadan önce resmî programla ayrıca karşılaştırılmalıdır; uygulama bu içeriklerin doğruluğunu kendi başına garanti etmez.

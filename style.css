@@ -4,10 +4,13 @@ body{background:var(--bg);color:var(--tx);font:16px/1.5 -apple-system,BlinkMacSy
 .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
 a{color:inherit;text-decoration:none}
 
-/* Butonlarda focus çerçevesini tamamen kaldır */
-button:focus, button:focus-visible, select:focus, input:focus {
-  outline: none !important;
-  box-shadow: none !important;
+/* Klavye kullanıcıları için görünür odak göstergesi */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 3px solid var(--ac);
+  outline-offset: 3px;
+}
+:where(a, button, input, select, textarea, [tabindex]):focus:not(:focus-visible) {
+  outline: none;
 }
 
 /* Navigation */
@@ -220,6 +223,7 @@ select:disabled{opacity:.48;cursor:not-allowed;background-color:var(--bg2);color
   position: absolute;
   inset: 0;
   border-radius: 20px;
+  pointer-events: none;
 }
 
 .kz-preview{
@@ -425,3 +429,21 @@ dialog::backdrop{
   .grid{grid-template-columns:minmax(0,1fr);gap:16px}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* Print only filtered results in a clean two-column layout. */
+@media print {
+  @page { size: A4; margin: 12mm; }
+  body { background: #fff !important; color: #111 !important; font-size: 10pt; }
+  .nav, .hero, .simple-filters, .bar, .about, .foot, .card-footer-dual, .heart, .empty, .kicker, .stats { display: none !important; }
+  main.wrap { max-width: none; padding: 0; margin: 0; }
+  #grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8mm; padding: 0; }
+  .card { break-inside: avoid; border: 1px solid #bbb; border-radius: 6px; box-shadow: none; transform: none; background: #fff !important; color: #111 !important; }
+  .card-banner { background: #f1f1f1 !important; color: #111 !important; padding: 6px 8px; }
+  .card-body { padding: 8px; }
+  .bento-grid-inner { grid-template-columns: 54px minmax(0, 1fr); gap: 8px; }
+  .bento-thumbnail { width: 54px; height: 54px; min-width: 54px; min-height: 54px; }
+  .unit-tag, .kz-preview, .meta-inline, .banner-title, .open { color: #111 !important; }
+  .open { font-size: 11pt; }
+  .kz-preview { display: block; overflow: visible; }
+  a { text-decoration: none; }
+}

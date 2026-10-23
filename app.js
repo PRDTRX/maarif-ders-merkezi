@@ -24,7 +24,12 @@
     .toLocaleLowerCase('tr')
     .replace(/ı/g, 'i')
     .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '');
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9\s]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+  const compact = (value) => normalize(value).replace(/\s+/g, '');
 
   const escapeHtml = (value) => String(value ?? '').replace(/[&<>"']/g, (char) => ({
     '&': '&amp;',
@@ -127,6 +132,10 @@
         normalizedItem.g + '. sınıf',
         normalizedItem.g + ' sınıf'
       ].join(' '));
+      normalizedItem._hc = compact([
+        normalizedItem.t, normalizedItem.s, normalizedItem.u, normalizedItem.k,
+        normalizedItem.kt, normalizedItem.g + ' sınıf'
+      ].join(' '));
       result.push(normalizedItem);
     });
 
@@ -179,7 +188,9 @@
     if (F.subject && item.s !== F.subject) return false;
     if (F.unit && item.u !== F.unit) return false;
     if (F.fav && !favs.has(item.id)) return false;
-    return searchTerms.every((word) => item._h.includes(word));
+    const compactQuery = compact(F.q);
+    return (compactQuery && item._hc.includes(compactQuery)) ||
+      searchTerms.every((word) => item._h.includes(word));
   }
 
   function score(item, query, terms) {
@@ -358,7 +369,7 @@
     render();
     if (F.q && !searchJumped) {
       searchJumped = true;
-      $('#bul').scrollIntoView({
+      $('#grid').scrollIntoView({
         behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
         block: 'start'
       });

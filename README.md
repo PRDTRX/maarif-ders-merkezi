@@ -23,7 +23,7 @@
 
 - Sınıf, ders, ünite ve arama metni filtreleri birbirleriyle uyumlu çalışır.
 - Sıralama tercihi: alan ağırlıklı ilgililik puanı, en yeni ve başlık A–Z.
-- Filtreler ve açık etkinlik bağlantısı URL sorgu parametrelerine yazılır; eski #q=... türündeki paylaşım bağlantıları da okunur.
+- Filtreler ve açık çalışma kâğıdı bağlantısı URL sorgu parametrelerine yazılır; eski #q=... türündeki paylaşım bağlantıları da okunur.
 - Favoriler ve tema tercihi tarayıcının localStorage alanında saklanır; hesap veya sunucu tarafı gerekmez.
 - index.html, robots.txt ve sitemap.xml aynı GitHub Pages adresini kullanır.
 - Listeyi yazdır o an filtrelenmiş sonuçları iki sütunlu yazdırma düzeninde çıkarır.

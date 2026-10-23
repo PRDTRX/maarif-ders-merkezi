@@ -249,8 +249,8 @@
 
     return '<article class="card" data-g="' + escapeHtml(item.g) + '">' +
       '<div class="card-banner">' +
-        '<span class="banner-title">' + escapeHtml(item.g) + '. Sınıf ' + escapeHtml(item.s) + '</span>' +
-        '<button class="heart" data-id="' + escapeHtml(item.id) + '" aria-pressed="false" aria-label="Favorilere ekle" title="Favorilere ekle">' +
+        '<span class="banner-title"><span class="banner-grade">' + escapeHtml(item.g) + '. SINIF</span><span class="banner-subject">' + escapeHtml(item.s) + '</span></span>' +
+        '<button class="heart" type="button" data-id="' + escapeHtml(item.id) + '" aria-pressed="false" aria-label="Favorilere ekle" title="Favorilere ekle">' +
           '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 8.8c0 5.1-8.8 10-8.8 10s-8.8-4.9-8.8-10A4.7 4.7 0 0 1 12 6.5a4.7 4.7 0 0 1 8.8 2.3Z"/></svg>' +
         '</button>' +
       '</div>' +
@@ -524,8 +524,10 @@
   }
 
   function toggleFavorite(id) {
-    if (!ids.has(id)) return;
-    if (favs.has(id)) favs.delete(id);
+    if (!ids.has(id)) return false;
+
+    const wasFavorite = favs.has(id);
+    if (wasFavorite) favs.delete(id);
     else favs.add(id);
 
     try {
@@ -534,6 +536,7 @@
 
     if (F.fav) render();
     else updateFavoriteUi();
+    return !wasFavorite;
   }
 
   function openDialog(id, addHistory = true) {
@@ -571,8 +574,11 @@
     const favorite = event.target.closest('.heart');
     const open = event.target.closest('.open');
     const print = event.target.closest('[data-print]');
-    if (favorite) toggleFavorite(favorite.dataset.id);
-    else if (print) printCard(print.dataset.print);
+    if (favorite) {
+      event.preventDefault();
+      event.stopPropagation();
+      toggleFavorite(favorite.dataset.id);
+    } else if (print) printCard(print.dataset.print);
     else if (open) {
       lastDialogTrigger = open;
       openDialog(open.dataset.id);

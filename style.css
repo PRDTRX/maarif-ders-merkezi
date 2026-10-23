@@ -271,22 +271,36 @@ h1 em, .about h2 em {
   transition: border-color .18s ease, box-shadow .18s ease;
 }
 .card:hover { border-color: var(--line-strong); box-shadow: var(--shadow-soft); }
-.card-banner { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 11px 14px; border-bottom: 1px solid var(--line); background: var(--surface-soft); color: var(--ink); }
-.banner-title { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 600 10px/1.5 "IBM Plex Mono", monospace; letter-spacing: .025em; text-transform: uppercase; }
-.card[data-g="5"] .card-banner { background: #e8f3ca; }
-.card[data-g="6"] .card-banner { background: #e5e9fb; }
-.card[data-g="7"] .card-banner { background: #f8dfd5; }
-:root[data-theme="dark"] .card[data-g="5"] .card-banner,
-:root[data-theme="dark"] .card[data-g="6"] .card-banner,
-:root[data-theme="dark"] .card[data-g="7"] .card-banner { background: var(--surface-soft); color: var(--ink); }
+.card-banner {
+  position: relative; display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; min-height: 62px; padding: 10px 14px 10px 17px;
+  border-bottom: 1px solid var(--line); background: var(--surface-soft); color: var(--ink);
+}
+.card-banner::before {
+  content: ""; position: absolute; inset: 0 auto 0 0; width: 4px;
+  background: var(--accent);
+}
+.banner-title { min-width: 0; display: flex; align-items: center; flex-wrap: wrap; gap: 9px; }
+.banner-grade {
+  display: inline-flex; align-items: center; padding: 5px 7px;
+  background: var(--accent); color: #fff; font: 600 9px/1.4 "IBM Plex Mono", monospace;
+  letter-spacing: .035em; white-space: nowrap;
+}
+.banner-subject {
+  min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  color: var(--ink-muted); font: 600 11px/1.5 "DM Sans", sans-serif;
+  letter-spacing: .035em;
+}
 .heart {
-  flex: 0 0 33px; width: 33px; height: 33px; display: grid; place-items: center; padding: 0;
-  border: 1px solid var(--line-strong); border-radius: 0; background: var(--surface); color: var(--ink-faint); cursor: pointer;
-  transition: color .18s ease, border-color .18s ease, background .18s ease;
+  flex: 0 0 36px; width: 36px; height: 36px; display: grid; place-items: center; padding: 0;
+  border: 1px solid var(--line); border-radius: 50%; background: var(--surface); color: var(--ink-faint);
+  cursor: pointer; touch-action: manipulation; transition: color .18s ease, border-color .18s ease, background .18s ease;
 }
 .heart svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linejoin: round; }
-.heart:hover, .heart.on { color: var(--accent-ink); border-color: var(--ink); background: var(--accent); }
+.heart:hover { color: var(--accent-hover); border-color: var(--accent); background: var(--accent-soft); }
+.heart.on { color: #fff; border-color: var(--accent); background: var(--accent); }
 .heart.on svg { fill: currentColor; }
+.heart:active { transform: scale(.96); }
 .card-body { flex: 1; padding: 18px; }
 .bento-grid-inner { display: grid; grid-template-columns: 126px minmax(0, 1fr); gap: 18px; height: 100%; }
 .bento-thumbnail {

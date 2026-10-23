@@ -102,13 +102,14 @@ test('application avoids dynamic code evaluation primitives', () => {
   assert.doesNotMatch(app, /\bnew\s+Function\s*\(/);
 });
 
-test('quiet premium design includes responsive layout, dark-theme tokens and a clear heading hierarchy', () => {
+test('high-contrast editorial archive has responsive layout, theme tokens and a clear heading hierarchy', () => {
   const html = read('index.html');
   const css = read('style.css');
 
   assert.match(html, /class="library-heading"/);
   assert.match(html, /<h2>Çalışma kâğıtları<\/h2>/);
-  assert.match(css, /\.grid\s*\{[^}]*grid-template-columns:\s*repeat\(3,\s*minmax\(0,\s*1fr\)\)/s);
+  assert.match(css, /--accent:\s*#c8ff4f/i);
+  assert.match(css, /\.grid\s*\{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)/s);
   assert.match(css, /@media\s*\(max-width:\s*1080px\)/);
   assert.match(css, /@media\s*\(max-width:\s*720px\)/);
   assert.match(css, /:root\[data-theme="dark"\]/);

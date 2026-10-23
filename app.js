@@ -73,7 +73,7 @@
 
   function prepareData(source) {
     if (!Array.isArray(source)) {
-      console.error('Etkinlik verileri yüklenemedi: window.DATA bir dizi değil.');
+      console.error('Çalışma kâğıdı verileri yüklenemedi: window.DATA bir dizi değil.');
       return [];
     }
 
@@ -99,7 +99,7 @@
 
       const id = String(raw.id ?? '').trim();
       if (!/^[A-Za-z0-9][A-Za-z0-9._-]{0,79}$/.test(id) || usedIds.has(id)) {
-        console.warn('Etkinlik kaydı atlandı: id eksik, geçersiz veya yineleniyor.', index + 1);
+        console.warn('Çalışma kâğıdı kaydı atlandı: id eksik, geçersiz veya yineleniyor.', index + 1);
         return;
       }
       usedIds.add(id);
@@ -110,7 +110,7 @@
       const normalizedItem = {
         ...item,
         id,
-        ty: String(raw.ty ?? 'Etkinlik kâğıdı').trim() || 'Etkinlik kâğıdı',
+        ty: 'Çalışma kâğıdı',
         m: Math.round(duration),
         f: safePdf(raw.f),
         dt: isIsoDate(date) ? date : '',
@@ -300,7 +300,7 @@
 
     $('#grid').innerHTML = results.map(card).join('');
     $('#empty').hidden = results.length > 0;
-    $('#count').textContent = results.length + ' etkinlik bulundu';
+    $('#count').textContent = results.length + ' çalışma kâğıdı bulundu';
 
     const hasFilters = Boolean(F.q || F.grade || F.subject || F.unit || F.fav);
     $('#reset').style.visibility = hasFilters ? 'visible' : 'hidden';
@@ -310,7 +310,7 @@
 
   function renderStats() {
     const stats = [
-      [D.length, 'etkinlik'],
+      [D.length, 'çalışma kâğıdı'],
       [new Set(D.map((item) => item.s)).size, 'ders'],
       [new Set(D.map((item) => item.u)).size, 'ünite'],
       [new Set(D.map((item) => item.g)).size, 'sınıf düzeyi']

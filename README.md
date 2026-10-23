@@ -1,8 +1,8 @@
 # Maarif Ders Merkezi
 
-5, 6 ve 7. sınıf etkinlik kâğıtları için statik bir arama sitesi (HTML/CSS/JavaScript; derleme adımı gerektirmez).
+5, 6 ve 7. sınıf çalışma kâğıtları için statik bir arama sitesi (HTML/CSS/JavaScript; derleme adımı gerektirmez).
 
-> **Önemli:** data.js şu an örnek kayıtlar içerir. İçeriği yayınlamadan önce kazanım kodlarını ve metinlerini MEB TTKB programlarından doğrulayın, gerçek PDF dosyalarını ekleyin ve örnek verilerdeki başlıkları/etkinlikleri kontrol edin.
+> **Önemli:** data.js şu an örnek kayıtlar içerir. İçeriği yayınlamadan önce kazanım kodlarını ve metinlerini MEB TTKB programlarından doğrulayın, gerçek PDF dosyalarını ekleyin ve örnek verilerdeki başlıkları/çalışma kâğıtlarını kontrol edin.
 
 ## Yayınlama (GitHub Pages)
 
@@ -14,7 +14,7 @@
 ## İçerik ekleme
 
 - PDF dosyalarını **pdf/** klasörüne ekleyin.
-- data.js içine her etkinlik için benzersiz ve kalıcı bir **id** ekleyin.
+- data.js içine her çalışma kâğıdı için benzersiz ve kalıcı bir **id** ekleyin.
 - **f** alanı için **pdf/dosya-adi.pdf** gibi bir göreli yol kullanın. Uygulama yalnızca pdf/ altındaki PDF yollarını veya doğrudan HTTPS .pdf bağlantılarını kabul eder; hatalı/güvensiz adresleri devre dışı bırakır.
 - **dl** ve **fv** alanlarını yalnızca gerçek ve doğrulanmış sayımlar mevcutsa ekleyin. Bunlar statik JavaScript verisinden otomatik güncellenmez.
 - Her kayıt için benzersiz ve kalıcı bir kimlik zorunludur. Eksik, geçersiz veya yinelenen kimlikler otomatik olarak yeniden adlandırılmaz; kayıt atlanır ve konsola uyarı yazılır.
@@ -23,7 +23,7 @@
 
 - Sınıf, ders, ünite ve arama metni filtreleri birbirleriyle uyumlu çalışır.
 - Sıralama tercihi: alan ağırlıklı ilgililik puanı, en yeni ve başlık A–Z.
-- Filtreler ve açık etkinlik bağlantısı URL sorgu parametrelerine yazılır; eski #q=... türündeki paylaşım bağlantıları da okunur.
+- Filtreler ve açık çalışma kâğıdı bağlantısı URL sorgu parametrelerine yazılır; eski #q=... türündeki paylaşım bağlantıları da okunur.
 - Favoriler ve tema tercihi tarayıcının localStorage alanında saklanır; hesap veya sunucu tarafı gerekmez.
 - index.html, robots.txt ve sitemap.xml aynı GitHub Pages adresini kullanır.
 - Listeyi yazdır o an filtrelenmiş sonuçları iki sütunlu yazdırma düzeninde çıkarır.
@@ -43,7 +43,7 @@ Bu kontroller kazanım metinlerinin resmî müfredata uygunluğunu veya PDF içe
 1. Sınıf seçin; ders ve ünite seçeneklerinin buna göre güncellendiğini doğrulayın.
 2. Türkçe karakterli bir kelimeyle arama yapın, ardından filtreleri temizleyin.
 3. Favori ekleyip sayfayı yenileyin; favorinin korunduğunu doğrulayın.
-4. Bir etkinlik ayrıntısını açın, bağlantıyı kopyalayıp yeni sekmede açın ve geri tuşunu deneyin.
+4. Bir çalışma kâğıdı ayrıntısını açın, bağlantıyı kopyalayıp yeni sekmede açın ve geri tuşunu deneyin.
 5. PDF alanını boş bırakın ve güvenli olmayan bir bağlantı girin; açma bağlantısının gösterilmediğini doğrulayın.
 6. Açık/koyu tema, dar ekran, klavye odağı ve yazdırma görünümünü kontrol edin.
 

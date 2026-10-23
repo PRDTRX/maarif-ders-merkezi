@@ -102,16 +102,19 @@ test('application avoids dynamic code evaluation primitives', () => {
   assert.doesNotMatch(app, /\bnew\s+Function\s*\(/);
 });
 
-test('high-contrast editorial archive has responsive layout, theme tokens and a clear heading hierarchy', () => {
+test('teacher-first light archive has responsive layout, theme tokens and a clear heading hierarchy', () => {
   const html = read('index.html');
   const css = read('style.css');
 
   assert.match(html, /class="library-heading"/);
-  assert.match(html, /<h2>Çalışma kâğıtları<\/h2>/);
-  assert.match(css, /--accent:\s*#c8ff4f/i);
+  assert.match(html, /<h2>Öğretim materyalleri<\/h2>/);
+  assert.match(html, /Öğretmenler için kaynak arşivi/i);
+  assert.match(html, /Ders hazırlığı için/);
+  assert.match(css, /--accent:\s*#1f7a73/i);
   assert.match(css, /\.grid\s*\{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)/s);
   assert.match(css, /@media\s*\(max-width:\s*1080px\)/);
   assert.match(css, /@media\s*\(max-width:\s*720px\)/);
   assert.match(css, /:root\[data-theme="dark"\]/);
   assert.match(css, /\.simple-filters\s*\{[^}]*background:\s*var\(--card\)/s);
+  assert.match(css, /select:focus:not\(:focus-visible\)/);
 });

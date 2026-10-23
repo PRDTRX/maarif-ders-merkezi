@@ -50,13 +50,16 @@
 
     if (/^[a-z][a-z\d+.-]*:/i.test(href)) {
       try {
+        const rawPathMatch = href.match(/^https:\/\/[^/?#]+(\/[^?#]*)?/i);
+        if (!rawPathMatch) return '';
+        const rawPath = decodeURIComponent(rawPathMatch[1] || '/');
+        if (rawPath.includes('\\') ||
+            /[\u0000-\u001f\u007f]/.test(rawPath) ||
+            rawPath.split('/').some((part) => part === '.' || part === '..')) return '';
+
         const parsed = new URL(href);
         if (parsed.protocol !== 'https:' || parsed.username || parsed.password ||
             !/\.pdf$/i.test(decodeURIComponent(parsed.pathname))) return '';
-        const decodedPath = decodeURIComponent(parsed.pathname);
-        if (decodedPath.includes('\\') ||
-            /[\u0000-\u001f\u007f]/.test(decodedPath) ||
-            decodedPath.split('/').some((part) => part === '.' || part === '..')) return '';
         return parsed.href;
       } catch {
         return '';

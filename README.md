@@ -28,20 +28,15 @@
 - index.html, robots.txt ve sitemap.xml aynı GitHub Pages adresini kullanır.
 - Listeyi yazdır o an filtrelenmiş sonuçları iki sütunlu yazdırma düzeninde çıkarır.
 
-## Tasarım ve erişilebilirlik
+## Tasarım sistemi ve erişilebilirlik
 
-- Mobil yerleşim dar ekranlarda tek sütuna iner; gezinme, filtre ve kart işlemleri dokunmatik kullanım için en az 44 px hedefleri gözetir.
-- Klavye ile gezinme için görünür odak stilleri ve ana içeriğe atlama bağlantısı bulunur.
-- Koyu tema, kullanıcının sistem tercihinden başlar; açık/koyu seçimi yapıldığında tercih saklanır.
-- Hareket azaltma tercihi dikkate alınır; kart yükselmesi yalnızca hover destekleyen hassas işaretleyicilerde etkinleşir.
-- Renk tokenları açık ve koyu temada ayrı ön plan renkleri kullanır. Yayın öncesi gerçek tarayıcıda WCAG kontrast ölçümü ve klavye testi yapılmalıdır.
+- Görsel yön, eğitim yayını / editoryal mizanpaj yaklaşımı üzerine kurulur: kâğıt tonu, mürekkep rengi, kobalt vurgular, sınırlı turuncu detaylar ve belirgin tipografik hiyerarşi.
+- Arayüzde Space Grotesk ve Newsreader kullanılır; hero görseli gerçek bir stok görsel yerine CSS ile çizilmiş katmanlı, baskı hissi veren bir kompozisyondur.
+- Koyu tema, sistem tercihini izler; elle seçilen açık/koyu tema localStorage içinde saklanır.
+- Klavye kullanıcıları için belirgin focus görünümü ve ana içeriğe atlama bağlantısı bulunur. Hareket azaltma tercihi dikkate alınır.
+- Yerleşim masaüstünde çok sütunlu katalog, küçük ekranlarda tek sütun kullanır; yazdırma görünümü ayrıca tanımlıdır.
+- Otomatik kontroller görsel kaliteyi veya WCAG uygunluğunu tek başına kanıtlamaz. Yayın öncesi gerçek tarayıcıda kontrast, klavye erişimi ve dar ekranlarda taşma denetimi yapılmalıdır.
 - Katalogdaki mevcut kayıtlar örnektir; gerçek PDF'ler ve kazanım eşleştirmeleri doğrulanmadan içerikler gerçek eğitim kaynağı olarak sunulmamalıdır.
-
-## Son tasarım denetimi
-
-- Marka adı her yerde "Maarif Ders Merkezi" olarak korunur; özgün kitap simgesi ve Manrope/DM Sans tipografisi kullanılır.
-- Sınıf, ders ve ünite filtreleri sonuç listesinin hemen üstündedir; header üzerindeki yinelenen çalışma kâğıtları bağlantısı kaldırılmıştır.
-- Küçük kart etiketleri ve istatistik yazıları en az 12 px olacak şekilde büyütülmüştür.
 
 ## Kalite kontrolleri
 

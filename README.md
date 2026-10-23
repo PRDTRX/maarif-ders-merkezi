@@ -34,7 +34,7 @@
 - DM Sans arayüz yazı tipiyle Lora'nın editoryal serif vurguları eşleştirilir; gereksiz dekorasyon yerine boşluk, hizalama ve okunabilirlik öne çıkar.
 - Koyu tema, sistem tercihini izler; kullanıcı seçimi yerel olarak saklanır.
 - Klavye kullanıcıları için belirgin odak stilleri ve ana içeriğe atlama bağlantısı bulunur. Hareket azaltma tercihi dikkate alınır.
-- Yerleşim masaüstünde üç sütunlu katalogdan tablete iki, telefonda tek sütuna geçer. Yazdırma görünümü ayrıca tanımlıdır.
+- Yerleşim masaüstünde üç sütunlu katalogdan tablete iki, telefonda tek sütuna geçer. Yazdırma görünümünde iki sütunlu yazdırma düzeni ve tek kartı sayfaya yayma kuralı ayrıca tanımlıdır.
 - Otomatik kontroller görsel kaliteyi veya WCAG uygunluğunu tek başına kanıtlamaz. Yayın sonrası gerçek tarayıcıda kontrast, klavye erişimi ve farklı ekran genişliklerinde taşma denetimi yapılmalıdır.
 - Katalogdaki mevcut kayıtlar örnektir; gerçek PDF'ler ve kazanım eşleştirmeleri doğrulanmadan içerikler gerçek eğitim kaynağı olarak sunulmamalıdır.
 

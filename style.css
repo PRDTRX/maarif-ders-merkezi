@@ -181,8 +181,8 @@ h1 em, .about h2 em {
 }
 .search:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,255,79,.18); }
 .search > svg { flex: 0 0 auto; }
-.search input { width: 100%; min-width: 0; border: 0; outline: 0; background: transparent; color: #191b15; font-size: 14px; }
-.search input::placeholder { color: #767b70; opacity: 1; }
+.search input { width: 100%; min-width: 0; border: 0; outline: 0; background: transparent; color: var(--ink); font-size: 14px; }
+.search input::placeholder { color: var(--ink-faint); opacity: 1; }
 .search kbd { flex: 0 0 auto; padding: 3px 8px; border: 1px solid #d8dbd0; background: #f0f1e8; color: #4d5348; font: 11px/1.6 "IBM Plex Mono", monospace; }
 .stats { display: flex; flex-wrap: wrap; gap: 0; list-style: none; margin: 30px 0 0; padding: 17px 0 0; border-top: 1px solid #3b4034; }
 .stats li { display: flex; flex-direction: column; gap: 2px; min-width: 124px; padding: 0 22px; border-left: 1px solid #3b4034; color: var(--hero-muted); font-size: 10px; }

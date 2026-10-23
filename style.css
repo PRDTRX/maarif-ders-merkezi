@@ -59,7 +59,7 @@
   --highlight: #e0bd83;
   --notice: #202d38;
   --danger: #ff9c8a;
-  --focus: #8fc4ed
+  --focus: #8fc4ed;
   --shadow-soft: 0 14px 34px rgba(0, 0, 0, .22);
   --shadow-pop: 0 28px 90px rgba(0, 0, 0, .58);
 }
@@ -135,7 +135,7 @@ select:focus:not(:focus-visible), button:focus:not(:focus-visible), a:focus:not(
 /* Calm, teacher-first introduction */
 .hero {
   position: relative; overflow: hidden;
-  background: var(--surface); color: var(--ink);
+  background: var(--hero); color: var(--hero-ink);
   border-bottom: 1px solid var(--line);
 }
 .hero::before {
@@ -180,7 +180,7 @@ h1 em, .about h2 em {
 .search {
   display: flex; align-items: center; gap: 14px; max-width: 680px; min-height: 66px;
   margin-top: 30px; padding: 0 16px;
-  border: 1px solid #5b6052; background: var(--surface-raised); color: var(--ink-muted);
+  border: 1px solid var(--line-strong); background: var(--surface-raised); color: var(--ink-muted);
   transition: border-color .18s ease, box-shadow .18s ease;
 }
 .search:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(31,122,115,.10); }

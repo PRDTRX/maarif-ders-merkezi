@@ -4,7 +4,7 @@
   color-scheme: light; --paper: #f4f0e7; --paper-soft: #e9e3d7; --paper-white: #fffdf7; --card: var(--paper-white); --banner-ink: #fffdf7; --art-blue: #3548f5;
   --ink: #191a18; --ink-soft: #5d5d57; --line: #d3cdbf; --blue: #3548f5; --blue-deep: #2332ca;
   --orange: #f15b3c; --orange-ink: #b63b24; --lime: #d8f36a; --focus: #244bff;
-  --grade-5: #3548f5; --grade-6: #ce4c2c; --grade-7: #7252bd;
+  --grade-5: #3548f5; --grade-6: #b93b24; --grade-7: #7252bd;
   --shadow-paper: 5px 5px 0 var(--ink); --shadow-card: 5px 6px 0 rgba(25,26,24,.10);
   --shadow-dialog: 0 28px 90px rgba(15,17,20,.30); --radius-sm: 3px; --radius-md: 7px;
   --radius-lg: 12px; --wrap: 1360px;
@@ -37,7 +37,7 @@ svg { flex-shrink: 0; }
 .nav { position: sticky; top: 0; z-index: 50; background: color-mix(in srgb,var(--paper) 94%,transparent); border-bottom: 1px solid var(--ink); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
 .navin { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 78px; }
 .brand { display: inline-flex; align-items: center; gap: 12px; min-width: 0; font-family: "Space Grotesk",sans-serif; font-weight: 700; letter-spacing: -.045em; line-height: 1.1; white-space: nowrap; }
-.brand-mark { display: grid; place-items: center; flex: 0 0 43px; width: 43px; height: 43px; border: 1.5px solid var(--ink); border-radius: 50%; background: var(--blue); color: white; box-shadow: 3px 3px 0 var(--ink); transform: rotate(-7deg); }
+.brand-mark { display: grid; place-items: center; flex: 0 0 43px; width: 43px; height: 43px; border: 1.5px solid var(--ink); border-radius: 50%; background: var(--art-blue); color: white; box-shadow: 3px 3px 0 var(--ink); transform: rotate(-7deg); }
 .brand-mark svg { width: 29px; height: 29px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 .brand-word { display: flex; flex-direction: column; gap: 1px; color: var(--ink-soft); font-size: 10px; font-weight: 700; letter-spacing: .19em; text-transform: uppercase; }
 .brand-word strong { color: var(--ink); font-size: 17px; font-weight: 700; letter-spacing: -.05em; text-transform: none; }
@@ -123,7 +123,7 @@ select:disabled { opacity: .56; cursor: not-allowed; background-color: var(--pap
 .sort-control select { width: auto; min-width: 140px; height: 39px; padding-left: 11px; font-size: 12px; }
 .pill { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 39px; padding: 7px 12px; border: 1px solid var(--ink); border-radius: var(--radius-sm); background: transparent; color: var(--ink); font-size: 12px; font-weight: 700; cursor: pointer; transition: background-color .16s,color .16s,transform .16s; }
 .pill:hover { background: var(--paper-soft); }
-.pill.on { background: var(--blue); border-color: var(--blue); color: white; }
+.pill.on { background: var(--art-blue); border-color: var(--art-blue); color: white; }
 .favorite-filter svg { display: block; width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .count-bubble { display: inline-grid; place-items: center; min-width: 20px; height: 20px; padding: 0 4px; background: var(--paper-soft); color: var(--ink); font-size: 10px; font-weight: 700; font-variant-numeric: tabular-nums; }
 .favorite-filter.on .count-bubble { background: rgba(255,255,255,.2); color: white; }
@@ -168,7 +168,7 @@ select:disabled { opacity: .56; cursor: not-allowed; background-color: var(--pap
 .btn-outline { background: transparent; color: var(--ink); }
 .btn-outline:hover { background: var(--lime); color: #191a18; box-shadow: 2px 2px 0 var(--ink); transform: translate(-1px,-1px); }
 .btn-action { background: var(--ink); color: var(--paper-white); }
-.btn-action:hover { background: var(--blue); color: #fff; }
+.btn-action:hover { background: var(--art-blue); color: #fff; }
 .btn-action.unavailable { border-color: var(--line); background: var(--paper-soft); color: var(--ink-soft); box-shadow: none; cursor: not-allowed; }
 #theme,.x { -webkit-tap-highlight-color: transparent; }
 

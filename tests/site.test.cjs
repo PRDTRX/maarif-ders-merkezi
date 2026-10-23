@@ -101,3 +101,16 @@ test('application avoids dynamic code evaluation primitives', () => {
   assert.doesNotMatch(app, /\beval\s*\(/);
   assert.doesNotMatch(app, /\bnew\s+Function\s*\(/);
 });
+
+test('catalogue design includes responsive layout, dark-theme tokens and a clear heading hierarchy', () => {
+  const html = read('index.html');
+  const css = read('style.css');
+
+  assert.match(html, /class="library-heading"/);
+  assert.match(html, /<h2>Etkinlik kütüphanesi<\/h2>/);
+  assert.match(css, /\.grid\s*\{[^}]*grid-template-columns:\s*repeat\(3,\s*minmax\(0,\s*1fr\)\)/s);
+  assert.match(css, /@media\s*\(max-width:\s*1080px\)/);
+  assert.match(css, /@media\s*\(max-width:\s*720px\)/);
+  assert.match(css, /:root\[data-theme="dark"\]/);
+  assert.match(css, /\.simple-filters\s*\{[^}]*background:\s*var\(--card\)/s);
+});

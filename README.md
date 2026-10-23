@@ -23,7 +23,7 @@
 
 - Sınıf, ders, ünite ve arama metni filtreleri birbirleriyle uyumlu çalışır.
 - Sıralama tercihi: alan ağırlıklı ilgililik puanı, en yeni ve başlık A–Z.
-- Filtreler ve açık çalışma kâğıdı bağlantısı URL sorgu parametrelerine yazılır; eski #q=... türündeki paylaşım bağlantıları da okunur.
+- Filtreler ve açık çalışma kâğıdı bağlantısı URL sorgu parametrelerine yazılır; ayrıntı penceresi açıldığında tarayıcı geçmişine kaydedilir ve Geri/İleri gezinmesiyle geri yüklenir. Eski #q=... türündeki paylaşım bağlantıları da okunur.
 - Favoriler ve tema tercihi tarayıcının localStorage alanında saklanır; hesap veya sunucu tarafı gerekmez.
 - index.html, robots.txt ve sitemap.xml aynı GitHub Pages adresini kullanır.
 - Listeyi yazdır o an filtrelenmiş sonuçları iki sütunlu yazdırma düzeninde çıkarır.
@@ -48,7 +48,7 @@
 Proje bağımlılık gerektirmeyen Node.js kalite kontrolleri kullanır (Node.js 20 veya üstü önerilir).
 
 - `node --check app.js` ve `node --check data.js`: JavaScript sözdizimini kontrol eder.
-- `node --test`: veri şemasını, benzersiz kimlikleri, tarihleri, PDF yol biçimlerini ve temel HTML varlık bağlantılarını doğrular.
+- `node --test`: veri şemasını, benzersiz kimlikleri, tarihleri, PDF yol biçimlerini ve temel HTML varlık bağlantılarını doğrular. Tanımlanan yerel PDF yollarının dosya olarak mevcut olduğunu, PDF URL güvenlik kontrollerini ve yazdırma düzenini de denetler.
 - GitHub Actions, her push ve pull request'te bu kontrolleri çalıştırır.
 
 Bu kontroller kazanım metinlerinin resmî müfredata uygunluğunu veya PDF içeriğinin pedagojik doğruluğunu doğrulamaz; bunlar yayın öncesi editoryal kontrol gerektirir.
@@ -58,10 +58,10 @@ Bu kontroller kazanım metinlerinin resmî müfredata uygunluğunu veya PDF içe
 Tasarım değişikliklerinden sonra masaüstü ve mobil tarayıcılarda, özellikle 320 px, 375 px, 768 px ve geniş masaüstü ekranlarında test yapın. Klavye ile tüm kontrollere ulaşın, odak göstergesini doğrulayın ve açık/koyu temada metin ile düğme kontrastını ölçün.
 
 1. Sınıf seçin; ders ve ünite seçeneklerinin buna göre güncellendiğini doğrulayın.
-2. Türkçe karakterli bir kelimeyle arama yapın, ardından filtreleri temizleyin.
+2. Türkçe karakterli bir kelimeyle arama yapın; yazarken sayfanın kendiliğinden kaymadığını, Enter ile sonuçlara gidildiğini doğrulayın. Ardından filtreleri temizleyin.
 3. Favori ekleyip sayfayı yenileyin; favorinin korunduğunu doğrulayın.
 4. Bir çalışma kâğıdı ayrıntısını açın, bağlantıyı kopyalayıp yeni sekmede açın ve geri tuşunu deneyin.
-5. PDF alanını boş bırakın ve güvenli olmayan bir bağlantı girin; açma bağlantısının gösterilmediğini doğrulayın.
-6. Açık/koyu tema, dar ekran, klavye odağı ve yazdırma görünümünü kontrol edin.
+5. PDF alanını boş bırakın ve güvenli olmayan bir bağlantı girin; açma bağlantısının gösterilmediğini doğrulayın. Kodlanmış boşluk içeren geçerli HTTPS PDF adreslerinin kabul edildiğini de kontrol edin.
+6. Açık/koyu tema, dar ekran, klavye odağı ve iki sütunlu yazdırma görünümünü kontrol edin.
 
 Kazanım eşleştirmeleri yayınlanmadan önce resmî programla ayrıca karşılaştırılmalıdır; uygulama bu içeriklerin doğruluğunu kendi başına garanti etmez.

@@ -30,12 +30,12 @@
 
 ## Tasarım sistemi ve erişilebilirlik
 
-- Yeni görsel yön sade ve sakin bir eğitim arayüzüdür: kırık beyaz ve yumuşak yeşil yüzeyler, koyu mürekkep tonları, ince sınırlar ve ölçülü derinlik.
-- DM Sans arayüz yazı tipiyle Lora'nın editoryal serif vurguları eşleştirilir; gereksiz dekorasyon yerine boşluk, hizalama ve okunabilirlik öne çıkar.
-- Koyu tema, sistem tercihini izler; kullanıcı seçimi yerel olarak saklanır.
-- Klavye kullanıcıları için belirgin odak stilleri ve ana içeriğe atlama bağlantısı bulunur. Hareket azaltma tercihi dikkate alınır.
-- Yerleşim masaüstünde üç sütunlu katalogdan tablete iki, telefonda tek sütuna geçer. Yazdırma görünümünde iki sütunlu yazdırma düzeni ve tek kartı sayfaya yayma kuralı ayrıca tanımlıdır.
-- Otomatik kontroller görsel kaliteyi veya WCAG uygunluğunu tek başına kanıtlamaz. Yayın sonrası gerçek tarayıcıda kontrast, klavye erişimi ve farklı ekran genişliklerinde taşma denetimi yapılmalıdır.
+- Görsel yön eğitim sitesi şablonundan ayrılan, bağımsız bir editoryal arşiv yaklaşımıdır: mürekkep tonlarında koyu giriş alanı, kâğıt tonlarında katalog yüzeyi ve ölçülü asit yeşili vurgu.
+- Manrope başlıkları, DM Sans gövde metnini ve IBM Plex Mono arayüz metaverilerini birbirinden ayırır. Kısa köşeler, belirgin çizgiler ve güçlü boşluk kullanımı görsel hiyerarşiyi taşır.
+- Koyu tema desteklenir; tema tercihi tarayıcının localStorage alanında saklanır ve kullanıcı seçimi yoksa sistem tercihi kullanılır.
+- Klavye kullanıcıları için görünür odak stilleri ve ana içeriğe atlama bağlantısı bulunur. Hareket azaltma tercihi dikkate alınır.
+- Katalog geniş ekranlarda iki sütunlu, telefonda tek sütunlu çalışır. Yazdırma görünümünde iki sütunlu çıktı ve tek kartı sayfaya yayma kuralı korunur.
+- Otomatik kontroller görsel kaliteyi veya WCAG uygunluğunu tek başına kanıtlamaz. Yayın öncesinde gerçek tarayıcıda kontrast, klavye erişimi ve 320 px, 375 px, 768 px ve geniş ekranlarda taşma kontrol edilmelidir.
 - Katalogdaki mevcut kayıtlar örnektir; gerçek PDF'ler ve kazanım eşleştirmeleri doğrulanmadan içerikler gerçek eğitim kaynağı olarak sunulmamalıdır.
 
 ## Kalite kontrolleri

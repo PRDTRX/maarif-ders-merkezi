@@ -41,7 +41,7 @@
 
   function safePdf(value) {
     const href = String(value ?? '').trim();
-    if (!href || href.startsWith('//')) return '';
+    if (!href || href.startsWith('//') || /[\\\\%\u0000-\u001f\u007f]/.test(href)) return '';
 
     if (/^[a-z][a-z\d+.-]*:/i.test(href)) {
       try {
@@ -58,7 +58,8 @@
     }
 
     const path = href.split(/[?#]/, 1)[0];
-    if (!/^(?:\.\/)?pdf\/.+\.pdf$/i.test(path) || path.split('/').includes('..')) {
+    if (!/^(?:\.\/)?pdf\/[A-Za-z0-9._/-]+\.pdf$/i.test(path) ||
+        path.split('/').some((part) => !part || part === '.' || part === '..')) {
       return '';
     }
     return href;
@@ -96,14 +97,10 @@
           !item.s || !item.u || !item.k || !item.kt || !item.t ||
           !Number.isFinite(duration) || duration < 1) return;
 
-      let id = String(raw.id ?? index + 1).trim();
+      const id = String(raw.id ?? '').trim();
       if (!/^[A-Za-z0-9][A-Za-z0-9._-]{0,79}$/.test(id) || usedIds.has(id)) {
-        id = String(index + 1);
-        let suffix = 0;
-        while (usedIds.has(id)) {
-          suffix += 1;
-          id = String(index + 1) + '-' + suffix;
-        }
+        console.warn('Etkinlik kaydı atlandı: id eksik, geçersiz veya yineleniyor.', index + 1);
+        return;
       }
       usedIds.add(id);
 
@@ -185,12 +182,35 @@
     return searchTerms.every((word) => item._h.includes(word));
   }
 
-  function score(item, query) {
+  function score(item, query, terms) {
     if (!query) return 0;
+
+    const title = normalize(item.t);
+    const code = normalize(item.k);
+    const unit = normalize(item.u);
+    const subject = normalize(item.s);
+    const description = normalize(item.kt);
     let points = 0;
-    if (normalize(item.t).includes(query)) points += 5;
-    if (normalize(item.k) === query) points += 8;
-    if (normalize(item.u).includes(query)) points += 3;
+
+    if (title === query) points += 30;
+    else if (title.includes(query)) points += 14;
+    if (code === query) points += 24;
+    else if (code.includes(query)) points += 10;
+    if (unit === query) points += 12;
+    else if (unit.includes(query)) points += 6;
+    if (subject === query) points += 8;
+    if (description.includes(query)) points += 4;
+
+    for (const term of terms) {
+      if (title === term) points += 12;
+      else if (title.startsWith(term)) points += 7;
+      else if (title.includes(term)) points += 5;
+      if (code.includes(term)) points += 6;
+      if (unit.includes(term)) points += 3;
+      if (subject.includes(term)) points += 2;
+      if (description.includes(term)) points += 1;
+    }
+
     return points;
   }
 
@@ -265,7 +285,7 @@
     const query = normalize(F.q);
     const searchTerms = query.split(/\s+/).filter(Boolean);
     const results = D.filter((item) => matches(item, searchTerms));
-    const relevance = new Map(results.map((item) => [item.id, score(item, query)]));
+    const relevance = new Map(results.map((item) => [item.id, score(item, query, searchTerms)]));
     const date = (item) => item.dt || '';
     results.sort((a, b) => {
       if (F.sort === 'new') {

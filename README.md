@@ -17,16 +17,26 @@
 - data.js içine her etkinlik için benzersiz ve kalıcı bir **id** ekleyin.
 - **f** alanı için **pdf/dosya-adi.pdf** gibi bir göreli yol kullanın. Uygulama yalnızca pdf/ altındaki PDF yollarını veya doğrudan HTTPS .pdf bağlantılarını kabul eder; hatalı/güvensiz adresleri devre dışı bırakır.
 - **dl** ve **fv** alanlarını yalnızca gerçek ve doğrulanmış sayımlar mevcutsa ekleyin. Bunlar statik JavaScript verisinden otomatik güncellenmez.
-- Örnek id değerleri zaten kayıtlıdır. Yeni kayıtlar için benzersiz harf, rakam, nokta, alt çizgi veya tire içeren kimlik kullanın.
+- Her kayıt için benzersiz ve kalıcı bir kimlik zorunludur. Eksik, geçersiz veya yinelenen kimlikler otomatik olarak yeniden adlandırılmaz; kayıt atlanır ve konsola uyarı yazılır.
 
 ## Özellikler ve teknik notlar
 
 - Sınıf, ders, ünite ve arama metni filtreleri birbirleriyle uyumlu çalışır.
-- Sıralama tercihi: ilgililik, en yeni ve başlık A–Z.
+- Sıralama tercihi: alan ağırlıklı ilgililik puanı, en yeni ve başlık A–Z.
 - Filtreler ve açık etkinlik bağlantısı URL sorgu parametrelerine yazılır; eski #q=... türündeki paylaşım bağlantıları da okunur.
 - Favoriler ve tema tercihi tarayıcının localStorage alanında saklanır; hesap veya sunucu tarafı gerekmez.
 - index.html, robots.txt ve sitemap.xml aynı GitHub Pages adresini kullanır.
 - Listeyi yazdır o an filtrelenmiş sonuçları iki sütunlu yazdırma düzeninde çıkarır.
+
+## Kalite kontrolleri
+
+Proje bağımlılık gerektirmeyen Node.js kalite kontrolleri kullanır (Node.js 20 veya üstü önerilir).
+
+- `node --check app.js` ve `node --check data.js`: JavaScript sözdizimini kontrol eder.
+- `node --test`: veri şemasını, benzersiz kimlikleri, tarihleri, PDF yol biçimlerini ve temel HTML varlık bağlantılarını doğrular.
+- GitHub Actions, her push ve pull request'te bu kontrolleri çalıştırır.
+
+Bu kontroller kazanım metinlerinin resmî müfredata uygunluğunu veya PDF içeriğinin pedagojik doğruluğunu doğrulamaz; bunlar yayın öncesi editoryal kontrol gerektirir.
 
 ## Elle doğrulama listesi
 

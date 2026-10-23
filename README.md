@@ -28,6 +28,15 @@
 - index.html, robots.txt ve sitemap.xml aynı GitHub Pages adresini kullanır.
 - Listeyi yazdır o an filtrelenmiş sonuçları iki sütunlu yazdırma düzeninde çıkarır.
 
+## Tasarım ve erişilebilirlik
+
+- Mobil yerleşim dar ekranlarda tek sütuna iner; gezinme, filtre ve kart işlemleri dokunmatik kullanım için en az 44 px hedefleri gözetir.
+- Klavye ile gezinme için görünür odak stilleri ve ana içeriğe atlama bağlantısı bulunur.
+- Koyu tema, kullanıcının sistem tercihinden başlar; açık/koyu seçimi yapıldığında tercih saklanır.
+- Hareket azaltma tercihi dikkate alınır; kart yükselmesi yalnızca hover destekleyen hassas işaretleyicilerde etkinleşir.
+- Renk tokenları açık ve koyu temada ayrı ön plan renkleri kullanır. Yayın öncesi gerçek tarayıcıda WCAG kontrast ölçümü ve klavye testi yapılmalıdır.
+- Katalogdaki mevcut kayıtlar örnektir; gerçek PDF'ler ve kazanım eşleştirmeleri doğrulanmadan içerikler gerçek eğitim kaynağı olarak sunulmamalıdır.
+
 ## Kalite kontrolleri
 
 Proje bağımlılık gerektirmeyen Node.js kalite kontrolleri kullanır (Node.js 20 veya üstü önerilir).
@@ -39,6 +48,8 @@ Proje bağımlılık gerektirmeyen Node.js kalite kontrolleri kullanır (Node.js
 Bu kontroller kazanım metinlerinin resmî müfredata uygunluğunu veya PDF içeriğinin pedagojik doğruluğunu doğrulamaz; bunlar yayın öncesi editoryal kontrol gerektirir.
 
 ## Elle doğrulama listesi
+
+Tasarım değişikliklerinden sonra masaüstü ve mobil tarayıcılarda, özellikle 320 px, 375 px, 768 px ve geniş masaüstü ekranlarında test yapın. Klavye ile tüm kontrollere ulaşın, odak göstergesini doğrulayın ve açık/koyu temada metin ile düğme kontrastını ölçün.
 
 1. Sınıf seçin; ders ve ünite seçeneklerinin buna göre güncellendiğini doğrulayın.
 2. Türkçe karakterli bir kelimeyle arama yapın, ardından filtreleri temizleyin.

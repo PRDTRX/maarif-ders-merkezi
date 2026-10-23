@@ -303,7 +303,7 @@
     $('#count').textContent = results.length + ' çalışma kâğıdı bulundu';
 
     const hasFilters = Boolean(F.q || F.grade || F.subject || F.unit || F.fav);
-    $('#reset').style.visibility = hasFilters ? 'visible' : 'hidden';
+    $('#reset').hidden = !hasFilters;
     syncUrl();
     updateFavoriteUi();
   }
@@ -349,6 +349,8 @@
     $('#q').value = F.q;
     $('#sort').value = F.sort;
   }
+
+  $('#search-form').addEventListener('submit', (event) => event.preventDefault());
 
   let searchJumped = false;
   $('#q').addEventListener('input', (event) => {
@@ -426,10 +428,15 @@
   });
 
   const root = document.documentElement;
+  let storedTheme = '';
   try {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark' || savedTheme === 'light') root.dataset.theme = savedTheme;
+    storedTheme = localStorage.getItem('theme') || '';
   } catch {}
+  if (storedTheme === 'dark' || storedTheme === 'light') {
+    root.dataset.theme = storedTheme;
+  } else {
+    root.dataset.theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
 
   function syncThemeButton() {
     const dark = root.dataset.theme
@@ -444,6 +451,15 @@
   }
 
   syncThemeButton();
+  const themePreference = matchMedia('(prefers-color-scheme: dark)');
+  themePreference.addEventListener?.('change', (event) => {
+    let explicitTheme = '';
+    try { explicitTheme = localStorage.getItem('theme') || ''; } catch {}
+    if (explicitTheme !== 'dark' && explicitTheme !== 'light') {
+      root.dataset.theme = event.matches ? 'dark' : 'light';
+      syncThemeButton();
+    }
+  });
   $('#theme').addEventListener('click', () => {
     const dark = root.dataset.theme
       ? root.dataset.theme === 'dark'
@@ -479,6 +495,7 @@
   }
 
   const dialog = $('#dlg');
+  let lastDialogTrigger = null;
 
   function updateFavoriteUi() {
     $('#favn').textContent = favs.size;
@@ -544,7 +561,10 @@
     const print = event.target.closest('[data-print]');
     if (favorite) toggleFavorite(favorite.dataset.id);
     else if (print) printCard(print.dataset.print);
-    else if (open) openDialog(open.dataset.id);
+    else if (open) {
+      lastDialogTrigger = open;
+      openDialog(open.dataset.id);
+    }
   });
 
   dialog.addEventListener('click', (event) => {
@@ -559,6 +579,8 @@
   dialog.addEventListener('close', () => {
     F.a = '';
     syncUrl();
+    if (lastDialogTrigger?.isConnected) lastDialogTrigger.focus();
+    lastDialogTrigger = null;
   });
 
   $('#favt').addEventListener('click', () => {

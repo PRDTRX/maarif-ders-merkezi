@@ -30,12 +30,12 @@
 
 ## Tasarım sistemi ve erişilebilirlik
 
-- Görsel yön, eğitim yayını / editoryal mizanpaj yaklaşımı üzerine kurulur: kâğıt tonu, mürekkep rengi, kobalt vurgular, sınırlı turuncu detaylar ve belirgin tipografik hiyerarşi.
-- Arayüzde Space Grotesk ve Newsreader kullanılır; hero görseli gerçek bir stok görsel yerine CSS ile çizilmiş katmanlı, baskı hissi veren bir kompozisyondur.
-- Koyu tema, sistem tercihini izler; elle seçilen açık/koyu tema localStorage içinde saklanır.
-- Klavye kullanıcıları için belirgin focus görünümü ve ana içeriğe atlama bağlantısı bulunur. Hareket azaltma tercihi dikkate alınır.
-- Yerleşim masaüstünde çok sütunlu katalog, küçük ekranlarda tek sütun kullanır; yazdırma görünümü ayrıca tanımlıdır.
-- Otomatik kontroller görsel kaliteyi veya WCAG uygunluğunu tek başına kanıtlamaz. Yayın öncesi gerçek tarayıcıda kontrast, klavye erişimi ve dar ekranlarda taşma denetimi yapılmalıdır.
+- Yeni görsel yön sade ve sakin bir eğitim arayüzüdür: kırık beyaz ve yumuşak yeşil yüzeyler, koyu mürekkep tonları, ince sınırlar ve ölçülü derinlik.
+- DM Sans arayüz yazı tipiyle Lora'nın editoryal serif vurguları eşleştirilir; gereksiz dekorasyon yerine boşluk, hizalama ve okunabilirlik öne çıkar.
+- Koyu tema, sistem tercihini izler; kullanıcı seçimi yerel olarak saklanır.
+- Klavye kullanıcıları için belirgin odak stilleri ve ana içeriğe atlama bağlantısı bulunur. Hareket azaltma tercihi dikkate alınır.
+- Yerleşim masaüstünde üç sütunlu katalogdan tablete iki, telefonda tek sütuna geçer. Yazdırma görünümünde iki sütunlu yazdırma düzeni ve tek kartı sayfaya yayma kuralı ayrıca tanımlıdır.
+- Otomatik kontroller görsel kaliteyi veya WCAG uygunluğunu tek başına kanıtlamaz. Yayın sonrası gerçek tarayıcıda kontrast, klavye erişimi ve farklı ekran genişliklerinde taşma denetimi yapılmalıdır.
 - Katalogdaki mevcut kayıtlar örnektir; gerçek PDF'ler ve kazanım eşleştirmeleri doğrulanmadan içerikler gerçek eğitim kaynağı olarak sunulmamalıdır.
 
 ## Kalite kontrolleri

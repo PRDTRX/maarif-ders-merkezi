@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Maarif Ders Merkezi – 5, 6 ve 7. sınıf çalışma kâğıtları</title>
+<title>Derslik — Etkinlik arama</title>
 <meta name="description" content="5, 6 ve 7. sınıf çalışma kâğıtları için sınıf, ders, ünite ve kazanıma göre arama. Katalog içerikleri örnek kayıtlardır.">
 <meta name="theme-color" content="#319795">
 <link rel="canonical" href="https://prdtrx.github.io/maarif-ders-merkezi/">
 <meta property="og:type" content="website"><meta property="og:locale" content="tr_TR">
-<meta property="og:title" content="Maarif Ders Merkezi"><meta property="og:description" content="5, 6 ve 7. sınıf çalışma kâğıtları için kazanım odaklı arama.">
+<meta property="og:title" content="Derslik — Etkinlik arama"><meta property="og:description" content="5, 6 ve 7. sınıf çalışma kâğıtları için kazanım odaklı arama.">
 <meta property="og:url" content="https://prdtrx.github.io/maarif-ders-merkezi/"><meta name="twitter:card" content="summary">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Maarif Ders Merkezi","inLanguage":"tr","url":"https://prdtrx.github.io/maarif-ders-merkezi/"}</script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23319795'/%3E%3Cpath d='M16 18c7-3 13-2 16 1v28c-4-3-10-4-16-1zM48 18c-7-3-13-2-16 1v28c4-3 10-4 16-1 z' fill='none' stroke='%23fff' stroke-width='3' stroke-linejoin='round'/%3E%3Cpath d='M23 25h4M23 32h4M37 25h4M37 32h4' stroke='%23e6fffa' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
@@ -17,7 +17,7 @@
 <body>
 <a class="skip-link" href="#bul">Doğrudan çalışma kâğıtlarına geç</a>
 <nav class="nav" aria-label="Ana gezinme"><div class="wrap navin">
-  <a class="brand" href="#top" aria-label="Maarif Ders Merkezi ana sayfa"><span class="logo" aria-hidden="true"><svg viewBox="0 0 40 40" focusable="false"><path d="M7.5 10.5c5.1-1.8 9.3-.7 12.5 2v19c-3.2-2.7-7.4-3.8-12.5-2zM32.5 10.5c-5.1-1.8-9.3-.7-12.5 2v19c3.2-2.7 7.4-3.8 12.5-2z"/><path d="M12 17h3.5M12 22h3.5M24.5 17H28M24.5 22H28"/></svg></span><span class="brand-copy">Maarif <span>Ders Merkezi</span></span></a>
+  <a class="brand" href="#top" aria-label="Ana sayfa">DERSLİK</a>
   <div class="navr"><a href="#bul">Çalışma kâğıtları</a><a href="#hakkinda">Hakkında</a>
   <button id="theme" class="icon-button" type="button" aria-label="Koyu temaya geç" title="Koyu temaya geç"><svg class="theme-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 15.2A8.5 8.5 0 0 1 8.8 3.8 8.7 8.7 0 1 0 20.2 15.2Z"/></svg></button></div>
 </div></nav>
@@ -25,7 +25,7 @@
 <header class="hero" id="top"><div class="wrap">
   <p class="kicker">5, 6 ve 7. sınıflar için</p>
   <h1>Doğru etkinliği<br><span>saniyeler içinde bul.</span></h1>
-  <p class="lead">Maarif Modeli kazanımlarına göre hazırlanmış çalışma kâğıtları. Sınıfı, dersi, üniteyi ya da kazanımı yaz; gerisini biz bulalım.</p>
+  <p class="lead">Sınıfı, dersi, üniteyi ya da kazanım kodunu yaz; aradığın etkinliği bul.</p>
   <form class="search" id="search-form" role="search">
     <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M11 4a7 7 0 105 11.9l4.6 4.6 1.4-1.4-4.6-4.6A7 7 0 0011 4zm0 2a5 5 0 110 10 5 5 0 010-10z" fill="currentColor"/></svg>
     <input id="q" type="search" placeholder="Örn. kesirler, 6. sınıf, fotosentez…" autocomplete="off" aria-label="Çalışma kâğıdı ara">
@@ -39,13 +39,13 @@
     <strong>Örnek katalog</strong>
     Bu sayfadaki kayıtlar örnek amaçlıdır. PDF dosyaları ve kazanım eşleştirmeleri doğrulanmadan gerçek eğitim kaynağı olarak kullanılmamalıdır.
   </aside>
-  <section class="filters simple-filters" aria-label="Çalışma kâğıdı seçimi">
+    <div class="bar"><p id="count" aria-live="polite"></p><div class="barr"><label class="sort-control"><span>Sıralama</span><select id="sort" aria-label="Sonuçları sıralama"><option value="rel">İlgililik</option><option value="new">En yeni</option><option value="az">Başlık (A–Z)</option></select></label><button id="favt" class="pill favorite-filter" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 8.8c0 5.1-8.8 10-8.8 10s-8.8-4.9-8.8-10A4.7 4.7 0 0 1 12 6.5a4.7 4.7 0 0 1 8.8 2.3Z"/></svg><span>Favoriler</span><span id="favn" class="count-bubble">0</span></button><button id="reset" class="link">Filtreleri temizle</button></div></div>
+  <section id="grid" class="grid" aria-label="Çalışma kâğıdı sonuçları"></section>
+  <section class="filters simple-filters" aria-label="Sonuçları filtrele">
     <label><span>Sınıf</span><select id="grade" aria-label="Sınıf"><option value="">Tüm sınıflar</option></select></label>
     <label><span>Ders</span><select id="subject" aria-label="Ders"><option value="">Önce sınıf seç</option></select></label>
     <label><span>Ünite</span><select id="unit" aria-label="Ünite"><option value="">Önce ders seç</option></select></label>
   </section>
-  <div class="bar"><p id="count" aria-live="polite"></p><div class="barr"><label class="sort-control"><span>Sıralama</span><select id="sort" aria-label="Sonuçları sıralama"><option value="rel">İlgililik</option><option value="new">En yeni</option><option value="az">Başlık (A–Z)</option></select></label><button id="favt" class="pill favorite-filter" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 8.8c0 5.1-8.8 10-8.8 10s-8.8-4.9-8.8-10A4.7 4.7 0 0 1 12 6.5a4.7 4.7 0 0 1 8.8 2.3Z"/></svg><span>Favoriler</span><span id="favn" class="count-bubble">0</span></button><button id="reset" class="link">Filtreleri temizle</button></div></div>
-  <section id="grid" class="grid" aria-label="Çalışma kâğıdı sonuçları"></section>
   <noscript><p class="empty">Çalışma kâğıtlarını görmek için JavaScript gerekir.</p></noscript>
   <div id="empty" class="empty" hidden><h3>Sonuç bulunamadı</h3><p>Yazımı kontrol et ya da filtreleri temizleyip yeniden dene.</p></div>
 </main>

@@ -102,7 +102,7 @@ test('application avoids dynamic code evaluation primitives', () => {
   assert.doesNotMatch(app, /\bnew\s+Function\s*\(/);
 });
 
-test('catalogue design includes responsive layout, dark-theme tokens and a clear heading hierarchy', () => {
+test('quiet premium design includes responsive layout, dark-theme tokens and a clear heading hierarchy', () => {
   const html = read('index.html');
   const css = read('style.css');
 

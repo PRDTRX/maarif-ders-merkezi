@@ -315,7 +315,7 @@
 
     $('#grid').innerHTML = results.map(card).join('');
     $('#empty').hidden = results.length > 0;
-    $('#count').textContent = results.length + ' çalışma kâğıdı bulundu';
+    $('#count').textContent = results.length + ' kaynak kaydı bulundu';
 
     const hasFilters = Boolean(F.q || F.grade || F.subject || F.unit || F.fav);
     $('#reset').hidden = !hasFilters;

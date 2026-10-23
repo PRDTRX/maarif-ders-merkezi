@@ -3,6 +3,7 @@
   color-scheme: light;
   --page: #f7f8f5;
   --surface: #ffffff;
+  --card: var(--surface);
   --surface-soft: #eff3ee;
   --surface-tint: #e5eee7;
   --ink: #202a25;
@@ -28,6 +29,7 @@
   color-scheme: dark;
   --page: #151a17;
   --surface: #1c231f;
+  --card: var(--surface);
   --surface-soft: #222c26;
   --surface-tint: #273b31;
   --ink: #eef3ed;
@@ -162,7 +164,7 @@ h1 em, .about h2 em { color: var(--accent); font-family: "Lora", Georgia, serif;
 .filters { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
 .simple-filters {
   padding: 17px; border: 1px solid var(--line); border-radius: var(--radius-md);
-  background: var(--surface); box-shadow: 0 2px 8px rgba(20, 38, 28, .018);
+  background: var(--card); box-shadow: 0 2px 8px rgba(20, 38, 28, .018);
 }
 .filters label, .sort-control { display: flex; min-width: 0; flex-direction: column; gap: 7px; }
 .filters label > span, .sort-control > span { color: var(--ink-muted); font-size: 11px; font-weight: 600; letter-spacing: .02em; }
@@ -217,6 +219,7 @@ h1 em, .about h2 em { color: var(--accent); font-family: "Lora", Georgia, serif;
 .unit-tag { display: inline-flex; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: 4px 8px; border-radius: 6px; background: var(--accent-soft); color: var(--accent-ink); font-size: 10px; font-weight: 600; }
 .bento-content h3 { margin: 11px 0 7px; font-size: 17px; font-weight: 600; line-height: 1.4; letter-spacing: -.035em; }
 .open { border: 0; padding: 0; background: transparent; color: inherit; text-align: left; cursor: pointer; }
+.open:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; border-radius: 3px; }
 .bento-content h3 .open { text-decoration: none; text-decoration-color: var(--line-strong); text-underline-offset: 4px; }
 .bento-content h3 .open:hover { color: var(--accent); text-decoration: underline; text-decoration-color: currentColor; }
 .kz-preview { display: -webkit-box; overflow: hidden; margin: 0; color: var(--ink-muted); font-size: 12px; line-height: 1.7; -webkit-box-orient: vertical; -webkit-line-clamp: 3; }

@@ -29,7 +29,10 @@ a{color:inherit;text-decoration:none}
 .kicker{display:inline-flex;align-items:center;gap:9px;padding:7px 15px;margin-bottom:20px;border:1px solid color-mix(in srgb,var(--ac) 20%,var(--ln));border-radius:99px;background:color-mix(in srgb,var(--card) 70%,transparent);color:var(--ac);font-size:12px;font-weight:750;letter-spacing:.12em;text-transform:uppercase}
 .kicker::before{content:"";width:6px;height:6px;background:var(--ac);border-radius:50%;box-shadow:0 0 0 4px color-mix(in srgb,var(--ac) 12%,transparent)}
 h1{font-size:clamp(40px,6.8vw,76px);line-height:1.02;letter-spacing:-.05em;font-weight:760;margin:0 auto .35em;max-width:960px}
-h1 span{background:linear-gradient(100deg,var(--ac),color-mix(in srgb,var(--ac) 70%,#4a5568));-webkit-background-clip:text;background-clip:text;color:transparent}
+h1 span{color:var(--ac)}
+@supports ((background-clip:text) or (-webkit-background-clip:text)){
+  h1 span{background:linear-gradient(100deg,var(--ac),color-mix(in srgb,var(--ac) 70%,#4a5568));-webkit-background-clip:text;background-clip:text;color:transparent}
+}
 .lead{max-width:600px;margin:20px auto 32px;font-size:clamp(16px,2vw,19px);line-height:1.65;color:var(--mu)}
 
 /* Search Bar */

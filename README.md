@@ -39,7 +39,8 @@
 
 ## Son tasarım denetimi
 
-- Marka başlığı, simge ve sayfa meta verileri aynı "Derslik" kimliğini kullanır; mobil başlık dar ekranlarda da görünür kalır.
+- Marka adı her yerde "Maarif Ders Merkezi" olarak korunur; özgün kitap simgesi ve Manrope/DM Sans tipografisi kullanılır.
+- Sınıf, ders ve ünite filtreleri sonuç listesinin hemen üstündedir; header üzerindeki yinelenen çalışma kâğıtları bağlantısı kaldırılmıştır.
 - Küçük kart etiketleri ve istatistik yazıları en az 12 px olacak şekilde büyütülmüştür.
 
 ## Kalite kontrolleri

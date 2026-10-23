@@ -1,6 +1,6 @@
 # Maarif Ders Merkezi
 
-5, 6 ve 7. sınıf çalışma kâğıtları için statik bir arama sitesi (HTML/CSS/JavaScript; derleme adımı gerektirmez).
+Öğretmenlerin ders hazırlığı için sınıf, ders, ünite ve kazanıma göre kaynak arayabildiği statik bir materyal arşivi (HTML/CSS/JavaScript; derleme adımı gerektirmez).
 
 > **Önemli:** data.js şu an örnek kayıtlar içerir. İçeriği yayınlamadan önce kazanım kodlarını ve metinlerini MEB TTKB programlarından doğrulayın, gerçek PDF dosyalarını ekleyin ve örnek verilerdeki başlıkları/çalışma kâğıtlarını kontrol edin.
 
@@ -30,10 +30,10 @@
 
 ## Tasarım sistemi ve erişilebilirlik
 
-- Görsel yön eğitim sitesi şablonundan ayrılan, bağımsız bir editoryal arşiv yaklaşımıdır: mürekkep tonlarında koyu giriş alanı, kâğıt tonlarında katalog yüzeyi ve ölçülü asit yeşili vurgu.
-- Manrope başlıkları, DM Sans gövde metnini ve IBM Plex Mono arayüz metaverilerini birbirinden ayırır. Kısa köşeler, belirgin çizgiler ve güçlü boşluk kullanımı görsel hiyerarşiyi taşır.
+- Görsel yön öğretmenlerin materyal bulma ve ders hazırlama akışına göre tasarlanmıştır: açık mavi-gri giriş alanı, beyaz katalog yüzeyleri ve ölçülü teal vurgu.
+- Logo, sade bir M monogramı olarak ele alınır; Manrope başlıkları, DM Sans gövde metnini ve IBM Plex Mono arayüz metaverilerini birbirinden ayırır. Daha yumuşak köşeler, sakin kontrast ve net boşluklar görsel hiyerarşiyi taşır.
 - Koyu tema desteklenir; tema tercihi tarayıcının localStorage alanında saklanır ve kullanıcı seçimi yoksa sistem tercihi kullanılır.
-- Klavye kullanıcıları için görünür odak stilleri ve ana içeriğe atlama bağlantısı bulunur. Hareket azaltma tercihi dikkate alınır.
+- Klavye kullanıcıları için ölçülü ve görünür `:focus-visible` stilleri ile ana içeriğe atlama bağlantısı bulunur. Fareyle seçim yapıldığında gereksiz odak halkası gösterilmez. Hareket azaltma tercihi dikkate alınır.
 - Katalog geniş ekranlarda iki sütunlu, telefonda tek sütunlu çalışır. Yazdırma görünümünde iki sütunlu çıktı ve tek kartı sayfaya yayma kuralı korunur.
 - Otomatik kontroller görsel kaliteyi veya WCAG uygunluğunu tek başına kanıtlamaz. Yayın öncesinde gerçek tarayıcıda kontrast, klavye erişimi ve 320 px, 375 px, 768 px ve geniş ekranlarda taşma kontrol edilmelidir.
 - Katalogdaki mevcut kayıtlar örnektir; gerçek PDF'ler ve kazanım eşleştirmeleri doğrulanmadan içerikler gerçek eğitim kaynağı olarak sunulmamalıdır.

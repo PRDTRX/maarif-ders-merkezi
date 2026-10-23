@@ -45,8 +45,38 @@ test('data.js exposes an array of records with required fields', () => {
         remotePdf = url.protocol === 'https:' && !url.username && !url.password && /\.pdf$/i.test(url.pathname);
       } catch {}
       assert.ok(localPdf || remotePdf, `record ${index + 1}: unsafe or unsupported PDF path`);
+      if (localPdf) {
+        const localPath = href.split(/[?#]/, 1)[0].replace(/^\.\//, '');
+        assert.ok(fs.existsSync(path.join(root, localPath)), `record ${index + 1}: local PDF file does not exist: ${localPath}`);
+      }
     }
   }
+});
+
+test('PDF URL validation accepts encoded HTTPS paths and rejects unsafe URLs', () => {
+  const app = read('app.js');
+  const start = app.indexOf('  function safePdf(value) {');
+  const end = app.indexOf('\n  function isIsoDate(value)', start);
+  assert.ok(start >= 0 && end > start, 'safePdf function must remain available for focused tests');
+  const source = app.slice(start, end).replace(/^  /gm, '');
+  const context = { URL };
+  vm.runInNewContext(source + '\nthis.safePdf = safePdf;', context);
+
+  assert.equal(context.safePdf('https://example.com/calisma%20kagidi.pdf'),
+    'https://example.com/calisma%20kagidi.pdf');
+  assert.equal(context.safePdf('https://example.com/%2e%2e/private.pdf'), '');
+  assert.equal(context.safePdf('javascript:alert(1)'), '');
+  assert.equal(context.safePdf('https://user:pass@example.com/file.pdf'), '');
+  assert.equal(context.safePdf('pdf/../private.pdf'), '');
+  assert.equal(context.safePdf('pdf/calisma.pdf'), 'pdf/calisma.pdf');
+});
+
+test('print layout uses two columns and spans a single-card print across the page', () => {
+  const css = read('style.css');
+  const readme = read('README.md');
+  assert.match(css, /#grid\s*\{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)/s);
+  assert.match(css, /\.print-target\s*\{[^}]*grid-column:\s*1\s*\/\s*-1/s);
+  assert.match(readme, /iki sütunlu yazdırma düzeni/i);
 });
 
 test('HTML declares Turkish language and references local application assets', () => {

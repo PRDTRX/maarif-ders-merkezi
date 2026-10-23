@@ -46,17 +46,18 @@
 
   function safePdf(value) {
     const href = String(value ?? '').trim();
-    if (!href || href.startsWith('//') || /[\\\\%\u0000-\u001f\u007f]/.test(href)) return '';
+    if (!href || href.startsWith('//') || /[\\\\\u0000-\u001f\u007f]/.test(href)) return '';
 
     if (/^[a-z][a-z\d+.-]*:/i.test(href)) {
       try {
         const parsed = new URL(href);
-        return parsed.protocol === 'https:' &&
-          !parsed.username &&
-          !parsed.password &&
-          /\.pdf$/i.test(parsed.pathname)
-          ? parsed.href
-          : '';
+        if (parsed.protocol !== 'https:' || parsed.username || parsed.password ||
+            !/\.pdf$/i.test(decodeURIComponent(parsed.pathname))) return '';
+        const decodedPath = decodeURIComponent(parsed.pathname);
+        if (decodedPath.includes('\\') ||
+            /[\u0000-\u001f\u007f]/.test(decodedPath) ||
+            decodedPath.split('/').some((part) => part === '.' || part === '..')) return '';
+        return parsed.href;
       } catch {
         return '';
       }
@@ -276,7 +277,7 @@
     '</article>';
   }
 
-  function syncUrl() {
+  function syncUrl(push = false) {
     const current = new URL(location.href);
     const params = new URLSearchParams(current.search);
     STATE_KEYS.forEach((key) => params.delete(key));
@@ -289,7 +290,7 @@
 
     current.search = params.toString();
     if (isStateHash(current.hash)) current.hash = '';
-    history.replaceState(null, '', current.pathname + current.search + current.hash);
+    history[push ? 'pushState' : 'replaceState'](null, '', current.pathname + current.search + current.hash);
   }
 
   function render() {
@@ -361,20 +362,17 @@
     $('#sort').value = F.sort;
   }
 
-  $('#search-form').addEventListener('submit', (event) => event.preventDefault());
+  $('#search-form').addEventListener('submit', (event) => {
+    event.preventDefault();
+    $('#grid').scrollIntoView({
+      behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+      block: 'start'
+    });
+  });
 
-  let searchJumped = false;
   $('#q').addEventListener('input', (event) => {
     F.q = event.target.value.trim();
     render();
-    if (F.q && !searchJumped) {
-      searchJumped = true;
-      $('#grid').scrollIntoView({
-        behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
-        block: 'start'
-      });
-    }
-    if (!F.q) searchJumped = false;
   });
 
   [['grade', 'grade'], ['subject', 'subject'], ['unit', 'unit']].forEach(([id, key]) => {
@@ -535,7 +533,7 @@
     else updateFavoriteUi();
   }
 
-  function openDialog(id) {
+  function openDialog(id, addHistory = true) {
     const item = D.find((record) => record.id === id);
     if (!item) {
       F.a = '';
@@ -545,7 +543,7 @@
     }
 
     F.a = item.id;
-    syncUrl();
+    syncUrl(addHistory);
     dialog.dataset.g = item.g;
 
     const pdfPreview = item.f
@@ -588,8 +586,9 @@
   });
 
   dialog.addEventListener('close', () => {
+    const hadDialogState = Boolean(F.a);
     F.a = '';
-    syncUrl();
+    if (hadDialogState) syncUrl();
     if (lastDialogTrigger?.isConnected) lastDialogTrigger.focus();
     lastDialogTrigger = null;
   });
@@ -603,7 +602,7 @@
     loadState();
     updateFilterOptions();
     render();
-    if (F.a) openDialog(F.a);
+    if (F.a) openDialog(F.a, false);
     else if (dialog.open) dialog.close();
   });
 
@@ -611,5 +610,5 @@
   updateFilterOptions();
   renderStats();
   render();
-  if (F.a) openDialog(F.a);
+  if (F.a) openDialog(F.a, false);
 })();

@@ -114,17 +114,15 @@ select:disabled{opacity:.48;cursor:not-allowed;background-color:var(--bg2);color
   display: grid;
   place-items: center;
   cursor: pointer;
-  transition: all .2s;
+  transition: none;
   padding: 0;
 }
-.heart:hover{
-  color: #e54865;
-  border-color: color-mix(in srgb, #e54865 40%, var(--ln));
-}
+.heart:hover,
 .heart.on{
   color: #e54865;
-  background: color-mix(in srgb, #e54865 12%, var(--card));
-  border-color: color-mix(in srgb, #e54865 30%, var(--ln));
+}
+.heart:focus:not(:focus-visible){
+  outline: none;
 }
 .heart svg{
   width: 16px;
@@ -137,6 +135,15 @@ select:disabled{opacity:.48;cursor:not-allowed;background-color:var(--bg2);color
 }
 .heart.on svg{
   fill: currentColor;
+}
+
+/* Dokunmatik ekranlarda kartın yapışkan hover/kaldırılma animasyonunu kapat. */
+@media (hover: none) {
+  .card:hover {
+    transform: none;
+    box-shadow: 0 4px 16px rgba(0,0,0,.03);
+    border-color: var(--ln);
+  }
 }
 
 .card-body{
@@ -431,8 +438,12 @@ dialog::backdrop{
   .navin{height:64px}.brand-copy{font-size:14px}.brand-copy span{font-size:9px}.logo{width:36px;height:36px}
   .hero{padding:60px 0 44px}h1{font-size:clamp(36px,10vw,52px)}
   .simple-filters{grid-template-columns:minmax(0,1fr);gap:12px}
-  .bar{align-items:flex-start;gap:12px;flex-direction:column}.barr{justify-content:flex-start;width:100%}
-  .sort-control{width:100%;justify-content:space-between}.sort-control select{flex:1;max-width:200px}
+  .bar{align-items:stretch;gap:12px;flex-direction:column;margin:20px 0 16px}
+  .barr{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:10px;width:100%}
+  .sort-control{grid-column:1/-1;width:100%;justify-content:space-between;gap:12px}
+  .sort-control select{flex:1;min-width:0;max-width:none}
+  .favorite-filter{justify-content:center;min-height:42px;padding:8px 12px}
+  #reset{justify-self:end;min-height:42px;padding:8px 4px}
   .grid{grid-template-columns:minmax(0,1fr);gap:16px}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
@@ -472,4 +483,7 @@ dialog::backdrop{
   .brand { gap: 8px; }
   .card-footer-dual { gap: 8px; padding-left: 12px; padding-right: 12px; }
   .btn { font-size: 11px; }
+  .barr { grid-template-columns:minmax(0,1fr) auto; gap:8px; }
+  .favorite-filter { gap:6px; padding:8px 10px; font-size:12px; }
+  #reset { font-size:12px; }
 }

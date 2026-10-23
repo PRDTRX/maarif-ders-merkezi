@@ -59,6 +59,17 @@ select:disabled{opacity:.48;cursor:not-allowed;background-color:var(--bg2);color
 .pill:hover{border-color:color-mix(in srgb,var(--ac) 55%,var(--ln))}
 .pill.on{background:var(--ac);border-color:var(--ac);color:#fff}
 .favorite-filter{display:inline-flex;align-items:center;gap:8px}
+.favorite-filter svg{
+  display:block;
+  width:16px;
+  height:16px;
+  flex:0 0 16px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
 .count-bubble{display:inline-grid;place-items:center;min-width:20px;height:20px;padding:0 5px;border-radius:6px;background:var(--bg2);font-size:11px;font-variant-numeric:tabular-nums}
 .favorite-filter.on .count-bubble{background:rgba(255,255,255,.2);color:#fff}
 .link{border:0;background:none;color:var(--ac);font:inherit;font-size:14px;cursor:pointer;visibility:hidden}
@@ -121,8 +132,32 @@ select:disabled{opacity:.48;cursor:not-allowed;background-color:var(--bg2);color
 .heart.on{
   color: #e54865;
 }
-.heart:focus:not(:focus-visible){
+.heart:focus:not(:focus-visible),
+#theme:focus:not(:focus-visible){
   outline: none;
+  box-shadow: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.heart:focus-visible{
+  outline: 2px solid var(--ac);
+  outline-offset: 2px;
+  border-radius: 50%;
+}
+#theme:focus-visible{
+  outline: 2px solid var(--ac);
+  outline-offset: 2px;
+  border-radius: 14px;
+}
+/* Mobil dokunuşlarda kare odak parlaması gösterme; klavye odağı korunur. */
+.heart, #theme{
+  -webkit-tap-highlight-color: transparent;
+}
+.heart svg{
+  display:block;
+  width:16px;
+  height:16px;
+  max-width:16px;
+  max-height:16px;
 }
 .heart svg{
   width: 16px;

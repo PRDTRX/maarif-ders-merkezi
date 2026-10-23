@@ -77,7 +77,6 @@ body {
   font: 16px/1.6 "DM Sans", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  transition: background-color .2s ease, color .2s ease;
 }
 button, input, select { font: inherit; }
 button, select, a { -webkit-tap-highlight-color: transparent; }
@@ -146,15 +145,10 @@ select:focus:not(:focus-visible), button:focus:not(:focus-visible), a:focus:not(
   background-size: 72px 72px;
   mask-image: linear-gradient(110deg, #000 4%, transparent 78%);
 }
-.hero::after {
-  content: "MDM / INDEX"; position: absolute; right: -2.5vw; bottom: -.24em;
-  color: rgba(29,52,73,.035); font: 800 clamp(80px, 15vw, 220px)/.9 "Manrope", "DM Sans", sans-serif;
-  letter-spacing: -.105em; white-space: nowrap; pointer-events: none;
-}
 .hero-inner {
   position: relative; z-index: 1; min-height: 455px; display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(260px, .44fr);
-  align-items: center; gap: 52px; padding-block: 72px 65px;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center; padding-block: 72px 65px;
 }
 .hero-copy { max-width: 800px; }
 .eyebrow, .section-label {
@@ -192,25 +186,6 @@ h1 em, .about h2 em {
 .stats li { display: flex; flex-direction: column; gap: 2px; min-width: 124px; padding: 0 22px; border-left: 1px solid var(--line); color: var(--hero-muted); font-size: 10px; }
 .stats li:first-child { padding-left: 0; border-left: 0; }
 .stats b { color: var(--hero-ink); font: 700 23px/1.25 "Manrope", "DM Sans", sans-serif; letter-spacing: -.06em; }
-.hero-accent { min-height: 300px; display: grid; place-items: center; position: relative; isolation: isolate; }
-.accent-ring {
-  position: absolute; width: 270px; height: 270px;
-  border: 1px solid #c5d4df; transform: rotate(8deg);
-}
-.accent-ring::before, .accent-ring::after { content: ""; position: absolute; inset: 21px; border: 1px solid #c5d4df; }
-.accent-ring::after { inset: 45px; border-color: #91c5bd; border-style: solid; opacity: .8; }
-.accent-card {
-  position: relative; z-index: 1; width: 208px; height: 248px; padding: 16px;
-  display: flex; flex-direction: column; justify-content: space-between;
-  border: 1px solid #d2e2e8; border-radius: 14px; background: #dce9f1; color: #244257;
-  box-shadow: 8px 8px 0 rgba(41,79,103,.08);
-}
-.accent-index { font: 600 10px/1.5 "IBM Plex Mono", monospace; letter-spacing: .04em; }
-.accent-book { width: 92px; height: 92px; align-self: center; fill: rgba(23,25,20,.06); stroke: currentColor; stroke-width: 2.4; stroke-linejoin: round; stroke-linecap: round; }
-.accent-caption { padding-top: 10px; border-top: 1px solid rgba(23,25,20,.35); font: 600 9px/1.5 "IBM Plex Mono", monospace; letter-spacing: .01em; text-align: center; }
-.accent-orbit { position: absolute; z-index: 2; display: block; width: 13px; height: 13px; border: 1px solid #edf3f8; border-radius: 50%; background: var(--highlight); }
-.orbit-one { top: 22px; right: 14%; }
-.orbit-two { bottom: 22px; left: 11%; width: 9px; height: 9px; background: #80b9b0; }
 
 /* Catalogue and controls */
 .main-content { padding-top: 48px; padding-bottom: 104px; }
@@ -389,7 +364,7 @@ dialog::backdrop { background: rgba(9, 11, 8, .76); backdrop-filter: blur(5px); 
 }
 @media (max-width: 1080px) {
   .wrap { width: min(var(--wrap), calc(100% - 48px)); }
-  .hero-inner { gap: 30px; grid-template-columns: minmax(0, 1.2fr) minmax(220px, .8fr); }
+  .hero-inner { gap: 30px; grid-template-columns: minmax(0, 1fr); }
   .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
   .bento-grid-inner { grid-template-columns: 104px minmax(0, 1fr); gap: 13px; }
   .bento-thumbnail { min-height: 140px; }
@@ -414,7 +389,6 @@ dialog::backdrop { background: rgba(9, 11, 8, .76); backdrop-filter: blur(5px); 
   .stats li { min-width: 0; flex: 1; padding-inline: 11px; }
   .stats li:first-child { padding-left: 0; }
   .stats b { font-size: 19px; }
-  .hero-accent { display: none; }
   .main-content { padding-top: 25px; padding-bottom: 62px; }
   .catalog-notice { align-items: flex-start; margin-bottom: 43px; padding: 12px; }
   .catalog-notice p { font-size: 11px; }
@@ -465,6 +439,10 @@ dialog::backdrop { background: rgba(9, 11, 8, .76); backdrop-filter: blur(5px); 
   .sort-control { width: 130px; }
   .link { margin-left: auto; }
 }
+:root.theme-changing *,
+:root.theme-changing *::before,
+:root.theme-changing *::after { transition: none !important; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     scroll-behavior: auto !important; animation-duration: .01ms !important;

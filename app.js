@@ -476,11 +476,15 @@
     const dark = root.dataset.theme
       ? root.dataset.theme === 'dark'
       : matchMedia('(prefers-color-scheme: dark)').matches;
+    root.classList.add('theme-changing');
     root.dataset.theme = dark ? 'light' : 'dark';
     try {
       localStorage.setItem('theme', root.dataset.theme);
     } catch {}
     syncThemeButton();
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      root.classList.remove('theme-changing');
+    }));
   });
 
   $('#yr').textContent = new Date().getFullYear();

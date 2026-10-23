@@ -7,9 +7,6 @@
  * t başlık, ty sabit belge türü, m tahmini dakika, f PDF yolu (isteğe bağlı),
  * dt ISO tarih (YYYY-MM-DD), dl doğrulanmış indirme sayısı (isteğe bağlı),
  * fv doğrulanmış favori sayısı (isteğe bağlı).
- * t başlık, ty belge türü, m tahmini dakika, f PDF yolu (isteğe bağlı),
- * dt ISO tarih (YYYY-MM-DD), dl doğrulanmış indirme sayısı (isteğe bağlı),
- * fv doğrulanmış favori sayısı (isteğe bağlı).
  */
 window.DATA = [
   {

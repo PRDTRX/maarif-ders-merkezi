@@ -37,6 +37,11 @@
 - Renk tokenları açık ve koyu temada ayrı ön plan renkleri kullanır. Yayın öncesi gerçek tarayıcıda WCAG kontrast ölçümü ve klavye testi yapılmalıdır.
 - Katalogdaki mevcut kayıtlar örnektir; gerçek PDF'ler ve kazanım eşleştirmeleri doğrulanmadan içerikler gerçek eğitim kaynağı olarak sunulmamalıdır.
 
+## Son tasarım denetimi
+
+- Marka başlığı, simge ve sayfa meta verileri aynı "Derslik" kimliğini kullanır; mobil başlık dar ekranlarda da görünür kalır.
+- Küçük kart etiketleri ve istatistik yazıları en az 12 px olacak şekilde büyütülmüştür.
+
 ## Kalite kontrolleri
 
 Proje bağımlılık gerektirmeyen Node.js kalite kontrolleri kullanır (Node.js 20 veya üstü önerilir).

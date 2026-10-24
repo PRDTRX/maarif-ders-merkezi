@@ -582,6 +582,8 @@
       event.preventDefault();
       event.stopPropagation();
       toggleFavorite(favorite.dataset.id);
+      // Mouse clicks should not leave a persistent focus ring on the heart.
+      if (event.detail > 0) favorite.blur();
     } else if (print) printCard(print.dataset.print);
     else if (open) {
       lastDialogTrigger = open;

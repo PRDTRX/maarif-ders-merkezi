@@ -242,6 +242,28 @@
     return parts.join('');
   }
 
+  // One reusable, course-specific visual per subject. Images are served by Unsplash's CDN
+  // so the repository does not need a separate uploaded image file for every subject.
+  const SUBJECT_VISUALS = [
+    { key: 'turkce', match: 'turkce', label: 'Okuma ve dil', src: 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=900&q=80' },
+    { key: 'matematik', match: 'matematik', label: 'Sayılar ve şekiller', src: 'https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=900&q=80' },
+    { key: 'fen', match: 'fen bilimleri', label: 'Bilim ve keşif', src: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=900&q=80' },
+    { key: 'sosyal', match: 'sosyal bilgiler', label: 'Tarih ve coğrafya', src: 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=900&q=80' },
+    { key: 'ingilizce', match: 'ingilizce', label: 'Yabancı dil', src: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=900&q=80' },
+    { key: 'din', match: 'din kulturu', label: 'Kültür ve değerler', src: 'https://images.unsplash.com/photo-1564769625905-50e93615e769?auto=format&fit=crop&w=900&q=80' },
+    { key: 'gorsel-sanatlar', match: 'gorsel sanatlar', label: 'Görsel sanatlar', src: 'https://images.unsplash.com/photo-1732887917874-f00b7341ac91?auto=format&fit=crop&w=900&q=80' },
+    { key: 'muzik', match: 'muzik', label: 'Müzik ve ritim', src: 'https://images.unsplash.com/photo-1769097542113-49f995910fc5?auto=format&fit=crop&w=900&q=80' },
+    { key: 'beden-egitimi', match: 'beden egitimi', label: 'Hareket ve spor', src: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=900&q=80' },
+    { key: 'bilisim', match: 'bilisim teknolojileri', label: 'Dijital üretim', src: 'https://images.unsplash.com/photo-1587620962725-abab7fe55159?auto=format&fit=crop&w=900&q=80' },
+    { key: 'rehberlik', match: 'rehberlik', label: 'Rehberlik ve gelişim', src: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=900&q=80' }
+  ];
+
+  function subjectVisual(subject) {
+    const value = normalize(subject);
+    return SUBJECT_VISUALS.find((visual) => value.includes(visual.match)) ||
+      { key: 'genel', label: 'Öğrenme ve keşif', src: 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=900&q=80' };
+  }
+
   function card(item) {
     const pdfBtn = item.f
       ? '<a class="btn btn-action" href="' + escapeHtml(item.f) + '" target="_blank" rel="noopener noreferrer">İndir ↗</a>'
@@ -256,11 +278,9 @@
       '</div>' +
       '<div class="card-body">' +
         '<div class="bento-grid-inner">' +
-          '<div class="bento-thumbnail">' +
-            '<div class="thumb-placeholder-content">' +
-              '<svg viewBox="0 0 24 24"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>' +
-              '<span class="thumb-label">' + escapeHtml(item.ty) + '</span>' +
-            '</div>' +
+          '<div class="bento-thumbnail" data-visual="' + escapeHtml(subjectVisual(item.s).key) + '">' +
+            '<img class="subject-image" src="' + escapeHtml(subjectVisual(item.s).src) + '" alt="" aria-hidden="true" loading="lazy" decoding="async" onerror="this.hidden=true">' +
+            '<span class="thumb-label">' + escapeHtml(subjectVisual(item.s).label) + '</span>' +
           '</div>' +
           '<div class="bento-content">' +
             '<span class="unit-tag">' + escapeHtml(item.u) + '</span>' +

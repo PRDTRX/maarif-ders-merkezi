@@ -478,3 +478,209 @@ dialog::backdrop { background: rgba(9, 11, 8, .76); backdrop-filter: blur(5px); 
   body.printing-card .print-target { max-width: 100%; border: 0; }
   body.printing-card .print-target .card-body { padding: 0; }
 }
+
+
+/* Final readability and alignment pass: keep the hero's content on one visual axis. */
+.hero-inner {
+  align-items: center;
+}
+.hero-copy {
+  width: min(100%, 960px);
+  margin-inline: auto;
+  text-align: center;
+}
+.hero-copy h1 {
+  width: 100%;
+  max-width: 900px;
+  margin: 27px auto 24px;
+  text-align: center;
+}
+.hero-copy .lead,
+.hero-copy .search {
+  margin-inline: auto;
+}
+.hero-copy .stats {
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+/* Subject photographs replace the generic empty thumbnail. */
+.bento-thumbnail {
+  isolation: isolate;
+  aspect-ratio: 4 / 3;
+  background: #dbe4e8;
+  border-color: var(--line);
+}
+.bento-thumbnail::before {
+  display: none;
+}
+.bento-thumbnail::after {
+  content: "";
+  position: absolute;
+  inset: 35% 0 0;
+  left: 0;
+  bottom: 0;
+  width: auto;
+  height: auto;
+  z-index: 1;
+  border: 0;
+  border-radius: 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(12, 20, 24, .76) 100%);
+  pointer-events: none;
+}
+.subject-image {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform .35s ease;
+}
+.card:hover .subject-image {
+  transform: scale(1.035);
+}
+.thumb-label {
+  position: absolute;
+  z-index: 2;
+  left: 10px;
+  bottom: 10px;
+  max-width: calc(100% - 20px);
+  padding: 4px 7px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border: 1px solid rgba(255, 255, 255, .34);
+  background: rgba(13, 23, 28, .58);
+  color: #fff;
+  font: 600 11px/1.45 "DM Sans", sans-serif;
+  text-align: left;
+  backdrop-filter: blur(4px);
+}
+
+@media screen and (min-width: 721px) {
+  .brand-word { font-size: 16px; }
+  .navr > a { font-size: 14px; }
+
+  .eyebrow, .section-label {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  .hero-inner {
+    min-height: 480px;
+    padding-block: 72px 68px;
+  }
+  .hero-copy { width: min(100%, 980px); }
+  .hero-copy h1 {
+    max-width: 900px;
+    margin-block: 29px 25px;
+    font-size: clamp(58px, 6vw, 88px);
+    line-height: 1.02;
+    letter-spacing: -.075em;
+  }
+  .lead {
+    max-width: 720px;
+    font-size: 18px;
+    line-height: 1.75;
+  }
+  .search {
+    max-width: 740px;
+    min-height: 70px;
+    margin-top: 34px;
+    padding-inline: 19px;
+  }
+  .search input { font-size: 16px; }
+  .search kbd { font-size: 12px; }
+  .stats {
+    margin-top: 34px;
+    padding-top: 20px;
+  }
+  .stats li {
+    min-width: 144px;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  .stats b { font-size: 26px; }
+
+  .main-content { padding-top: 56px; }
+  .catalog-notice {
+    gap: 15px;
+    margin-bottom: 44px;
+    padding: 18px 21px;
+  }
+  .notice-mark { font-size: 14px; }
+  .catalog-notice p { font-size: 14px; line-height: 1.7; }
+  .library-heading { margin-bottom: 32px; }
+  .library-heading h2 {
+    font-size: clamp(38px, 4vw, 58px);
+    line-height: 1.08;
+  }
+  .library-heading > p {
+    max-width: 380px;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .simple-filters { gap: 20px; padding: 25px; }
+  .filters { gap: 20px; }
+  .filters label, .sort-control { gap: 9px; }
+  .filters label > span, .sort-control > span {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  .filters select, .sort-control select { font-size: 15px; }
+  .filters select { height: 52px; }
+  .bar { margin-top: 36px; margin-bottom: 22px; }
+  #count { font-size: 13px; }
+  .pill { font-size: 13px; }
+  .link { font-size: 13px; }
+
+  .grid { gap: 26px; }
+  .card-banner {
+    min-height: 68px;
+    padding: 12px 17px 12px 20px;
+  }
+  .banner-grade { font-size: 10px; padding: 6px 8px; }
+  .banner-subject { font-size: 13px; }
+  .heart { flex-basis: 40px; width: 40px; height: 40px; }
+  .card-body { padding: 22px; }
+  .bento-grid-inner {
+    grid-template-columns: minmax(150px, .42fr) minmax(0, 1fr);
+    gap: 22px;
+  }
+  .unit-tag {
+    padding: 6px 8px;
+    font-size: 11px;
+  }
+  .bento-content h3 {
+    margin-top: 13px;
+    margin-bottom: 10px;
+    font-size: clamp(22px, 2.1vw, 29px);
+    line-height: 1.22;
+  }
+  .kz-preview {
+    font-size: 14px;
+    line-height: 1.7;
+    -webkit-line-clamp: 4;
+  }
+  .kz-preview b { font-size: 11px; }
+  .meta-inline { margin-top: 15px; font-size: 11px; }
+  .card-footer-dual { gap: 10px; padding: 14px; }
+  .btn { min-height: 44px; padding-inline: 12px; font-size: 13px; }
+
+  .about { padding-block: 84px 88px; }
+  .about-inner { gap: 64px; }
+  .about h2 { font-size: clamp(38px, 4vw, 58px); }
+  .feature-number { font-size: 12px; }
+  .trio h3 { font-size: 16px; line-height: 1.4; }
+  .trio p { font-size: 14px; line-height: 1.75; }
+  .footer-brand { font-size: 14px; }
+  .foot p { font-size: 12px; }
+  .back-top { font-size: 12px; }
+
+  .chip { font-size: 12px; }
+  .unit { font-size: 15px; }
+}
